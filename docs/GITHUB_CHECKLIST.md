@@ -1,10 +1,9 @@
-# GitHub Publish Checklist / GitHub 发布检查清单
+# GitHub Publish Checklist
 
-## English
+Use this checklist before pushing the repository to GitHub or preparing a public
+release.
 
-Use this checklist before the first GitHub push.
-
-### Keep
+## Keep
 
 - `src/`
 - `gradle/`
@@ -17,12 +16,14 @@ Use this checklist before the first GitHub push.
 - `README.md`
 - `README.en.md`
 - `README.zh-CN.md`
+- `README.ru.md`
 - `LICENSE.txt`
 - `lib/README.md`
 - `docs/`
-- `demo/` if you want screenshots in the repository
+- `demo/`, if you want screenshots and the logo in the repository
+- `tools/export-github-ready.ps1`, if you want a local export helper
 
-### Do Not Commit
+## Do Not Commit
 
 - `build/`
 - `.gradle/`
@@ -30,43 +31,51 @@ Use this checklist before the first GitHub push.
 - `.idea/`
 - `.vscode/`
 - `mods/`
+- `github-ready/`
+- `release/`
+- `releases/`
 - `tools/generate-cn-patch.js`
 - `lib/*.jar`
 - local logs
 - exported game files
 - Project Zomboid installation files
 
-The localization patch work is intentionally excluded from this repository.
+The Project Zomboid compile-time jars are intentionally excluded because they
+come from a local game installation and may not be redistributable.
 
-### Local Build Check
+## Local Build Check
 
 ```powershell
 .\gradlew.bat clean build
 ```
 
 The CI workflow skips the Gradle build when the local Project Zomboid
-compile-time jars are not present, because those jars are not tracked.
+compile-time jars are not present.
 
-### First Push
+## Git Status Check
 
 ```powershell
-git init
-git add .
-git status
-git commit -m "Prepare EtherHack B42 compatibility fork"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
+git status --ignored
 ```
 
-Review `git status` before committing. If any ignored local folder appears, stop
-and update `.gitignore` before pushing.
+Before committing, make sure generated output, IDE state, local game jars, and
+exported game files are absent from the staged file list.
 
-## 中文
+## Optional Export
 
-第一次推送到 GitHub 前，请按这个清单检查。
+To create a clean local copy for manual inspection:
 
-### 应保留
+```powershell
+.\tools\export-github-ready.ps1
+```
+
+The export is written to `github-ready/EtherHack-B42`, which is ignored by Git.
+
+## 中文检查清单
+
+首次推送到 GitHub 或准备公开发布前，请检查以下内容。
+
+## 应保留
 
 - `src/`
 - `gradle/`
@@ -79,12 +88,14 @@ and update `.gitignore` before pushing.
 - `README.md`
 - `README.en.md`
 - `README.zh-CN.md`
+- `README.ru.md`
 - `LICENSE.txt`
 - `lib/README.md`
 - `docs/`
-- `demo/`，如果你想保留截图
+- `demo/`，如果你希望仓库包含截图和 Logo
+- `tools/export-github-ready.ps1`，如果你希望保留本地导出脚本
 
-### 不要提交
+## 不要提交
 
 - `build/`
 - `.gradle/`
@@ -92,33 +103,39 @@ and update `.gitignore` before pushing.
 - `.idea/`
 - `.vscode/`
 - `mods/`
+- `github-ready/`
+- `release/`
+- `releases/`
 - `tools/generate-cn-patch.js`
 - `lib/*.jar`
 - 本地日志
 - 导出的游戏文件
 - Project Zomboid 游戏安装文件
 
-汉化补丁工作建议放在独立仓库或独立分支，不和 EtherHack B42 兼容分支混在一起。
+Project Zomboid 的编译期 jar 来自本地游戏安装，可能不适合再分发，所以应保持在 Git 外。
 
-### 本地构建检查
+## 本地构建检查
 
 ```powershell
 .\gradlew.bat clean build
 ```
 
-因为 Project Zomboid 的编译期 jar 不提交，GitHub Actions 在缺少这些 jar 时会跳过 Gradle 构建。
+如果 CI 环境中没有本地 Project Zomboid 编译期 jar，GitHub Actions 会跳过 Gradle 构建。
 
-### 首次推送
+## Git 状态检查
 
 ```powershell
-git init
-git add .
-git status
-git commit -m "Prepare EtherHack B42 compatibility fork"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
+git status --ignored
 ```
 
-提交前一定看一眼 `git status`。如果 `build/`、`.gradle/`、`mods/`、`lib/*.jar` 等本地文件出现在待提交列表里，先停下来修 `.gitignore`。
+提交前确认构建产物、IDE 状态、本地游戏 jar 和导出的游戏文件没有进入暂存区。
 
+## 可选导出
+
+如果想生成一个便于人工检查的干净副本：
+
+```powershell
+.\tools\export-github-ready.ps1
+```
+
+导出目录是 `github-ready/EtherHack-B42`，该目录已被 Git 忽略。

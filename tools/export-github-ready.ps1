@@ -33,6 +33,7 @@ $items = @(
     "README.md",
     "README.en.md",
     "README.zh-CN.md",
+    "README.ru.md",
     "settings.gradle.kts"
 )
 
