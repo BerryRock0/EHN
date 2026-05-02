@@ -55,41 +55,6 @@ function EtherInfoPanel:render()
     end
 
     y = y + marginText
-
-    self:drawTextCentered(getTranslate("UI_InformationPanel_AntiCheatStatus_Title"), y, 1, 1, 1, 1, UIFont.Medium)
-
-    y = y + marginTitle
-
-    local antiCheatStatusTexts = {
-        "UI_InformationPanel_AntiCheatStatus_Text1",
-        "UI_InformationPanel_AntiCheatStatus_Text2",
-        "UI_InformationPanel_AntiCheatStatus_BikiniTools",
-        "UI_InformationPanel_AntiCheatStatus_CustomLogger"
-    }
-
-    local customLogger = PARP ~= nil or LogExtenderClient ~= nil or LogExtenderServer ~= nil or AVCS ~= nil;
-    local bikinitools = BTSE ~= nil or PARP ~= nil or Bikinitools ~= nil;
-
-    local antiCheatStatus = {
-        getAntiCheat12Status(),
-        getAntiCheat8Status(),
-        bikinitools,
-        customLogger
-    }
-
-    for i, textKey in ipairs(antiCheatStatusTexts) do
-        local statusText = antiCheatStatus[i] 
-                        and getTranslate("UI_InformationPanel_AntiCheatStatus_Enable")
-                        or getTranslate("UI_InformationPanel_AntiCheatStatus_Disable")
-
-        if self.localPlayer == nil then statusText = getTranslate("UI_InformationPanel_AntiCheatStatus_Disable") end
-        
-        self:drawTextCentered(getTranslate(textKey) .. statusText, y, 1, 1, 1, 1, UIFont.Small)
-        y = y + marginText
-    end
-
-
-    y = y + marginText
     
     self:drawTextCentered(getTranslate("UI_InformationPanel_Contacts_Title"), y, 1, 1, 1, 1, UIFont.Medium)
 

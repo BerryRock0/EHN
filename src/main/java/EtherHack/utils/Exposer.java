@@ -1,6 +1,6 @@
 package EtherHack.utils;
 
-import EtherHack.Ether.EtherAPI;
+import EtherHack.Ether.EtherLuaMethods;
 import se.krka.kahlua.converter.KahluaConverterManager;
 import se.krka.kahlua.integration.expose.LuaJavaClassExposer;
 import se.krka.kahlua.vm.KahluaTable;
@@ -10,7 +10,7 @@ public class Exposer extends LuaJavaClassExposer {
       super(var1, var2, var3);
    }
 
-   public void exposeAPI(EtherAPI.SafeEtherLuaMethods var1) {
+   public void exposeAPI(EtherLuaMethods var1) {
       this.exposeGlobalFunctions(var1);
    }
 }

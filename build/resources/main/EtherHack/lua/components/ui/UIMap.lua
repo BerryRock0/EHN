@@ -256,7 +256,7 @@ function UIMap:onTeleport(x, y)
 		return
 	end
 
-	safePlayerTeleport(x, y);
+	EtherDebugClient.teleportSelf(x, y, self.localPlayer and self.localPlayer:getZ() or 0);
 end
 --*********************************************************
 --* Создание нового экземпляра

@@ -1,6 +1,7 @@
 package EtherHack;
 
 import EtherHack.utils.Info;
+import EtherHack.utils.EtherPaths;
 import EtherHack.utils.Logger;
 import EtherHack.utils.Patch;
 import java.io.File;
@@ -27,7 +28,15 @@ public class GamePatcher {
     * Список всех файлов, подлежащих инъекции
     */
    private final String[] patchFiles = new String[]{
-           "GameWindow.class", "inventory/ItemContainer.class", "Lua/LuaEventManager.class", "Lua/LuaManager.class"
+           "GameWindow.class", "inventory/ItemContainer.class", "Lua/LuaEventManager.class"
+   };
+
+   /**
+    * Loose class overrides created by older EtherHack builds that are no longer
+    * patched by the B42-compatible installer.
+    */
+   private final String[] legacyPatchFilesToRemove = new String[]{
+           "Lua/LuaManager.class"
    };
 
    /**
@@ -40,38 +49,84 @@ public class GamePatcher {
     */
    private final String whiteListPathEtherFiles = "EtherHack";
 
+   private final Path gameRoot = Paths.get("").toAbsolutePath();
+   private final Path gameJar = gameRoot.resolve("projectzomboid.jar");
+
    /**
     * Экспортирование файлов EtherHack в корневую директорию игры
     */
    public void extractEtherHack() {
       try {
          String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-         Path currentDirectory = Paths.get(System.getProperty("user.dir"));
+         Path currentDirectory = gameRoot;
+         Path b42ModDirectory = EtherPaths.b42ModDirectory();
+         Path b42CommonMediaDirectory = EtherPaths.b42CommonMediaDirectory();
+         Path b42VersionMediaDirectory = EtherPaths.b42VersionMediaDirectory();
 
          try (JarFile jarFile = new JarFile(jarFilePath)) {
-            jarFile.stream().filter((entry) -> entry.getName().startsWith(whiteListPathEtherFiles))
+            Files.createDirectories(b42CommonMediaDirectory);
+            Files.createDirectories(b42VersionMediaDirectory);
+
+            jarFile.stream().filter((entry) -> entry.getName().startsWith(whiteListPathEtherFiles + "/"))
                     .forEach((entry) -> {
                        try {
-                          Path extractPath = currentDirectory.resolve(entry.getName());
+                          Path b42ExtractPath = getB42ExtractPath(entry.getName());
+                          Path legacyExtractPath = currentDirectory.resolve(entry.getName());
 
                           if (entry.isDirectory()) {
-                             Files.createDirectories(extractPath);
+                             Files.createDirectories(b42ExtractPath);
+                             Files.createDirectories(legacyExtractPath);
                           } else {
-                             Files.createDirectories(extractPath.getParent());
+                             Files.createDirectories(b42ExtractPath.getParent());
+                             Files.createDirectories(legacyExtractPath.getParent());
 
                              try (InputStream inputStream = jarFile.getInputStream(entry)) {
-                                Files.copy(inputStream, extractPath, StandardCopyOption.REPLACE_EXISTING);
+                                Files.copy(inputStream, b42ExtractPath, StandardCopyOption.REPLACE_EXISTING);
+                             }
+
+                             try (InputStream inputStream = jarFile.getInputStream(entry)) {
+                                Files.copy(inputStream, legacyExtractPath, StandardCopyOption.REPLACE_EXISTING);
                              }
                           }
                        } catch (IOException e) {
                           e.printStackTrace();
                        }
                     });
+            writeB42ModInfo(b42ModDirectory);
             Logger.print("Extraction completed successfully");
+            Logger.print("B42 local mod files were written to: " + b42ModDirectory);
          }
       } catch (URISyntaxException | IOException e) {
          e.printStackTrace();
       }
+   }
+
+   private Path getB42ExtractPath(String entryName) {
+      Path relativePath = Path.of(entryName);
+
+      if (entryName.startsWith("EtherHack/media/lua/")) {
+         String standardLuaPath = entryName.substring("EtherHack/media/".length());
+         return EtherPaths.b42VersionMediaDirectory().resolve(standardLuaPath);
+      }
+
+      if (entryName.startsWith("EtherHack/lua/")) {
+         return EtherPaths.b42VersionMediaDirectory().resolve(relativePath);
+      }
+
+      return EtherPaths.b42CommonMediaDirectory().resolve(relativePath);
+   }
+
+   private void writeB42ModInfo(Path b42ModDirectory) throws IOException {
+      Path versionDirectory = b42ModDirectory.resolve(EtherPaths.B42_VERSION_FOLDER);
+      Files.createDirectories(versionDirectory);
+      String version = Info.CHEAT_VERSION == null ? "unknown" : Info.CHEAT_VERSION;
+      String modInfo = String.join(System.lineSeparator(),
+              "name=EtherHack",
+              "id=" + EtherPaths.MOD_ID,
+              "description=EtherHack B42 compatibility package. Java bytecode hooks are installed separately by the patcher.",
+              "version=" + version,
+              "");
+      Files.writeString(versionDirectory.resolve("mod.info"), modInfo);
    }
 
 
@@ -82,10 +137,15 @@ public class GamePatcher {
       Logger.print("Deleting all EtherHack files...");
 
       try {
-         Path currentDirectory = Paths.get(System.getProperty("user.dir"));
+         Path currentDirectory = gameRoot;
          Path targetPath = currentDirectory.resolve(whiteListPathEtherFiles);
          if (Files.exists(targetPath)) {
-            Files.walk(targetPath).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
+            deleteRecursively(targetPath, currentDirectory);
+         }
+
+         Path b42ModDirectory = EtherPaths.b42ModDirectory();
+         if (Files.exists(b42ModDirectory)) {
+            deleteRecursively(b42ModDirectory, EtherPaths.userZomboidDirectory().resolve("mods"));
          }
          Logger.print("Deletion EtherHack files completed successfully");
       } catch (IOException except) {
@@ -99,13 +159,16 @@ public class GamePatcher {
     * Файлы будут сохранены с расширением .bkup в той же папке, что и оригиналы.
     */
    public void backupGameFiles() {
-      Path currentPath = Paths.get("").toAbsolutePath();
+      if (isB42JarGameFolder()) {
+         Logger.print("B42 jar-based game layout detected. Patched classes will be written as loose classpath overrides; no jar backup is required.");
+         return;
+      }
 
       for (int i = 0; i < patchFiles.length; i++) {
          String iteration = "[" + (i + 1) + "/" + patchFiles.length + "]";
          Logger.print("Creating a backup file '" + patchFiles[i] + "' " + iteration);
 
-         Path originalFilePath = Paths.get(currentPath.toString(), gameClassFolder, patchFiles[i]);
+         Path originalFilePath = gameRoot.resolve(gameClassFolder).resolve(patchFiles[i]);
 
          if (Files.exists(originalFilePath)) {
             try {
@@ -148,7 +211,6 @@ public class GamePatcher {
       Patch.injectIntoClass("zombie/GameWindow", "init", true, (method) -> {
          AbstractInsnNode insertionPoint = null;
 
-         // Find the point of injection
          for (AbstractInsnNode insn : method.instructions.toArray()) {
             if (insn instanceof MethodInsnNode) {
                MethodInsnNode methodInsn = (MethodInsnNode) insn;
@@ -162,24 +224,22 @@ public class GamePatcher {
          }
 
          if (insertionPoint != null) {
-            InsnList initEtherLuaInstructions = new InsnList();
-            initEtherLuaInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "EtherHack/Ether/EtherLuaCompiler", "getInstance", "()LEtherHack/Ether/EtherLuaCompiler;", false));
-            initEtherLuaInstructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "EtherHack/Ether/EtherLuaCompiler", "init", "()V", false));
-            method.instructions.insert(insertionPoint, initEtherLuaInstructions);
+            Logger.printLog("Found LuaManager.init() invocation in the GameWindow init method.");
          } else {
             throw new IllegalStateException("Cannot find LuaManager.init() invocation in the method when patching the Game window");
          }
-         AbstractInsnNode lastInsn = method.instructions.getLast();
-         if (lastInsn != null){
-            InsnList initLogoInstructions = new InsnList();
-            initLogoInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "EtherHack/Ether/EtherLogo", "getInstance", "()LEtherHack/Ether/EtherLogo;", false));
-            initLogoInstructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "EtherHack/Ether/EtherLogo", "init", "()V", false));
-            method.instructions.insertBefore(lastInsn, initLogoInstructions);
 
+         AbstractInsnNode returnInsn = null;
+         for (AbstractInsnNode insn : method.instructions.toArray()) {
+            if (insn.getOpcode() == Opcodes.RETURN) {
+               returnInsn = insn;
+            }
+         }
+
+         if (returnInsn != null) {
             InsnList initEtherInstructions = new InsnList();
-            initEtherInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
-            initEtherInstructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "EtherHack/Ether/EtherMain", "init", "()V", false));
-            method.instructions.insertBefore(lastInsn, initEtherInstructions);
+            initEtherInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "EtherHack/Ether/EtherMain", "initSafe", "()V", false));
+            method.instructions.insertBefore(returnInsn, initEtherInstructions);
          } else {
             throw new IllegalStateException("Could not find the end of the method when patching the Game window");
          }
@@ -257,33 +317,6 @@ public class GamePatcher {
    }
 
    /**
-    * Внедрение в файл LuaManager
-    */
-   public void patchLuaManager() {
-      Patch.injectIntoClass("zombie/Lua/LuaManager", "RunLua", true, (method) -> {
-         if (!method.desc.equals("(Ljava/lang/String;Z)Ljava/lang/Object;")) {
-            return;
-         }
-
-         InsnList newInstructions = new InsnList();
-         LabelNode endOfMethodLabel = new LabelNode();
-
-         newInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "EtherHack/Ether/EtherLuaCompiler", "getInstance", "()LEtherHack/Ether/EtherLuaCompiler;", false));
-         newInstructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
-         newInstructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "EtherHack/Ether/EtherLuaCompiler", "isShouldLuaCompile", "(Ljava/lang/String;)Z", false));
-
-         newInstructions.add(new JumpInsnNode(Opcodes.IFNE, endOfMethodLabel));
-
-         newInstructions.add(new InsnNode(Opcodes.ACONST_NULL));
-         newInstructions.add(new InsnNode(Opcodes.ARETURN));
-
-         newInstructions.add(endOfMethodLabel);
-
-         method.instructions.insert(newInstructions);
-      });
-   }
-
-   /**
     * Проверяет, содержит ли хотя бы один из заданных файлов аннотацию @Injected.
     * @return true, если аннотация @Injected найдена хотя бы в одном файле. false в противном случае.
     */
@@ -297,16 +330,33 @@ public class GamePatcher {
     * @return true, если игровая папка и все требуемые файлы присутствуют. false в противном случае.
     */
    public boolean isGameFolder() {
-      Path gameFolderPath = Paths.get(gameClassFolder);
+      Path gameFolderPath = gameRoot.resolve(gameClassFolder);
 
       // Проверяем, существует ли папка игры
       if (Files.exists(gameFolderPath) && Files.isDirectory(gameFolderPath)) {
          // Если папка существует, проверяем наличие всех необходимых файлов
-         return Arrays.stream(patchFiles)
+         boolean hasLooseClasses = Arrays.stream(patchFiles)
                  .allMatch(fileName -> Files.exists(gameFolderPath.resolve(fileName)));
+         if (hasLooseClasses) {
+            return true;
+         }
       }
 
-      return false;
+      return isB42JarGameFolder();
+   }
+
+   private boolean isB42JarGameFolder() {
+      if (!Files.exists(gameJar)) {
+         return false;
+      }
+
+      try (JarFile jarFile = new JarFile(gameJar.toFile())) {
+         return Arrays.stream(patchFiles)
+                 .allMatch(fileName -> jarFile.getEntry(gameClassFolder + "/" + fileName) != null);
+      } catch (IOException e) {
+         Logger.print("Error while reading projectzomboid.jar: " + e.getMessage());
+         return false;
+      }
    }
 
    /**
@@ -317,11 +367,14 @@ public class GamePatcher {
       Logger.printCredits();
 
       Logger.print("Preparing to install the EtherHack...");
+      Patch.setClassSource(gameRoot, gameJar);
 
       if (!isGameFolder()) {
          Logger.print("No game files were found in this directory. Place the cheat in the root folder of the game");
          return;
       }
+
+      deleteLegacyLoosePatchFiles();
 
       Logger.print("Checking for injections in game files");
 
@@ -336,8 +389,6 @@ public class GamePatcher {
       patchGameWindow();
       patchItemContainer();
       patchLuaEventManager();
-      patchLuaManager();
-      //GameClientPatcher.applyPatches();
 
       Patch.saveModifiedClasses();
 
@@ -356,13 +407,12 @@ public class GamePatcher {
    public void restoreFiles() {
       Logger.printCredits();
       Logger.print("Restoring files...");
-      Path currentPath = Paths.get("").toAbsolutePath();
 
       for(int i = 0; i < patchFiles.length; ++i) {
          String fileName = patchFiles[i];
          String iteration = "[" + (i + 1) + "/" + patchFiles.length + "]";
          Logger.print("Restoring the file '" + fileName + "' " + iteration);
-         Path originalFilePath = Paths.get(currentPath.toString(), "zombie", patchFiles[i]);
+         Path originalFilePath = gameRoot.resolve("zombie").resolve(patchFiles[i]);
          Path backupFilePath = Paths.get(originalFilePath.toString() + ".bkup");
          if (Files.exists(backupFilePath)) {
             try {
@@ -374,12 +424,46 @@ public class GamePatcher {
             } catch (IOException e) {
                Logger.print("Error when restoring the game file '" + fileName + "': " + e.getMessage());
             }
+         } else if (isB42JarGameFolder() && Files.exists(originalFilePath)) {
+            try {
+               Files.delete(originalFilePath);
+            } catch (IOException e) {
+               Logger.print("Error when deleting patched B42 class '" + fileName + "': " + e.getMessage());
+            }
          } else {
             Logger.print("Backup file '" + fileName + ".bkup' not found. Skipping restore");
          }
       }
 
       Logger.print("Files restoration completed!");
+      deleteLegacyLoosePatchFiles();
       uninstallEtherHackFiles();
+   }
+
+   private void deleteLegacyLoosePatchFiles() {
+      for (String fileName : legacyPatchFilesToRemove) {
+         Path looseClassPath = gameRoot.resolve(gameClassFolder).resolve(fileName);
+         if (!Files.exists(looseClassPath)) {
+            continue;
+         }
+
+         try {
+            Files.delete(looseClassPath);
+            Logger.print("Deleted legacy patched B42 class '" + fileName + "'");
+         } catch (IOException e) {
+            Logger.print("Error when deleting legacy patched B42 class '" + fileName + "': " + e.getMessage());
+         }
+      }
+   }
+
+   private void deleteRecursively(Path targetPath, Path allowedParent) throws IOException {
+      Path normalizedTarget = targetPath.toAbsolutePath().normalize();
+      Path normalizedParent = allowedParent.toAbsolutePath().normalize();
+
+      if (!normalizedTarget.startsWith(normalizedParent) || normalizedTarget.equals(normalizedParent)) {
+         throw new IOException("Refusing to delete unsafe path: " + normalizedTarget);
+      }
+
+      Files.walk(normalizedTarget).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
    }
 }

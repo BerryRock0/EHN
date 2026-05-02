@@ -31,7 +31,7 @@ end
 function EtherMapPanel:onMouseWheel(del)
 	self:setYScroll(self:getYScroll() - (del * 40));
 
-    if self:getMouseX() > 10 and self:getMouseY() > 10 and self:getMouseX() < self.map.width + 10 and self:getMouseY() < self.map.height + 10 then
+    if self.map ~= nil and self:getMouseX() > self.map.x and self:getMouseY() > self.map.y and self:getMouseX() < self.map.x + self.map.width and self:getMouseY() < self.map.y + self.map.height then
         self.map:onMouseWheel(del);
     end 
 	return true;
@@ -42,8 +42,8 @@ end
 --*********************************************************
 function EtherMapPanel:addCheckBox(title, method, isSelected)
     local rows = self.rows;
-    local checkboxX = 10;
-    local checkboxY = self.map.y + self.map.height + 10 + rows * 20;
+    local checkboxX = EtherMain.panelPadding;
+    local checkboxY = self.map.y + self.map.height + EtherMain.panelPadding + rows * EtherMain.rowHeight;
 
     local checkbox = UICheckbox:new(checkboxX, checkboxY, title, isSelected, method);
     checkbox:initialise();
@@ -54,7 +54,7 @@ function EtherMapPanel:addCheckBox(title, method, isSelected)
     checkbox:setAnchorBottom(true);
     self:addChild(checkbox);
 
-    self:setScrollHeight(self:getScrollHeight() + checkbox.height + 5);
+    self:setScrollHeight(self:getScrollHeight() + EtherMain.rowHeight);
 
     self.rows = self.rows + 1;
 
@@ -74,7 +74,7 @@ end
 --* Создание кнопки
 --*********************************************************
 function EtherMapPanel:addButton(posX, posY, buttonTitle, onClick)
-    local buttonWidth, buttonHeight = 130, 16;
+    local buttonWidth, buttonHeight = 150, EtherMain.buttonHeight;
     local button = UIButton:new(posX, posY, buttonWidth, buttonHeight, buttonTitle, onClick)
     button:initialise();
     button:instantiate();
@@ -92,10 +92,10 @@ end
 --*********************************************************
 function EtherMapPanel:addButtonWithLabel(title, buttonTitle, func)
     local rows = self.rows;
-    local buttonY = self.map.y + self.map.height + 10 + rows * 25;
+    local buttonY = self.map.y + self.map.height + EtherMain.panelPadding + rows * EtherMain.rowHeight;
     
-    self:addLabel(10, buttonY - 3, title)
-    local button = self:addButton(self:getWidth() - 130 - 20, buttonY, buttonTitle, func)
+    self:addLabel(EtherMain.panelPadding, buttonY + 2, title)
+    local button = self:addButton(self:getWidth() - 150 - EtherMain.panelPadding, buttonY, buttonTitle, func)
 
     self.rows = self.rows + 1;
 
@@ -114,7 +114,7 @@ function EtherMapPanel:createChildren()
 
     if self.localPlayer == nil then return end;
 
-    self.map = UIMap:new(10, 10, self.width - 20, self.height - 200)
+    self.map = UIMap:new(EtherMain.panelPadding, EtherMain.panelPadding, self.width - EtherMain.panelPadding * 2, self.height - 220)
     self.map:initialise()
     self.map:instantiate()
     self.map:initDataAndStyle()
@@ -159,8 +159,8 @@ function EtherMapPanel:new(posX, posY, width, height)
     menuTableData.localPlayer = getPlayer();
     self.__index = self;
 
-    self.uiElements = {};
-    self.rows = 0;
+    menuTableData.uiElements = {};
+    menuTableData.rows = 0;
 
     return menuTableData;
 end

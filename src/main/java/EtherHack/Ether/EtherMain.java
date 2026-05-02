@@ -4,12 +4,28 @@ import EtherHack.utils.Logger;
 
 public class EtherMain {
    private static EtherMain instance;
+   private static boolean initialized;
    public EtherTranslator etherTranslator;
    public EtherCredits etherCredits;
    public EtherLuaManager etherLuaManager;
    public EtherAPI etherAPI;
 
    private EtherMain() {
+   }
+
+   public static synchronized void initSafe() {
+      if (initialized) {
+         Logger.printLog("EtherHack is already initialized. Skipping duplicate init.");
+         return;
+      }
+
+      try {
+         getInstance().init();
+         initialized = true;
+      } catch (Throwable throwable) {
+         Logger.printLog("EtherHack initialization failed: " + throwable);
+         throwable.printStackTrace();
+      }
    }
 
    public void init() {

@@ -1,5 +1,25 @@
 require "ISUI/ISPanel"
 
+local function getEtherMechanicsVehicle(player)
+    if player == nil then return nil end
+
+    if player.getNearVehicle then
+        local vehicle = player:getNearVehicle()
+        if vehicle ~= nil then return vehicle end
+    end
+
+    if player.getUseableVehicle then
+        local vehicle = player:getUseableVehicle()
+        if vehicle ~= nil then return vehicle end
+    end
+
+    if player.getVehicle then
+        return player:getVehicle()
+    end
+
+    return nil
+end
+
 --*********************************************************
 --* Глобальные установки UI
 --*********************************************************
@@ -40,7 +60,10 @@ function UIMechanics:createChildren()
 
     self.getKeyButton = UIButton:new(10, self.datas.y + self.datas.height + 10, 100, 20, getTranslate("UI_Mechanics_ButtonGetKey"), 
     function() 
-        sendClientCommand(self.localPlayer, "vehicle", "getKey", { vehicle = self.localPlayer:getNearVehicle():getId() })
+        local vehicle = getEtherMechanicsVehicle(self.localPlayer)
+        if vehicle ~= nil then
+            sendClientCommand(self.localPlayer, "vehicle", "getKey", { vehicle = vehicle:getId() })
+        end
     end)
     self.getKeyButton:initialise();
     self.getKeyButton:instantiate();
@@ -80,9 +103,11 @@ function UIMechanics:createChildren()
 
     self.repairVehicleButton = UIButton:new(self.brokePart.x + self.brokePart.width + 10, self.datas.y + self.datas.height + 10, 100, 20, getTranslate("UI_Mechanics_ButtonRepairVehicle"), 
     function() 
-        local vehicle = self.localPlayer:getNearVehicle();
-        sendClientCommand(self.localPlayer, "vehicle", "repair", { vehicle = vehicle:getId() })
-        self.totalCondition = 100;
+        local vehicle = getEtherMechanicsVehicle(self.localPlayer)
+        if vehicle ~= nil then
+            sendClientCommand(self.localPlayer, "vehicle", "repair", { vehicle = vehicle:getId() })
+            self.totalCondition = 100;
+        end
     end)
     self.repairVehicleButton:initialise();
     self.repairVehicleButton:instantiate();
@@ -193,12 +218,12 @@ function UIMechanics:render()
 	
     self:drawTexture(self.resizeimage, self.width-10, self.height - 10, 1, 1, 1, 1);
 
-    if (self.localPlayer:getNearVehicle() == nil) then 
+    local vehicle = getEtherMechanicsVehicle(self.localPlayer)
+    if (vehicle == nil) then 
         self.datas:setVisible(false);
         self:drawTextCentre(getTranslate("UI_Mechanics_NoVehicle"), self.width / 2, self.height / 2, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
         
     else
-        local vehicle = self.localPlayer:getNearVehicle();
         self.datas:setVisible(true);
 
         local name = getText("IGUI_VehicleName" .. vehicle:getScript():getName());
@@ -234,7 +259,8 @@ end
 --************************************************************************--
 function UIMechanics:loadParts()
     self.lastSelectedIndex = self.datas.selected or 0;
-    local vehicle = self.localPlayer:getNearVehicle();
+    local vehicle = getEtherMechanicsVehicle(self.localPlayer)
+    if vehicle == nil then return end
     self.datas:clear();
 
     self.totalCondition = 0;
@@ -253,7 +279,7 @@ end
 --** Обновление меню
 --************************************************************************--
 function UIMechanics:update()
-    if (self.localPlayer:getNearVehicle() == nil) then 
+    if (getEtherMechanicsVehicle(self.localPlayer) == nil) then 
         self.isPartsLoaded = false;
         self.repairPartButton:setVisible(false);
         self.repairVehicleButton:setVisible(false);

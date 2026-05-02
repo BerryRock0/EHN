@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Info {
-   private static final String CHEAT_VERSION;
+   public static final String CHEAT_VERSION;
    public static final String CHEAT_GUI_TITLE;
    public static final String CHEAT_CREDITS_TITLE;
    public static final String CHEAT_WINDOW_TITLE_SUFFIX;

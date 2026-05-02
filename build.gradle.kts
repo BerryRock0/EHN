@@ -5,8 +5,15 @@ plugins {
     java
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+    options.release.set(17)
 }
 
 fun loadProperties(): Properties {
@@ -27,8 +34,8 @@ repositories {
 dependencies {
     implementation("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
-    implementation("org.ow2.asm:asm:9.7.1")
-    implementation("org.ow2.asm:asm-tree:9.7.1")
+    implementation("org.ow2.asm:asm:9.9.1")
+    implementation("org.ow2.asm:asm-tree:9.9.1")
     implementation(files("lib/fmod.jar"))
     implementation(files("lib/zombie.jar"))
     implementation(files("lib/Kahlua.jar"))

@@ -1,6 +1,7 @@
 package EtherHack.Ether;
 
 import EtherHack.annotations.SubscribeLuaEvent;
+import EtherHack.utils.EtherPaths;
 import EtherHack.utils.EventSubscriber;
 import EtherHack.utils.Logger;
 import zombie.Lua.LuaManager;
@@ -33,9 +34,12 @@ public class EtherLuaManager {
    public void loadLua() {
       Logger.printLog("Loading EtherLua...");
 
-      EtherLuaCompiler.getInstance().addWordToBlacklistLuaCompiler("EtherMain");
-      EtherLuaCompiler.getInstance().addPathToWhiteListLuaCompiler(pathToLuaMainFile);
+      String resolvedLuaFile = resolveLuaFile(pathToLuaMainFile);
 
-      LuaManager.RunLua(pathToLuaMainFile, false);
+      LuaManager.RunLua(resolvedLuaFile, false);
+   }
+
+   public String resolveLuaFile(String luaFile) {
+      return EtherPaths.resolveResourcePathString(luaFile);
    }
 }

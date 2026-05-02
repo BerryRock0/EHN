@@ -1,21 +1,43 @@
-.gradle
+# Gradle / build output
+.gradle/
 build/
-gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+out/
+bin/
+dist/
 
-### IntelliJ IDEA ###
+# Local IDE state
+.vs/
 .idea/
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+.vscode/
 *.iws
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+
+# Runtime / generated mod copies
+mods/
+tools/generate-cn-patch.js
+*.log
+*.tmp
+*.bak
+*.bkup
+*.class
+*.jar.bkup
+console.txt
+hs_err_pid*.log
+replay_pid*.log
+
+# Local export/staging directories
+github-ready/
+release/
+releases/
+
+# Compile-time game libraries copied from a local Project Zomboid install.
+# See lib/README.md for the expected file names.
+lib/*.jar
+!lib/README.md
+
+# Gradle wrapper is useful for reproducible local builds, so keep the jar.
+!gradle/wrapper/gradle-wrapper.jar
 
 ### Eclipse ###
 .apt_generated
@@ -25,19 +47,12 @@ out/
 .settings
 .springBeans
 .sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
 /nbdist/
 /.nb-gradle/
-
-### VS Code ###
-.vscode/
 
 ### Mac OS ###
 .DS_Store

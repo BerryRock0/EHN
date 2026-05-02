@@ -1,6 +1,7 @@
 package EtherHack.utils;
 
 import EtherHack.annotations.SubscribeLuaEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.Map;
 
 public class EventSubscriber {
    private static Map<String, List<AbstractMap.SimpleEntry<Object, Method>>> subscribers = new HashMap<>();
+   private static final Map<String, Long> lastExceptionLogAt = new HashMap<>();
+   private static final long EXCEPTION_LOG_THROTTLE_MS = 5000L;
 
    public static void register(Object handler) {
       Logger.printLog("Registering a class object and subscribing to Lua events: " + handler);
@@ -30,11 +33,26 @@ public class EventSubscriber {
          for (AbstractMap.SimpleEntry<Object, Method> entry : handlers) {
             try {
                entry.getValue().invoke(entry.getKey());
+            } catch (InvocationTargetException e) {
+               logSubscriberException(eventName, entry.getValue(), e.getCause() != null ? e.getCause() : e);
             } catch (Exception e) {
-               Logger.printLog(String.format("Exception when calling method '%s' for event '%s': %s",
-                       entry.getValue(), eventName, e));
+               logSubscriberException(eventName, entry.getValue(), e);
             }
          }
       }
+   }
+
+   private static void logSubscriberException(String eventName, Method method, Throwable throwable) {
+      String key = eventName + ":" + method;
+      long now = System.currentTimeMillis();
+      Long lastLogAt = lastExceptionLogAt.get(key);
+      if (lastLogAt != null && now - lastLogAt < EXCEPTION_LOG_THROTTLE_MS) {
+         return;
+      }
+
+      lastExceptionLogAt.put(key, now);
+      Logger.printLog(String.format("Exception when calling method '%s' for event '%s': %s",
+              method, eventName, throwable));
+      throwable.printStackTrace();
    }
 }

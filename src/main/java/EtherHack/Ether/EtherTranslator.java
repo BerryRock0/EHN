@@ -1,6 +1,7 @@
 
 package EtherHack.Ether;
 
+import EtherHack.utils.EtherPaths;
 import EtherHack.utils.Logger;
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,7 +46,7 @@ public class EtherTranslator {
     * 会遍历TRANSLATIONS_PATH目录下所有txt文件，解析其中的"键=值"对
     */
    public void loadTranslations() {
-      File translationsDir = new File(TRANSLATIONS_PATH);
+      File translationsDir = EtherPaths.resolveResourcePath(TRANSLATIONS_PATH).toFile();
       File[] translationFiles = translationsDir.listFiles(EtherTranslator::lambda$loadTranslations$0);
 
       if (translationFiles == null) {

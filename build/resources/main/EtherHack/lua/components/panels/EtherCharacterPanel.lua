@@ -10,8 +10,8 @@ EtherCharacterPanel = ISPanel:derive("EtherCharacterPanel"); -- Наследов
 --*********************************************************
 function EtherCharacterPanel:addCheckBox(title, method, isSelected, isOnlyInGame)
     local checkBoxAmount = #self.checkBoxList;
-    local checkboxX = 15;
-    local checkboxY = 10 + checkBoxAmount * 20;
+    local checkboxX = EtherMain.panelPadding;
+    local checkboxY = EtherMain.panelPadding + checkBoxAmount * EtherMain.rowHeight;
 
     local checkbox = UICheckbox:new(checkboxX, checkboxY, title, isSelected, method);
     checkbox:initialise();
@@ -23,7 +23,7 @@ function EtherCharacterPanel:addCheckBox(title, method, isSelected, isOnlyInGame
     checkbox.isOnlyInGame = isOnlyInGame;
     self:addChild(checkbox);
 
-    self:setScrollHeight(self:getScrollHeight() + checkbox.height + 5);
+    self:setScrollHeight(self:getScrollHeight() + EtherMain.rowHeight);
 
     table.insert(self.checkBoxList, checkbox);
 end
@@ -75,7 +75,7 @@ function EtherCharacterPanel:createChildren()
     end, ISFarmingMenu.cheat, false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_GodMode"), function(isChecked)
-        toggleGodMode(isChecked);
+        EtherDebugClient.toggleSelf("god", isChecked);
     end, isEnableGodMode(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_TimedActionCheat"), function(isChecked)
@@ -83,11 +83,11 @@ function EtherCharacterPanel:createChildren()
     end, isTimedActionCheat(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_NoClip"), function(isChecked)
-        toggleNoclip(isChecked);
+        EtherDebugClient.toggleSelf("noclip", isChecked);
     end, isEnableNoclip(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_Invisible"), function(isChecked)
-        toggleInvisible(isChecked);
+        EtherDebugClient.toggleSelf("invisible", isChecked);
     end, isEnableInvisible(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
@@ -102,15 +102,15 @@ function EtherCharacterPanel:createChildren()
     end, isExtraDamage(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
-        toggleEnableUnlimitedCarry(isChecked);
+        EtherDebugClient.toggleSelf("unlimitedCarry", isChecked);
     end, isEnableUnlimitedCarry(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedEndurance"), function(isChecked)
-        toggleUnlimitedEndurance(isChecked);
+        EtherDebugClient.toggleSelf("unlimitedEndurance", isChecked);
     end, isUnlimitedEndurance(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedAmmo"), function(isChecked)
-        toggleUnlimitedAmmo(isChecked);
+        EtherDebugClient.toggleSelf("unlimitedAmmo", isChecked);
     end, isUnlimitedAmmo(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCondition"), function(isChecked)
@@ -237,6 +237,7 @@ function EtherCharacterPanel:new(posX, posY, width, height)
 	menuTableData.borderColor = {r=0.0, g=0.0, b=0.0, a=0.0};
     menuTableData.moveWithMouse = true;
     menuTableData.localPlayer = getPlayer();
+    menuTableData.checkBoxList = {};
     self.__index = self;
 
     self.checkBoxList = {}; -- Список всех чекбоксов

@@ -58,16 +58,18 @@ end
 --** Отрисовка кнопки
 --************************************************************************--
 function UIButton:render()
+    local textY = self.height / 2 - (getTextManager():getFontHeight(self.font) / 2);
+
 	if self.isEnable then
 		if not self.onPressed then
 			self:drawRect( 0, 0, self.width, self.height, 1.0, EtherMain.accentColor.r, EtherMain.accentColor.g, EtherMain.accentColor.b)
 		else
 			self:drawRect( 0, 0, self.width, self.height, 0.8, EtherMain.accentColor.r, EtherMain.accentColor.g, EtherMain.accentColor.b)
 		end
-		self:drawTextCentre(self.title, self.width / 2, self.height / 2 - 8, 1.0, 1.0, 1.0, 1.0, self.font);
+		self:drawTextCentre(self.title, self.width / 2, textY, 1.0, 1.0, 1.0, 1.0, self.font);
 	else
 		self:drawRect( 0, 0, self.width, self.height, 1.0, 0.1, 0.1, 0.1)
-		self:drawTextCentre(self.title, self.width / 2, self.height / 2 - 8, 1.0, 1.0, 1.0, 0.3, self.font);
+		self:drawTextCentre(self.title, self.width / 2, textY, 1.0, 1.0, 1.0, 0.3, self.font);
 	end
 end
 

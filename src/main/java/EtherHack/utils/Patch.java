@@ -1,13 +1,12 @@
 package EtherHack.utils;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -19,9 +18,24 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
+import java.util.jar.JarFile;
 
 public class Patch {
    private static final Map<String, ClassNode> classNodeMap = new HashMap<>();
+   private static Path classRoot = Paths.get("");
+   private static Path classJar;
+
+   public static void setClassRoot(Path root) {
+      classRoot = root;
+      classJar = null;
+      classNodeMap.clear();
+   }
+
+   public static void setClassSource(Path root, Path jar) {
+      classRoot = root;
+      classJar = jar;
+      classNodeMap.clear();
+   }
 
    public static void injectIntoClass(String className, String methodName, boolean isStatic, Consumer<MethodNode> injector) {
       Logger.print("Injection into a game file '" + className + "' in method: '" + methodName + "'");
@@ -29,7 +43,7 @@ public class Patch {
       ClassNode classNode = classNodeMap.computeIfAbsent(className, key -> {
          ClassNode node = new ClassNode();
          try {
-            ClassReader reader = new ClassReader(key);
+            ClassReader reader = new ClassReader(readClassBytes(key + ".class"));
             reader.accept(node, 0);
             return node;
          } catch (IOException e) {
@@ -55,10 +69,10 @@ public class Patch {
    }
 
    public static boolean isInjectedAnnotationPresent(String file, String baseDir) {
-      Path filePath = Paths.get(baseDir, file);
+      String classEntry = Paths.get(baseDir, file).toString().replace('\\', '/');
 
-      try (FileInputStream fis = new FileInputStream(filePath.toString())) {
-         ClassReader reader = new ClassReader(fis);
+      try {
+         ClassReader reader = new ClassReader(readClassBytes(classEntry));
          boolean[] found = new boolean[]{false};
 
          reader.accept(new ClassVisitor(589824) {
@@ -121,13 +135,35 @@ public class Patch {
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
             classNode.accept(writer);
             byte[] bytes = writer.toByteArray();
+            Path outputFile = classRoot.resolve(className + ".class");
 
-            try (FileOutputStream fos = new FileOutputStream(className + ".class")) {
-               fos.write(bytes);
-            }
+            Files.createDirectories(outputFile.getParent());
+            Files.write(outputFile, bytes);
          } catch (IOException e) {
             Logger.print("Error saving modified class '" + className + "': " + e.getMessage());
          }
       }
+   }
+
+   private static byte[] readClassBytes(String classEntry) throws IOException {
+      String normalizedEntry = classEntry.replace('\\', '/');
+      Path looseClassFile = classRoot.resolve(normalizedEntry);
+
+      if (Files.exists(looseClassFile)) {
+         return Files.readAllBytes(looseClassFile);
+      }
+
+      if (classJar != null && Files.exists(classJar)) {
+         try (JarFile jarFile = new JarFile(classJar.toFile())) {
+            var entry = jarFile.getEntry(normalizedEntry);
+            if (entry != null) {
+               try (InputStream inputStream = jarFile.getInputStream(entry)) {
+                  return inputStream.readAllBytes();
+               }
+            }
+         }
+      }
+
+      throw new IOException("Class file not found: " + normalizedEntry);
    }
 }

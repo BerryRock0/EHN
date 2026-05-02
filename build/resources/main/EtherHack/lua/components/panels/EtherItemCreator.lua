@@ -48,35 +48,42 @@ end
 --*********************************************************
 function EtherItemCreator:initList()
     self.items = getAllItems();
-    self.module = {};
+    self.displayCategories = {};
 
-    local moduleNames = {}
+    local displayCategoryNames = {}
     local allItems = {}
     for i=0,self.items:size()-1 do
         local item = self.items:get(i);
         if not item:getObsolete() and not item:isHidden() then
-            if not self.module[item:getModuleName()] then
-                self.module[item:getModuleName()] = {}
-                table.insert(moduleNames, item:getModuleName())
-            end
-            table.insert(self.module[item:getModuleName()], item);
             table.insert(allItems, item)
+
+            local displayCategory = UIItemTables.getItemDisplayCategory(item)
+            if displayCategory ~= nil then
+                if not self.displayCategories[displayCategory] then
+                    self.displayCategories[displayCategory] = {}
+                    table.insert(displayCategoryNames, displayCategory)
+                end
+                table.insert(self.displayCategories[displayCategory], item)
+            end
         end
     end
 
-    table.sort(moduleNames, function(a,b) return not string.sort(a, b) end)
+    table.sort(displayCategoryNames, function(a,b)
+        return not string.sort(UIItemTables.getDisplayCategoryText(a), UIItemTables.getDisplayCategoryText(b))
+    end)
 
     local listBox = UIItemTables:new(0, 0, self.panel.width, self.panel.height - self.panel.tabHeight);
     listBox:initialise();
     self.panel:addView("All", listBox);
     listBox:initList(allItems);
 
-    for _,moduleName in ipairs(moduleNames) do
-        if moduleName ~= "Moveables" then
+    for _,displayCategoryName in ipairs(displayCategoryNames) do
+        local categoryItems = self.displayCategories[displayCategoryName]
+        if categoryItems and #categoryItems > 0 then
             local categoryTable = UIItemTables:new(0, 0, self.panel.width, self.panel.height - self.panel.tabHeight);
             categoryTable:initialise();
-            self.panel:addView(moduleName, categoryTable);
-            categoryTable:initList(self.module[moduleName]);
+            self.panel:addView(UIItemTables.getDisplayCategoryText(displayCategoryName), categoryTable);
+            categoryTable:initList(categoryItems);
         end
     end
 

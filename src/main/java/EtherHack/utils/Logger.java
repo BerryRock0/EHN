@@ -1,6 +1,7 @@
 package EtherHack.utils;
 
 import zombie.debug.DebugLog;
+import zombie.debug.DebugType;
 
 public class Logger {
    public static void print(String var0) {
@@ -8,7 +9,12 @@ public class Logger {
    }
 
    public static void printLog(String var0) {
-      DebugLog.General.print("[EtherHack]: " + var0);
+      String message = "[EtherHack]: " + var0;
+      try {
+         DebugLog.log(DebugType.General, message);
+      } catch (Throwable ignored) {
+         System.out.println(message);
+      }
    }
 
    public static void printCredits() {

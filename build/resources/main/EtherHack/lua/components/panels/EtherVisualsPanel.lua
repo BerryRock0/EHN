@@ -33,12 +33,7 @@ end
 --* Добавление чекбоксов
 --*********************************************************
 function EtherVisualsPanel:addCheckBox(title, method, isSelected)
-    local yOffset = 5;
-    if #self.uiElements == 0 then
-        yOffset = 0;
-    end
-
-    local checkbox = UICheckbox:new(10, self.yRowPosition + yOffset, title, isSelected, method);
+    local checkbox = UICheckbox:new(EtherMain.panelPadding, self.yRowPosition, title, isSelected, method);
     checkbox:initialise();
     checkbox:instantiate();
     checkbox:setAnchorLeft(true);
@@ -47,9 +42,9 @@ function EtherVisualsPanel:addCheckBox(title, method, isSelected)
     checkbox:setAnchorBottom(true);
     self:addChild(checkbox);
 
-    self:setScrollHeight(self:getScrollHeight() + checkbox.height + 5);
+    self:setScrollHeight(self:getScrollHeight() + EtherMain.rowHeight);
 
-    self.yRowPosition = self.yRowPosition + checkbox.height + yOffset;
+    self.yRowPosition = self.yRowPosition + EtherMain.rowHeight;
 
     table.insert(self.uiElements, checkbox);
 end
@@ -78,20 +73,15 @@ end
 --* Создание слайдера
 --*********************************************************
 function EtherVisualsPanel:addSliderWithLabel(title, value, minValue, maxValue, method)
-    local yOffset = 10;
-    if #self.uiElements == 0 then
-        yOffset = 10;
-    end
+    local sliderHeight = 14;
+    local sliderWidth = 180;
 
-    local sliderHeight= 10;
-    local sliderWidth = 100;
-
-    self:addLabel(10, self.yRowPosition + yOffset, title);
-    local slider = self:addSlider(self.width - sliderWidth - 50, self.yRowPosition + yOffset + 8, sliderWidth, sliderHeight, value, minValue, maxValue, method)
+    self:addLabel(EtherMain.panelPadding, self.yRowPosition + 2, title);
+    local slider = self:addSlider(self.width - sliderWidth - EtherMain.panelPadding - 40, self.yRowPosition + 7, sliderWidth, sliderHeight, value, minValue, maxValue, method)
     
-    self:setScrollHeight(self:getScrollHeight() + sliderHeight + 5);
+    self:setScrollHeight(self:getScrollHeight() + EtherMain.rowHeight);
     
-    self.yRowPosition = self.yRowPosition + sliderHeight * 2 + 5 + yOffset;
+    self.yRowPosition = self.yRowPosition + EtherMain.rowHeight;
 
     table.insert(self.uiElements, slider);
 
@@ -170,7 +160,8 @@ function EtherVisualsPanel:new(posX, posY, width, height)
 	menuTableData.backgroundColor = {r=0.0, g=0.0, b=0.0, a=0.0};
 	menuTableData.borderColor = {r=0.0, g=0.0, b=0.0, a=0.0};
     menuTableData.moveWithMouse = true;
-    menuTableData.yRowPosition = 10;
+    menuTableData.yRowPosition = EtherMain.panelPadding;
+    menuTableData.uiElements = {};
     self.__index = self;
 
     self.uiElements = {}; -- Список всех элементов

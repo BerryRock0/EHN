@@ -1,10 +1,10 @@
 package EtherHack.Ether;
 
-import EtherHack.GameClientWrapper;
 import EtherHack.annotations.LuaEvents;
 import EtherHack.annotations.SubscribeLuaEvent;
 import EtherHack.utils.ColorUtils;
 import EtherHack.utils.ConfigUtils;
+import EtherHack.utils.EtherPaths;
 import EtherHack.utils.EventSubscriber;
 import EtherHack.utils.Exposer;
 import EtherHack.utils.Logger;
@@ -15,10 +15,8 @@ import EtherHack.utils.ZombieUtils;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 import se.krka.kahlua.converter.KahluaConverterManager;
@@ -36,21 +34,14 @@ import zombie.core.textures.Texture;
 import zombie.inventory.InventoryItem;
 import zombie.inventory.types.HandWeapon;
 import zombie.iso.IsoWorld;
-import zombie.network.GameClient;
-import zombie.network.GameServer;
-import zombie.network.ServerOptions;
-import zombie.network.ZomboidNetData;
 import zombie.ui.UIFont;
 import zombie.vehicles.BaseVehicle;
 
 import static zombie.Lua.LuaManager.env;
 
 public class EtherAPI {
-   private final ProtectionManagerX protectionManager;
    private Exposer exposer;
-   private final SafeEtherLuaMethods etherLuaMethods = new SafeEtherLuaMethods();
    final ConcurrentHashMap<String, Texture> textureCache = new ConcurrentHashMap<>();
-   private final SafeAPI safeAPI = SafeAPI.getInstance();
    private final ConcurrentHashMap<String, float[]> originalWeaponStats = new ConcurrentHashMap<>();
    public Color mainUIAccentColor;
    public Color vehiclesUIColor;
@@ -66,7 +57,6 @@ public class EtherAPI {
    public boolean isEnableNightVision;
    public boolean isZombieDontAttack;
    public boolean isNoRecoil;
-   public boolean isBypassDebugMode;
    public boolean isUnlimitedCarry;
    public boolean isUnlimitedCondition;
    public boolean isUnlimitedEndurance;
@@ -109,7 +99,7 @@ public class EtherAPI {
    public boolean isMapDrawZombies;
 
    public void saveConfig(String var1) {
-      String var2 = "EtherHack/config/" + var1 + ".properties";
+      String var2 = EtherPaths.resolveWritablePath("EtherHack/config/" + var1 + ".properties").toString();
       Properties var3 = new Properties();
       var3.setProperty("mainUIAccentColor", ColorUtils.colorToString(this.mainUIAccentColor));
       var3.setProperty("vehiclesUIColor", ColorUtils.colorToString(this.vehiclesUIColor));
@@ -127,7 +117,6 @@ public class EtherAPI {
       var3.setProperty("isEnableNightVision", Boolean.toString(this.isEnableNightVision));
       var3.setProperty("isZombieDontAttack", Boolean.toString(this.isZombieDontAttack));
       var3.setProperty("isNoRecoil", Boolean.toString(this.isNoRecoil));
-      var3.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
       var3.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
       var3.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
       var3.setProperty("isUnlimitedEndurance", Boolean.toString(this.isUnlimitedEndurance));
@@ -170,6 +159,7 @@ public class EtherAPI {
       var3.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
 
       try {
+         java.nio.file.Files.createDirectories(java.nio.file.Path.of(var2).getParent());
          FileOutputStream var4 = new FileOutputStream(var2);
 
          try {
@@ -192,7 +182,7 @@ public class EtherAPI {
    }
 
    public void loadConfig(String var1) {
-      String var2 = "EtherHack/config/" + var1 + ".properties";
+      String var2 = EtherPaths.resolveResourcePathString("EtherHack/config/" + var1 + ".properties");
       Properties var3 = new Properties();
 
       try {
@@ -230,7 +220,6 @@ public class EtherAPI {
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var3, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var3, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var3, "isNoRecoil", false);
-      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var3, "isBypassDebugMode", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCondition", false);
       this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedEndurance", false);
@@ -277,7 +266,7 @@ public class EtherAPI {
       Properties var1 = new Properties();
 
       try {
-         FileInputStream var2 = new FileInputStream("EtherHack/config/startup.properties");
+         FileInputStream var2 = new FileInputStream(EtherPaths.resolveResourcePathString("EtherHack/config/startup.properties"));
 
          try {
             var1.load(var2);
@@ -310,7 +299,6 @@ public class EtherAPI {
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var1, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var1, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var1, "isNoRecoil", false);
-      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCondition", false);
       this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedEndurance", false);
@@ -356,7 +344,6 @@ public class EtherAPI {
    public EtherAPI() {
       this.initStartupConfig();
       EventSubscriber.register(this);
-      this.protectionManager = ProtectionManagerX.getInstance();
    }
 
    @LuaEvents({
@@ -364,82 +351,17 @@ public class EtherAPI {
            @SubscribeLuaEvent(eventName = "OnMainMenuEnter")
    })
    public void loadAPI() {
-      Logger.printLog("Loading protected EtherAPI...");
-      protectionManager.initializeProtection();
+      Logger.printLog("Loading EtherAPI...");
 
-      // Initialize protection first
-      protectionManager.initializeProtection();
-
-      // Install event protection first
-      EventProtector.getInstance().installProtection();
-
-      // Then continue with normal API loading
       if (this.exposer != null) {
          this.exposer.destroy();
       }
 
-      // Use protected exposer with proper SafeEtherLuaMethods instance
       this.exposer = new SafeExposer(LuaManager.converterManager,
               LuaManager.platform,
               LuaManager.env);
 
-      SafeEtherLuaMethods protectedMethods = (SafeEtherLuaMethods) createProtectedMethods();
-      this.exposer.exposeAPI(protectedMethods);
-
-      // Additional initialization after protection is in place
-      initializeProtectedState();
-   }
-
-   private SafeEtherLuaMethods createProtectedMethods() {
-      return new SafeEtherLuaMethods() {
-         public Object invokeMethod(String name, Object... args) {
-            return protectionManager.invokeFunction(name, args);
-         }
-      };
-   }
-
-   // Implement packet handlers
-   public void handleNetworkPacket(String command, Map<String, Object> data) {
-      protectionManager.handlePacket(command, data);
-   }
-
-   private void initializeProtectedState() {
-      try {
-         if (GameClient.connection != null) {
-            // Set connection as validated
-            setFieldValue(GameClient.connection);
-
-            // Use wrapper to clear network data
-            GameClientWrapper wrapper = GameClientWrapper.get();
-            wrapper.clearIncomingNetData();
-         }
-      } catch (Exception e) {
-         Logger.printLog("Error initializing protected state: " + e.getMessage());
-      }
-   }
-
-   private void clearPendingHandshakes() {
-      try {
-         // Clear any queued network events
-          GameClientWrapper wrapper = GameClientWrapper.get();
-          // Get and clear the queue
-          ArrayList<ZomboidNetData> netData = wrapper.getIncomingNetData();
-          if (netData != null) {
-             netData.clear();
-          }
-      } catch (Exception e) {
-         Logger.printLog("Error clearing handshakes: " + e.getMessage());
-      }
-   }
-
-   private static void setFieldValue(Object obj) {
-      try {
-         java.lang.reflect.Field field = obj.getClass().getDeclaredField("validated");
-         field.setAccessible(true);
-         field.set(obj, true);
-      } catch (Exception e) {
-         Logger.printLog("Error setting field value: " + e.getMessage());
-      }
+      this.exposer.exposeAPI(new EtherLuaMethods());
    }
 
    // Inner class for safe method exposure
@@ -448,43 +370,8 @@ public class EtherAPI {
          super(m, (J2SEPlatform) p, e);
       }
 
-      // Override the exposeGlobalFunctions method instead
       public void exposeAPI(EtherLuaMethods methods) {
-         for (Method method : methods.getClass().getMethods()) {
-            if (method.isAnnotationPresent(se.krka.kahlua.integration.annotations.LuaMethod.class)) {
-               String originalName = method.getName();
-               String safeName = safeAPI.getSafeName(originalName);
-               exposeGlobalFunction(method, safeName);
-            }
-         }
-      }
-
-      private void exposeGlobalFunction(Method method, String name) {
-         exposeMethod(method.getDeclaringClass(), method, name, env);
-      }
-   }
-
-   // Wrapper for Lua methods with protection
-   public class SafeEtherLuaMethods extends EtherLuaMethods {
-      public Object callMethod(String name, Object... args) {
-         String originalName = safeAPI.getOriginalName(name);
-         if (originalName != null) {
-            try {
-               Method method = this.getClass().getMethod(originalName, getParameterTypes(args));
-               return method.invoke(this, args);
-            } catch (Exception e) {
-               Logger.printLog("Error calling method " + originalName + ": " + e.getMessage());
-            }
-         }
-         return null;
-      }
-
-      private Class<?>[] getParameterTypes(Object[] args) {
-         Class<?>[] types = new Class<?>[args.length];
-         for (int i = 0; i < args.length; i++) {
-            types[i] = args[i].getClass();
-         }
-         return types;
+         exposeGlobalFunctions(methods);
       }
    }
 
@@ -718,13 +605,6 @@ public class EtherAPI {
       }
    }
 
-   private void bypassDebugMode() {
-      boolean var1 = GameClient.bIngame;
-      boolean var2 = ServerOptions.instance.getBoolean("AntiCheatProtectionType12");
-      boolean var3 = GameServer.bServer;
-      boolean var4 = GameServer.bCoop;
-      Core.bDebug = var1 && this.isBypassDebugMode && (!var2 && var3 || var4 || !var3);
-   }
 
    @SubscribeLuaEvent(
       eventName = "OnPostUIDraw"
@@ -762,7 +642,7 @@ public class EtherAPI {
             }
          }
 
-         ArrayList var8 = GameClient.instance.getPlayers();
+         ArrayList var8 = zombie.network.GameClient.instance.getPlayers();
          if (var8 != null && !var8.isEmpty()) {
             Iterator var9 = var8.iterator();
 
@@ -844,7 +724,7 @@ public class EtherAPI {
       if (this.isVisualsEnable && this.isVisualsPlayersEnable) {
          IsoPlayer var1 = IsoPlayer.getInstance();
          if (var1 != null) {
-            ArrayList var2 = GameClient.instance.getPlayers();
+            ArrayList var2 = zombie.network.GameClient.instance.getPlayers();
             float var3 = PlayerUtils.getScreenPositionX(var1);
             float var4 = PlayerUtils.getScreenPositionY(var1);
             float var5 = this.playersUIColor.a;
@@ -898,7 +778,6 @@ public class EtherAPI {
    public synchronized void updateAPI() {
       try {
          updateLocalPlayerFeatures();
-         bypassDebugMode();
       } catch (Exception e) {
          Logger.printLog("Error in updateAPI: " + e.getMessage());
       }

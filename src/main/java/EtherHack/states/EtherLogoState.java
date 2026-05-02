@@ -1,5 +1,6 @@
 package EtherHack.states;
 
+import EtherHack.utils.EtherPaths;
 import java.util.function.Consumer;
 import zombie.GameTime;
 import zombie.core.Core;
@@ -17,7 +18,7 @@ public class EtherLogoState extends GameState {
    private int stage = 0;
    private float targetAlpha = 0.0F;
    private boolean noRender = false;
-   private final LogoElement etherLogo = new LogoElement("EtherHack/media/EtherLogo.png");
+   private final LogoElement etherLogo = new LogoElement(EtherPaths.resolveResourcePathString("EtherHack/media/EtherLogo.png"));
 
    public void enter() {
       UIManager.bSuspend = true;

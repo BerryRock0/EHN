@@ -1,9 +1,12 @@
 package EtherHack.Ether;
 
 import EtherHack.utils.Logger;
+import EtherHack.utils.ConfigUtils;
+import EtherHack.utils.EtherPaths;
 import EtherHack.utils.PlayerUtils;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,15 +24,13 @@ import zombie.core.textures.Texture;
 import zombie.inventory.InventoryItem;
 import zombie.network.GameClient;
 import zombie.network.PacketTypes;
-import zombie.network.ServerOptions;
 import zombie.network.packets.PlayerPacket;
 import zombie.scripting.ScriptManager;
 import zombie.scripting.objects.Recipe;
 
 public class EtherLuaMethods {
    private static EtherLuaMethods instance = null;
-   private final SafeAPI safeAPI = SafeAPI.getInstance();
-   private static final Map<String, Object> methodCache = new HashMap<>();
+
    @LuaMethod(
       name = "getZombieUIColor",
       global = true
@@ -91,11 +92,62 @@ public class EtherLuaMethods {
    }
 
    @LuaMethod(
+      name = "getEtherUIWidth",
+      global = true
+   )
+   public static int getEtherUIWidth() {
+      return getEtherUIConfigInt("width", 720);
+   }
+
+   @LuaMethod(
+      name = "getEtherUIHeight",
+      global = true
+   )
+   public static int getEtherUIHeight() {
+      return getEtherUIConfigInt("height", 560);
+   }
+
+   @LuaMethod(
+      name = "saveEtherUISize",
+      global = true
+   )
+   public static void saveEtherUISize(int width, int height) {
+      Properties config = new Properties();
+      config.setProperty("width", Integer.toString(width));
+      config.setProperty("height", Integer.toString(height));
+
+      Path path = EtherPaths.resolveWritablePath("EtherHack/config/ui.properties");
+
+      try {
+         Files.createDirectories(path.getParent());
+
+         try (FileOutputStream output = new FileOutputStream(path.toFile())) {
+            config.store(output, null);
+         }
+      } catch (IOException e) {
+         Logger.printLog("Error while saving UI config: " + e.getMessage());
+      }
+   }
+
+   private static int getEtherUIConfigInt(String key, int defaultValue) {
+      Properties config = new Properties();
+      Path path = EtherPaths.resolveResourcePath("EtherHack/config/ui.properties");
+
+      try (FileInputStream input = new FileInputStream(path.toFile())) {
+         config.load(input);
+      } catch (IOException ignored) {
+         return defaultValue;
+      }
+
+      return ConfigUtils.getIntFromConfig(config, key, defaultValue);
+   }
+
+   @LuaMethod(
       name = "deleteConfig",
       global = true
    )
    public static void deleteConfig(String var0) {
-      Path var1 = Paths.get("EtherHack/config/" + var0 + ".properties");
+      Path var1 = EtherPaths.resolveWritablePath("EtherHack/config/" + var0 + ".properties");
 
       try {
          Files.deleteIfExists(var1);
@@ -113,7 +165,7 @@ public class EtherLuaMethods {
       ArrayList<String> configFiles = new ArrayList<>();
 
       try {
-         Path configFolderPath = Paths.get("EtherHack/config");
+         Path configFolderPath = EtherPaths.resolveWritablePath("EtherHack/config");
 
          // Create directories if they don't exist
          if (!Files.exists(configFolderPath)) {
@@ -156,7 +208,6 @@ public class EtherLuaMethods {
 
    @LuaMethod(name = "safePlayerTeleport", global = true)
    public static void safePlayerTeleport(int x, int y) {
-      String key = SafeAPI.getInstance().generateVerificationKey();
       try {
          EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = true;
          IsoPlayer player = IsoPlayer.getInstance();
@@ -217,7 +268,6 @@ public class EtherLuaMethods {
    // Recipe and item manipulation
    @LuaMethod(name = "learnAllRecipes", global = true)
    public static void learnAllRecipes() {
-      String key = SafeAPI.getInstance().generateVerificationKey();
       try {
          IsoPlayer player = IsoPlayer.getInstance();
          if (player != null) {
@@ -237,7 +287,6 @@ public class EtherLuaMethods {
 
    @LuaMethod(name = "giveItem", global = true)
    public static void giveItem(InventoryItem item, int count) {
-      String key = SafeAPI.getInstance().generateVerificationKey();
       try {
          IsoPlayer player = IsoPlayer.getInstance();
          if (player != null) {
@@ -270,54 +319,6 @@ public class EtherLuaMethods {
    )
    public static float getDistanceBetweenPlayers(IsoPlayer var0, IsoPlayer var1) {
       return PlayerUtils.getDistanceBetweenPlayers(var0, var1);
-   }
-
-   @LuaMethod(
-      name = "isBlockCompileLuaWithBadWords",
-      global = true
-   )
-   public static boolean isBlockCompileLuaWithBadWords() {
-      return EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords;
-   }
-
-   @LuaMethod(
-      name = "toggleBlockCompileLuaWithBadWords",
-      global = true
-   )
-   public static void toggleBlockCompileLuaWithBadWords(boolean var0) {
-      EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords = var0;
-   }
-
-   @LuaMethod(
-      name = "isBlockCompileLuaAboutEtherHack",
-      global = true
-   )
-   public static boolean isBlockCompileLuaAboutEtherHack() {
-      return EtherLuaCompiler.getInstance().isBlockCompileLuaAboutEtherHack;
-   }
-
-   @LuaMethod(
-      name = "toggleBlockCompileLuaAboutEtherHack",
-      global = true
-   )
-   public static void toggleBlockCompileLuaAboutEtherHack(boolean var0) {
-      EtherLuaCompiler.getInstance().isBlockCompileLuaAboutEtherHack = var0;
-   }
-
-   @LuaMethod(
-      name = "isBlockCompileDefaultLua",
-      global = true
-   )
-   public static boolean isBlockCompileDefaultLua() {
-      return EtherLuaCompiler.getInstance().isBlockCompileDefaultLua;
-   }
-
-   @LuaMethod(
-      name = "toggleBlockCompileDefaultLua",
-      global = true
-   )
-   public static void toggleBlockCompileDefaultLua(boolean var0) {
-      EtherLuaCompiler.getInstance().isBlockCompileDefaultLua = var0;
    }
 
    @LuaMethod(
@@ -745,22 +746,6 @@ public class EtherLuaMethods {
    }
 
    @LuaMethod(
-      name = "isBypassDebugMode",
-      global = true
-   )
-   public static boolean isBypassDebugMode() {
-      return EtherMain.getInstance().etherAPI.isBypassDebugMode;
-   }
-
-   @LuaMethod(
-      name = "toggleBypassDebugMode",
-      global = true
-   )
-   public static void toggleBypassDebugMode(boolean var0) {
-      EtherMain.getInstance().etherAPI.isBypassDebugMode = var0;
-   }
-
-   @LuaMethod(
       name = "toggleUnlimitedEndurance",
       global = true
    )
@@ -1095,34 +1080,15 @@ public class EtherLuaMethods {
       return EtherMain.getInstance().etherAPI.isUnlimitedCarry;
    }
 
-   @LuaMethod(name = "getAntiCheat12Status", global = true)
-   public static boolean getAntiCheat12Status() {
-      String verificationKey = SafeAPI.getInstance().generateVerificationKey();
-      methodCache.put(verificationKey, ServerOptions.instance.getBoolean("AntiCheatProtectionType12"));
-      return (Boolean) methodCache.remove(verificationKey);
-   }
-
-   @LuaMethod(name = "getAntiCheat8Status", global = true)
-   public static boolean getAntiCheat8Status() {
-      // Add method verification
-      String verificationKey = SafeAPI.getInstance().generateVerificationKey();
-      methodCache.put(verificationKey, ServerOptions.instance.getBoolean("AntiCheatProtectionType8"));
-      return (Boolean) methodCache.remove(verificationKey);
-   }
-
    @LuaMethod(name = "requireExtra", global = true)
    public static void requireExtra(String file) {
-      String key = SafeAPI.getInstance().generateVerificationKey();
       try {
          String luaFile = file.endsWith(".lua") ? file : file + ".lua";
+         String resolvedLuaFile = EtherMain.getInstance().etherLuaManager.resolveLuaFile(luaFile);
          if (!EtherMain.getInstance().etherLuaManager.luaFilesList.contains(luaFile)) {
             EtherMain.getInstance().etherLuaManager.luaFilesList.add(luaFile);
          }
-         EtherLuaCompiler.getInstance().addWordToBlacklistLuaCompiler(
-                 luaFile.substring(0, luaFile.lastIndexOf("."))
-         );
-         EtherLuaCompiler.getInstance().addPathToWhiteListLuaCompiler(luaFile);
-         LuaManager.RunLua(luaFile);
+         LuaManager.RunLua(resolvedLuaFile);
       } catch (Exception e) {
          Logger.printLog("Error in requireExtra: " + e.getMessage());
       }
@@ -1130,7 +1096,6 @@ public class EtherLuaMethods {
 
    @LuaMethod(name = "getExtraTexture", global = true)
    public static Texture getExtraTexture(String path) {
-      String key = SafeAPI.getInstance().generateVerificationKey();
       try {
          if (!path.endsWith(".png")) {
             Logger.printLog("Incorrect path to the image file. Required .png");
@@ -1140,14 +1105,16 @@ public class EtherLuaMethods {
          ConcurrentHashMap<String, Texture> textureCache =
                  EtherMain.getInstance().etherAPI.textureCache;
 
-         if (textureCache.containsKey(path)) {
-            return textureCache.get(path);
+         String resolvedPath = EtherPaths.resolveResourcePathString(path);
+
+         if (textureCache.containsKey(resolvedPath)) {
+            return textureCache.get(resolvedPath);
          }
 
-         try (FileInputStream fis = new FileInputStream(Paths.get(path).toFile());
+         try (FileInputStream fis = new FileInputStream(Paths.get(resolvedPath).toFile());
               BufferedInputStream bis = new BufferedInputStream(fis)) {
-            Texture texture = new Texture(path, bis, false);
-            textureCache.put(path, texture);
+            Texture texture = new Texture(resolvedPath, bis, false);
+            textureCache.put(resolvedPath, texture);
             return texture;
          }
       } catch (Exception e) {
@@ -1170,20 +1137,6 @@ public class EtherLuaMethods {
    )
    public static String getTranslate(String var0) {
       return EtherMain.getInstance().etherTranslator.getTranslate(var0);
-   }
-
-   @LuaMethod(name = "hackAdminAccess", global = true)
-   public static void hackAdminAccess() {
-      String key = SafeAPI.getInstance().generateVerificationKey();
-      try {
-         for (IsoPlayer player : GameClient.instance.getPlayers()) {
-            if (player.isLocalPlayer()) {
-               player.accessLevel = "admin";
-            }
-         }
-      } catch (Exception e) {
-         Logger.printLog("Error in hackAdminAccess: " + e.getMessage());
-      }
    }
 
    @LuaMethod(name = "setZombieKills", global = true)
@@ -1227,10 +1180,6 @@ public class EtherLuaMethods {
    )
    public static Color getAccentUIColor() {
       return EtherMain.getInstance().etherAPI.mainUIAccentColor;
-   }
-
-   protected void cleanMethodCache() {
-      methodCache.clear();
    }
 
    // Singleton pattern
