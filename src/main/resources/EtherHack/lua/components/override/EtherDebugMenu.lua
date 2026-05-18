@@ -15,7 +15,7 @@ EtherDebugMenu.tab = "MAIN"
 function EtherDebugMenu:setupButtons()
     -- MAIN
     self:addButtonInfo("General debuggers", function() ISGeneralDebug.OnOpenPanel() end, "MAIN");
-    self:addButtonInfo("Cheats", function() ISCheatPanelUI.OnOpenPanel() end, "MAIN");
+    self:addButtonInfo("Cheats", function() ISCheatsPanelUI.OnOpenPanel() end, "MAIN");
     self:addButtonInfo("Climate debuggers", function() ClimateControlDebug.OnOpenPanel() end, "MAIN");
     self:addButtonInfo("Player's Stats", function() ISPlayerStatsUI.OnOpenPanel() end, "MAIN");
     self:addButtonInfo("Items List", function() ISItemsListViewer.OnOpenPanel() end, "MAIN");
