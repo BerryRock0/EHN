@@ -629,7 +629,7 @@ public class EtherAPI {
 
       private void bypassDebugMode()
       {
-         Core.debug = this.isBypassDebugMode;
+         Core.bDebug = this.isBypassDebugMode;
       }
 
    @SubscribeLuaEvent(eventName = "OnPostUIDraw")
