@@ -282,6 +282,16 @@ public class EtherLuaMethods {
       return PlayerUtils.getDistanceBetweenPlayers(var0, var1);
    }
 
+   @LuaMethod(name = "isBypassDebugMode", global = true)
+   public static boolean isBypassDebugMode() {
+      return EtherMain.getInstance().etherAPI.isBypassDebugMode;
+   }
+
+   @LuaMethod(name = "toggleBypassDebugMode", global = true)
+   public static void toggleBypassDebugMode(boolean var0) {
+      EtherMain.getInstance().etherAPI.isBypassDebugMode = var0;
+   }
+
     @LuaMethod(name="isAlwaysRack", global=true)
     public static boolean isAlwaysRack() {
         return EtherMain.getInstance().etherAPI.isAlwaysRack;        
