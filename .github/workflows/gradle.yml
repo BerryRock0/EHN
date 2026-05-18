@@ -35,3 +35,9 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: chmod +x gradlew && ./gradlew build
+
+    - name: Upload
+      uses: actions/upload-artifact@v5
+      with:
+          name: EtherHack
+          path: ./build/*.jar
