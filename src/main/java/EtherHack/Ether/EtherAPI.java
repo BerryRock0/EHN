@@ -47,6 +47,7 @@ public class EtherAPI {
    public Color vehiclesUIColor;
    public Color zombiesUIColor;
    public Color playersUIColor;
+   public boolean isBypassDebugMode;
    public boolean isAlwaysRack;
    public boolean isAlwaysRoundChamber;
    public boolean isAlwaysKnockdown;
@@ -113,6 +114,7 @@ public class EtherAPI {
       var3.setProperty("vehiclesUIColor", ColorUtils.colorToString(this.vehiclesUIColor));
       var3.setProperty("zombiesUIColor", ColorUtils.colorToString(this.zombiesUIColor));
       var3.setProperty("playersUIColor", ColorUtils.colorToString(this.playersUIColor));
+      var3.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
       var3.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
       var3.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
       var3.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
@@ -227,6 +229,7 @@ public class EtherAPI {
       this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var3, "vehiclesUIColor", new Color(150, 150, 200));
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var3, "zombiesUIColor", new Color(255, 150, 100));
       this.playersUIColor = ConfigUtils.getColorFromConfig(var3, "playersUIColor", new Color(255, 50, 100));
+      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var3, "isBypassDebugMode", false);
       this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var3, (String)"isAlwaysRack", false);
       this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysRoundChamber", false);
       this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysKnockdown", false);
@@ -315,6 +318,7 @@ public class EtherAPI {
       this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var1, "vehiclesUIColor", new Color(150, 150, 200));
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var1, "zombiesUIColor", new Color(255, 150, 100));
       this.playersUIColor = ConfigUtils.getColorFromConfig(var1, "playersUIColor", new Color(255, 50, 100));
+      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var3, "isBypassDebugMode", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var1, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var1, "isMultiHitZombies", false);
       this.isExtraDamage = ConfigUtils.getBooleanFromConfig(var1, "isExtraDamage", false);
@@ -623,10 +627,15 @@ public class EtherAPI {
             var1.getNutrition().setWeight(80.0);
    }
 
+      private void bypassDebugMode()
+      {
+         boolean var1 = GameClient.ingame;
+         boolean var3 = GameServer.server;
+         boolean var4 = GameServer.coop;
+         Core.debug = var1 && this.isBypassDebugMode && (var3 || var4 || !var3);
+      }
 
-   @SubscribeLuaEvent(
-      eventName = "OnPostUIDraw"
-   )
+   @SubscribeLuaEvent(eventName = "OnPostUIDraw")
    public void updateVisuals() {
       try {
          this.updatePlayersVisuals();
