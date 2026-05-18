@@ -60,6 +60,7 @@
 	UI_CharacterPanel_OptimalWeight = "Maintain optimal weight",
 
 	UI_Exploit_TraitPointTitle = "Character trait points",
+	UI_Exploit_DebugBypass = "Bypass debug mode prohibition",
 	UI_Exploit_MechanicsMenuTitle = "Vehicle mechanics menu",
 	UI_Exploit_MechanicsMenuButton = "Open",
 	UI_Exploit_MedicMenuTitle = "Medicine menu",
