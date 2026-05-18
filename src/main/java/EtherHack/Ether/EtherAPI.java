@@ -318,7 +318,7 @@ public class EtherAPI {
       this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var1, "vehiclesUIColor", new Color(150, 150, 200));
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var1, "zombiesUIColor", new Color(255, 150, 100));
       this.playersUIColor = ConfigUtils.getColorFromConfig(var1, "playersUIColor", new Color(255, 50, 100));
-      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var3, "isBypassDebugMode", false);
+      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var1, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var1, "isMultiHitZombies", false);
       this.isExtraDamage = ConfigUtils.getBooleanFromConfig(var1, "isExtraDamage", false);
@@ -629,7 +629,7 @@ public class EtherAPI {
 
       private void bypassDebugMode()
       {
-         Core.bDebug = this.isBypassDebugMode;
+         Core.debug = this.isBypassDebugMode;
       }
 
    @SubscribeLuaEvent(eventName = "OnPostUIDraw")
