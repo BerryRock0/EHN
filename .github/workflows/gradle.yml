@@ -44,5 +44,5 @@ jobs:
 
       - name: Build
         if: steps.pz_libs.outputs.available == 'true'
-        run: ./gradlew build
+        run: chmod +x gradlew && ./gradlew build
 
