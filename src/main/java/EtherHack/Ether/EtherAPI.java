@@ -424,14 +424,6 @@ public class EtherAPI {
             if (!this.originalWeaponStats.containsKey(var4)) {
                this.originalWeaponStats.put(var4, new float[]{var3.getExtraDamage(), var3.getMaxDamage(), var3.getMinDamage(), var3.getMaxRange(), var3.getMinRange(), (float)var3.getHitChance(), var3.getCritDmgMultiplier()});
             }
-
-            var3.setExtraDamage(100000.0F);
-            var3.setMaxDamage(1000000.0F);
-            var3.setMinDamage(1000000.0F);
-            var3.setMaxRange(10000.0F);
-            var3.setMinRange(0.0F);
-            var3.setHitChance(100);
-            var3.setCritDmgMultiplier(100000.0F);
          }
 
          if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies) {
