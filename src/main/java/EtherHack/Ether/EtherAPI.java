@@ -47,6 +47,11 @@ public class EtherAPI {
    public Color vehiclesUIColor;
    public Color zombiesUIColor;
    public Color playersUIColor;
+   public boolean isAlwaysRack;
+   public boolean isAlwaysRoundChamber;
+   public boolean isAlwaysKnockdown;
+   public boolean isAlwaysCritical;
+   public boolean isAlwaysAiming;
    public boolean isPlayerInSafeTeleported;
    public boolean isMultiHitZombies;
    public boolean isExtraDamage;
@@ -57,6 +62,9 @@ public class EtherAPI {
    public boolean isEnableNightVision;
    public boolean isZombieDontAttack;
    public boolean isNoRecoil;
+   public boolean isNoReload;
+   public boolean isNoJam;
+   public boolean isNoSpentRoundChamber;
    public boolean isUnlimitedCarry;
    public boolean isUnlimitedCondition;
    public boolean isUnlimitedEndurance;
@@ -105,6 +113,11 @@ public class EtherAPI {
       var3.setProperty("vehiclesUIColor", ColorUtils.colorToString(this.vehiclesUIColor));
       var3.setProperty("zombiesUIColor", ColorUtils.colorToString(this.zombiesUIColor));
       var3.setProperty("playersUIColor", ColorUtils.colorToString(this.playersUIColor));
+      var3.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
+      var3.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
+      var3.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
+      var3.setProperty("isAlwaysAiming", Boolean.toString(this.isAlwaysAiming));
+      var3.setProperty("isAlwaysCritical", Boolean.toString(this.isAlwaysCritical));
       var3.setProperty("isPlayerInSafeTeleported", Boolean.toString(this.isPlayerInSafeTeleported));
       var3.setProperty("isMultiHitZombies", Boolean.toString(this.isMultiHitZombies));
       var3.setProperty("isPlayerInSafeTeleported", Boolean.toString(this.isPlayerInSafeTeleported));
@@ -117,6 +130,9 @@ public class EtherAPI {
       var3.setProperty("isEnableNightVision", Boolean.toString(this.isEnableNightVision));
       var3.setProperty("isZombieDontAttack", Boolean.toString(this.isZombieDontAttack));
       var3.setProperty("isNoRecoil", Boolean.toString(this.isNoRecoil));
+      var3.setProperty("isNoReload", Boolean.toString(this.isNoReload));
+      var3.setProperty("isNoJam", Boolean.toString(this.isNoJam));
+      var3.setProperty("isNoSpentRoundChamber", Boolean.toString(this.isNoSpentRoundChamber));
       var3.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
       var3.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
       var3.setProperty("isUnlimitedEndurance", Boolean.toString(this.isUnlimitedEndurance));
@@ -205,11 +221,17 @@ public class EtherAPI {
          Logger.printLog("The config file was not found. Loading canceled.");
          return;
       }
-
+      
+      //this. = ConfigUtils.getBooleanFromConfig(var3, "", false);
       this.mainUIAccentColor = ConfigUtils.getColorFromConfig(var3, "mainUIAccentColor", new Color(56, 239, 125));
       this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var3, "vehiclesUIColor", new Color(150, 150, 200));
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var3, "zombiesUIColor", new Color(255, 150, 100));
       this.playersUIColor = ConfigUtils.getColorFromConfig(var3, "playersUIColor", new Color(255, 50, 100));
+      this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var3, (String)"isAlwaysRack", false);
+      this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysRoundChamber", false);
+      this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysKnockdown", false);
+      this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysAiming", false);
+      this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysCritical", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var3, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var3, "isMultiHitZombies", false);
       this.isExtraDamage = ConfigUtils.getBooleanFromConfig(var3, "isExtraDamage", false);
@@ -220,6 +242,9 @@ public class EtherAPI {
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var3, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var3, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var3, "isNoRecoil", false);
+      this.isNoReload = ConfigUtils.getBooleanFromConfig(var3, "isNoReload", false);
+      this.isNoJam = ConfigUtils.getBooleanFromConfig(var3, "isNoJam", false);
+      this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isNoSpentRoundChamber", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCondition", false);
       this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedEndurance", false);
@@ -284,7 +309,8 @@ public class EtherAPI {
       } catch (IOException var7) {
          Logger.printLog("Startup file not found. Loading default settings.");
       }
-
+      
+      //this. = ConfigUtils.getBooleanFromConfig(var3, "", false);
       this.mainUIAccentColor = ConfigUtils.getColorFromConfig(var1, "mainUIAccentColor", new Color(56, 239, 125));
       this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var1, "vehiclesUIColor", new Color(150, 150, 200));
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var1, "zombiesUIColor", new Color(255, 150, 100));
@@ -299,6 +325,9 @@ public class EtherAPI {
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var1, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var1, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var1, "isNoRecoil", false);
+      this.isNoReload = ConfigUtils.getBooleanFromConfig(var3, "isNoReload", false);
+      this.isNoJam = ConfigUtils.getBooleanFromConfig(var3, "isNoJam", false);
+      this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isNoSpentRoundChamber", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCondition", false);
       this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedEndurance", false);
@@ -413,64 +442,84 @@ public class EtherAPI {
       }
    }
 
-   private void updateLocalPlayerFeatures() {
+   private void updateLocalPlayerFeatures()
+   {
       IsoPlayer var1 = IsoPlayer.getInstance();
-      if (var1 != null) {
-         InventoryItem var2 = var1.getPrimaryHandItem();
-         HandWeapon var3;
-         if (this.isExtraDamage && var2 != null && (var2.getStringItemType().equals("RangedWeapon") || var2.getStringItemType().equals("MeleeWeapon")) && var2 instanceof HandWeapon) {
-            var3 = (HandWeapon)var2;
-            String var4 = var3.getFullType();
-            if (!this.originalWeaponStats.containsKey(var4)) {
+      InventoryItem var2 = var1.getPrimaryHandItem();
+      HandWeapon var3 = (HandWeapon)var2;
+      String var4 = var3.getFullType();
+      
+      if (var1 == null)
+         return;
+
+         if (this.isExtraDamage && var2 != null && (var2.getStringItemType().equals("RangedWeapon") || var2.getStringItemType().equals("MeleeWeapon")) && var2 instanceof HandWeapon)
+            if (!this.originalWeaponStats.containsKey(var4))
                this.originalWeaponStats.put(var4, new float[]{var3.getExtraDamage(), var3.getMaxDamage(), var3.getMinDamage(), var3.getMaxRange(), var3.getMinRange(), (float)var3.getHitChance(), var3.getCritDmgMultiplier()});
-            }
-         }
 
-         if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies) {
+         if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
             SandboxOptions.instance.set("MultiHitZombies", this.isMultiHitZombies);
-         }
 
-         if (var1.isTimedActionInstantCheat() != this.isTimedActionCheat) {
+
+         if (var1.isTimedActionInstantCheat() != this.isTimedActionCheat)
             var1.setTimedActionInstantCheat(this.isTimedActionCheat);
-         }
 
-         if (var1.isWearingNightVisionGoggles() != this.isEnableNightVision) {
+
+         if (var1.isWearingNightVisionGoggles() != this.isEnableNightVision)
             var1.setWearingNightVisionGoggles(this.isEnableNightVision);
-         }
 
-         if (var1.isGodMod() != this.isEnableGodMode) {
+
+         if (var1.isGodMod() != this.isEnableGodMode)
             var1.setGodMod(this.isEnableGodMode);
-         }
 
-         if (var1.isNoClip() != this.isEnableNoclip) {
+
+         if (var1.isNoClip() != this.isEnableNoclip)
             var1.setNoClip(this.isEnableNoclip);
-         }
 
-         if (var1.isInvisible() != this.isEnableInvisible) {
+
+         if (var1.isInvisible() != this.isEnableInvisible)
             var1.setInvisible(this.isEnableInvisible);
-         }
 
-         if (var1.isZombiesDontAttack() != this.isZombieDontAttack) {
+
+         if (var1.isZombiesDontAttack() != this.isZombieDontAttack)
             var1.setZombiesDontAttack(this.isZombieDontAttack);
+
+
+         if (var2 != null && var2.getStringItemType().equals("RangedWeapon") && var2 instanceof HandWeapon)
+         {
+            if(this.isAlwaysKnockdown)
+                var3.setAlwaysKnockdown(true);
+            
+            if(this.isAlwaysCritical)
+                var3.setCriticalChance(100.0f);
+            
+            if(this.isAlwaysRack)
+                var3.setRackAfterShoot(true);
+            
+            if(this.isNoJam)
+                var3.setJammed(false);
+            
+            if(this.isAlwaysRoundChamber)
+                var3.setRoundChambered(true);
+            
+            if(this.isNoSpentRoundChamber)
+                var3.setSpentRoundChambered(false);
+            
+            if(this.isAlwaysAiming)
+                var3.setAimingTime(0);
+            
+            if(this.isNoRecoil)
+                var3.setRecoilDelay(0);
+            
+            if(this.isNoReload)
+                var3.setReloadTime(0);
+
+            if (this.isUnlimitedAmmo)
+                var2.setCurrentAmmoCount(var2.getMaxAmmo());
          }
 
-         if (this.isNoRecoil && var2 != null && var2.getStringItemType().equals("RangedWeapon") && var2 instanceof HandWeapon) {
-            var3 = (HandWeapon)var2;
-            var3.setRecoilDelay(0);
-            var3.setCriticalChance(100.0F);
-            var3.setAlwaysKnockdown(true);
-            var3.setAimingTime(0);
-         }
-
-         if (this.isUnlimitedAmmo && var2 != null && var2.getStringItemType().equals("RangedWeapon")) {
-            var2.setCurrentAmmoCount(var2.getMaxAmmo());
-         }
-
-         if (this.isUnlimitedCondition && var2 != null) {
-            if (var2.getHaveBeenRepaired() > 1) {
-               var2.setHaveBeenRepaired(1);
-            }
-
+         if (this.isUnlimitedCondition && var2 != null)
+         {
+            var2.setHaveBeenRepaired(1);
             var2.setCondition(var2.getConditionMax());
          }
 
@@ -510,91 +559,68 @@ public class EtherAPI {
             }
          }
 
-         if (this.isUnlimitedEndurance) {
+         if (this.isUnlimitedEndurance)
             var1.getStats().setEndurance(1.0F);
-         }
 
-         if (this.isDisableFatigue) {
+         if (this.isDisableFatigue)
             var1.getStats().setFatigue(0.0F);
-         }
 
-         if (this.isDisableHunger) {
+         if (this.isDisableHunger)
             var1.getStats().setHunger(0.0F);
-         }
 
-         if (this.isDisableThirst) {
+         if (this.isDisableThirst) 
             var1.getStats().setThirst(0.0F);
-         }
 
-         if (this.isDisableDrunkenness) {
+         if (this.isDisableDrunkenness)
             var1.getStats().setDrunkenness(0.0F);
-         }
 
-         if (this.isDisableAnger) {
+         if (this.isDisableAnger)
             var1.getStats().setAnger(0.0F);
-         }
 
-         if (this.isDisableFear) {
+         if (this.isDisableFear)
             var1.getStats().setFear(0.0F);
-         }
 
-         if (this.isDisablePain) {
+         if (this.isDisablePain)
             var1.getStats().setPain(0.0F);
-         }
 
-         if (this.isDisablePanic) {
+         if (this.isDisablePanic)
             var1.getStats().setPanic(0.0F);
-         }
 
-         if (this.isDisableMorale) {
+         if (this.isDisableMorale)
             var1.getStats().setMorale(1.0F);
-         }
 
-         if (this.isDisableStress) {
+         if (this.isDisableStress)
             var1.getStats().setStress(0.0F);
-         }
 
-         if (this.isDisableSickness) {
+         if (this.isDisableSickness)
             var1.getStats().setSickness(0.0F);
-         }
 
-         if (this.isDisableStressFromCigarettes) {
+         if (this.isDisableStressFromCigarettes)
             var1.getStats().setStressFromCigarettes(0.0F);
-         }
 
-         if (this.isDisableSanity) {
+         if (this.isDisableSanity)
             var1.getStats().setSanity(1.0F);
-         }
 
-         if (this.isDisableBoredomLevel) {
+         if (this.isDisableBoredomLevel)
             var1.getBodyDamage().setBoredomLevel(0.0F);
-         }
 
-         if (this.isDisableUnhappynessLevel) {
+         if (this.isDisableUnhappynessLevel)
             var1.getBodyDamage().setUnhappynessLevel(0.0F);
-         }
 
-         if (this.isDisableWetness) {
+         if (this.isDisableWetness)
             var1.getBodyDamage().setWetness(0.0F);
-         }
 
-         if (this.isDisableInfectionLevel) {
+         if (this.isDisableInfectionLevel)
             var1.getBodyDamage().setInfectionLevel(0.0F);
-         }
 
-         if (this.isDisableFakeInfectionLevel) {
+         if (this.isDisableFakeInfectionLevel)
             var1.getBodyDamage().setFakeInfectionLevel(0.0F);
-         }
 
-         if (this.isOptimalCalories) {
+         if (this.isOptimalCalories)
             var1.getNutrition().setCalories(1200.0F);
-         }
 
-         if (this.isOptimalWeight) {
+         if (this.isOptimalWeight)
             var1.getNutrition().setWeight(80.0);
-         }
-
-      }
    }
 
 
