@@ -31,86 +31,56 @@ import zombie.scripting.objects.Recipe;
 public class EtherLuaMethods {
    private static EtherLuaMethods instance = null;
 
-   @LuaMethod(
-      name = "getZombieUIColor",
-      global = true
-   )
+   @LuaMethod(name = "getZombieUIColor", global = true)
    public static Color getZombieUIColor() {
       return EtherMain.getInstance().etherAPI.zombiesUIColor;
    }
 
-   @LuaMethod(
-      name = "setZombieUIColor",
-      global = true
-   )
+   @LuaMethod(name = "setZombieUIColor",global = true)
    public static void setZombieUIColor(float var0, float var1, float var2) {
       Color var3 = new Color(var0, var1, var2);
       EtherMain.getInstance().etherAPI.zombiesUIColor = var3;
    }
 
-   @LuaMethod(
-      name = "getVehicleUIColor",
-      global = true
-   )
+   @LuaMethod(name = "getVehicleUIColor", global = true)
    public static Color getVehicleUIColor() {
       return EtherMain.getInstance().etherAPI.vehiclesUIColor;
    }
 
-   @LuaMethod(
-      name = "setVehicleUIColor",
-      global = true
-   )
+   @LuaMethod(name = "setVehicleUIColor", global = true)
    public static void setVehicleUIColor(float var0, float var1, float var2) {
       Color var3 = new Color(var0, var1, var2);
       EtherMain.getInstance().etherAPI.vehiclesUIColor = var3;
    }
 
-   @LuaMethod(
-      name = "getPlayersUIColor",
-      global = true
-   )
+   @LuaMethod(name = "getPlayersUIColor", global = true)
    public static Color getPlayersUIColor() {
       return EtherMain.getInstance().etherAPI.playersUIColor;
    }
 
-   @LuaMethod(
-      name = "setPlayersUIColor",
-      global = true
-   )
+   @LuaMethod(name = "setPlayersUIColor", global = true)
    public static void setPlayersUIColor(float var0, float var1, float var2) {
       Color var3 = new Color(var0, var1, var2);
       EtherMain.getInstance().etherAPI.playersUIColor = var3;
    }
 
-   @LuaMethod(
-      name = "setAccentUIColor",
-      global = true
-   )
+   @LuaMethod(name = "setAccentUIColor", global = true)
    public static void setAccentUIColor(float var0, float var1, float var2) {
       Color var3 = new Color(var0, var1, var2);
       EtherMain.getInstance().etherAPI.mainUIAccentColor = var3;
    }
 
-   @LuaMethod(
-      name = "getEtherUIWidth",
-      global = true
-   )
+   @LuaMethod(name = "getEtherUIWidth", global = true)
    public static int getEtherUIWidth() {
       return getEtherUIConfigInt("width", 720);
    }
 
-   @LuaMethod(
-      name = "getEtherUIHeight",
-      global = true
-   )
+   @LuaMethod(name = "getEtherUIHeight", global = true)
    public static int getEtherUIHeight() {
       return getEtherUIConfigInt("height", 560);
    }
 
-   @LuaMethod(
-      name = "saveEtherUISize",
-      global = true
-   )
+   @LuaMethod(name = "saveEtherUISize", global = true)
    public static void saveEtherUISize(int width, int height) {
       Properties config = new Properties();
       config.setProperty("width", Integer.toString(width));
@@ -142,10 +112,7 @@ public class EtherLuaMethods {
       return ConfigUtils.getIntFromConfig(config, key, defaultValue);
    }
 
-   @LuaMethod(
-      name = "deleteConfig",
-      global = true
-   )
+   @LuaMethod(name = "deleteConfig", global = true)
    public static void deleteConfig(String var0) {
       Path var1 = EtherPaths.resolveWritablePath("EtherHack/config/" + var0 + ".properties");
 
@@ -157,10 +124,7 @@ public class EtherLuaMethods {
 
    }
 
-   @LuaMethod(
-           name = "getConfigList",
-           global = true
-   )
+   @LuaMethod(name = "getConfigList", global = true)
    public static ArrayList<String> getConfigList() {
       ArrayList<String> configFiles = new ArrayList<>();
 
@@ -190,18 +154,12 @@ public class EtherLuaMethods {
       }
    }
 
-   @LuaMethod(
-      name = "loadConfig",
-      global = true
-   )
+   @LuaMethod(name = "loadConfig", global = true)
    public static void loadConfig(String var0) {
       EtherMain.getInstance().etherAPI.loadConfig(var0);
    }
 
-   @LuaMethod(
-      name = "saveConfig",
-      global = true
-   )
+   @LuaMethod(name = "saveConfig", global = true)
    public static void saveConfig(String var0) {
       EtherMain.getInstance().etherAPI.saveConfig(var0);
    }
@@ -330,8 +288,8 @@ public class EtherLuaMethods {
     }
     
     @LuaMethod(name="toggleAlwaysRack", global=true)
-    public static void toggleAlwaysRack(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;
+    public static void toggleAlwaysRack(boolean var0) {
+        EtherMain.getInstance().etherAPI.isAlwaysRack = var0;
     }
 
     @LuaMethod(name="isAlwaysRoundChamber", global=true)
@@ -340,8 +298,8 @@ public class EtherLuaMethods {
     }
     
     @LuaMethod(name="toggleAlwaysRoundChamber", global=true)
-    public static void toggleAlwaysRoundChamber(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = isToggled;
+    public static void toggleAlwaysRoundChamber(boolean var0) {
+        EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = var0;
     }
 
     @LuaMethod(name="isAlwaysKnockdown", global=true)
@@ -350,8 +308,8 @@ public class EtherLuaMethods {
     }
     
     @LuaMethod(name="toggleAlwaysKnockdown", global=true)
-    public static void toggleAlwaysKnockdown(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isAlwaysKnockdown = isToggled;
+    public static void toggleAlwaysKnockdown(boolean var0) {
+        EtherMain.getInstance().etherAPI.isAlwaysKnockdown = var0;
     }
 
     @LuaMethod(name="isAlwaysAiming", global=true)
@@ -360,8 +318,8 @@ public class EtherLuaMethods {
     }
     
     @LuaMethod(name="toggleAlwaysAiming", global=true)
-    public static void toggleAlwaysAiming(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isAlwaysAiming = isToggled;        
+    public static void toggleAlwaysAiming(boolean var0) {
+        EtherMain.getInstance().etherAPI.isAlwaysAiming = var0;        
     }
 
    @LuaMethod(name="isAlwaysCritical", global=true)
@@ -370,8 +328,8 @@ public class EtherLuaMethods {
     }
     
    @LuaMethod(name="toggleAlwaysCritical", global=true)
-    public static void toggleAlwaysCritical(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isAlwaysCritical = isToggled;
+    public static void toggleAlwaysCritical(boolean var0) {
+        EtherMain.getInstance().etherAPI.isAlwaysCritical = var0;
     }
 
    @LuaMethod(name = "isEnableInvisible", global = true)
@@ -389,8 +347,7 @@ public class EtherLuaMethods {
       return EtherMain.getInstance().etherAPI.isZombieDontAttack;
    }
 
-   @LuaMethod(
-      name = "toggleZombieDontAttack", global = true)
+   @LuaMethod(name = "toggleZombieDontAttack", global = true)
    public static void toggleZombieDontAttack(boolean var0) {
       EtherMain.getInstance().etherAPI.isZombieDontAttack = var0;
    }
@@ -410,10 +367,7 @@ public class EtherLuaMethods {
       return EtherMain.getInstance().etherAPI.isEnableGodMode;
    }
 
-   @LuaMethod(
-      name = "toggleGodMode",
-      global = true
-   )
+   @LuaMethod(name = "toggleGodMode", global = true)
    public static void toggleGodMode(boolean var0) {
       EtherMain.getInstance().etherAPI.isEnableGodMode = var0;
    }
@@ -444,8 +398,8 @@ public class EtherLuaMethods {
     }
 
    @LuaMethod(name="toggleNoReload", global=true)
-   public static void toggleNoReload(boolean isToggled) {
-      EtherMain.getInstance().etherAPI.isNoReload = isToggled;
+   public static void toggleNoReload(boolean var0) {
+      EtherMain.getInstance().etherAPI.isNoReload = var0;
     }
 
    @LuaMethod(name="isNoJam", global=true)
@@ -454,8 +408,8 @@ public class EtherLuaMethods {
     }
 
    @LuaMethod(name="toggleNoJam", global=true)
-   public static void toggleNoJam(boolean isToggled) {
-      EtherMain.getInstance().etherAPI.isNoJam = isToggled;
+   public static void toggleNoJam(boolean var0) {
+      EtherMain.getInstance().etherAPI.isNoJam = var0;
     }
 
    @LuaMethod(name="isNoSpentRoundChamber", global=true)
@@ -464,8 +418,8 @@ public class EtherLuaMethods {
     }
 
    @LuaMethod(name="toggleNoSpentRoundChamber", global=true)
-   public static void toggleNoSpentRoundChamber(boolean isToggled) {
-      EtherMain.getInstance().etherAPI.isNoSpentRoundChamber = isToggled;
+   public static void toggleNoSpentRoundChamber(boolean var0) {
+      EtherMain.getInstance().etherAPI.isNoSpentRoundChamber = var0;
     }
 
    @LuaMethod(name = "isAutoRepairItems", global = true)
@@ -906,12 +860,14 @@ public class EtherLuaMethods {
 
    @LuaMethod(name = "requireExtra", global = true)
    public static void requireExtra(String file) {
-      try {
+      try
+      {
          String luaFile = file.endsWith(".lua") ? file : file + ".lua";
          String resolvedLuaFile = EtherMain.getInstance().etherLuaManager.resolveLuaFile(luaFile);
-         if (!EtherMain.getInstance().etherLuaManager.luaFilesList.contains(luaFile)) {
+         
+         if (!EtherMain.getInstance().etherLuaManager.luaFilesList.contains(luaFile))
             EtherMain.getInstance().etherLuaManager.luaFilesList.add(luaFile);
-         }
+         
          LuaManager.RunLua(resolvedLuaFile);
       } catch (Exception e) {
          Logger.printLog("Error in requireExtra: " + e.getMessage());
@@ -926,9 +882,7 @@ public class EtherLuaMethods {
             return null;
          }
 
-         ConcurrentHashMap<String, Texture> textureCache =
-                 EtherMain.getInstance().etherAPI.textureCache;
-
+         ConcurrentHashMap<String, Texture> textureCache = EtherMain.getInstance().etherAPI.textureCache;
          String resolvedPath = EtherPaths.resolveResourcePathString(path);
 
          if (textureCache.containsKey(resolvedPath)) {
@@ -992,10 +946,7 @@ public class EtherLuaMethods {
       return 0;
    }
 
-   @LuaMethod(
-      name = "getAccentUIColor",
-      global = true
-   )
+   @LuaMethod(name = "getAccentUIColor", global = true)
    public static Color getAccentUIColor() {
       return EtherMain.getInstance().etherAPI.mainUIAccentColor;
    }
