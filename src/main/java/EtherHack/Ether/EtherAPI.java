@@ -325,9 +325,9 @@ public class EtherAPI {
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var1, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var1, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var1, "isNoRecoil", false);
-      this.isNoReload = ConfigUtils.getBooleanFromConfig(var3, "isNoReload", false);
-      this.isNoJam = ConfigUtils.getBooleanFromConfig(var3, "isNoJam", false);
-      this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isNoSpentRoundChamber", false);
+      this.isNoReload = ConfigUtils.getBooleanFromConfig(var1, "isNoReload", false);
+      this.isNoJam = ConfigUtils.getBooleanFromConfig(var1, "isNoJam", false);
+      this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isNoSpentRoundChamber", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCondition", false);
       this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedEndurance", false);
