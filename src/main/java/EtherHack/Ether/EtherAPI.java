@@ -629,10 +629,7 @@ public class EtherAPI {
 
       private void bypassDebugMode()
       {
-         boolean var1 = GameClient.ingame;
-         boolean var3 = GameServer.server;
-         boolean var4 = GameServer.coop;
-         Core.debug = var1 && this.isBypassDebugMode && (var3 || var4 || !var3);
+         Core.bDebug = this.isBypassDebugMode;
       }
 
    @SubscribeLuaEvent(eventName = "OnPostUIDraw")
