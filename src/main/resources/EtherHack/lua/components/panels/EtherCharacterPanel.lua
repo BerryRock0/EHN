@@ -62,44 +62,60 @@ function EtherCharacterPanel:createChildren()
         toggleMultiHitZombies(isChecked);
     end, isMultiHitZombies(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_ZombieDontAttack"), function(isChecked)
-        toggleZombieDontAttack(isChecked);
-    end, isZombieDontAttack(), false);
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableSpentRoundChamber"), function(isChecked)
+        toggleNoSpentRoundChamber(isChecked)
+    end, isNoSpentRoundChamber(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableJam"), function(isChecked)
+        toggleNoJam(isChecked)
+    end, isNoJam(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
+        toggleNoRecoil(isChecked)
+    end, isNoRecoil(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_BuildCheat"), function(isChecked)
-        ISBuildMenu.cheat = isChecked;
-    end, ISBuildMenu.cheat, false);
+	self:addCheckBox(getTranslate("UI_CharacterPanel_DisableReload"), function(isChecked)
+        toggleNoReload(isChecked)
+    end, isNoReload(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_FarmingCheat"), function(isChecked)
-        ISFarmingMenu.cheat = isChecked;
-    end, ISFarmingMenu.cheat, false);
+    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRack"), function(isChecked)
+        toggleAlwaysRack(isChecked);
+    end, isAlwaysRack(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_GodMode"), function(isChecked)
-        EtherDebugClient.toggleSelf("god", isChecked);
-    end, isEnableGodMode(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_TimedActionCheat"), function(isChecked)
-        toggleTimedActionCheat(isChecked);
-    end, isTimedActionCheat(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_NoClip"), function(isChecked)
-        EtherDebugClient.toggleSelf("noclip", isChecked);
-    end, isEnableNoclip(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_Invisible"), function(isChecked)
-        EtherDebugClient.toggleSelf("invisible", isChecked);
-    end, isEnableInvisible(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
-        toggleNightVision(isChecked);
-    end, isEnableNightVision(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRoundChamber"), function(isChecked)
+        toggleAlwaysRoundChamber(isChecked);
+    end, isAlwaysRoundChamber(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
+        toggleAlwaysAiming(isChecked);
+    end, isAlwaysAiming(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysCritical"), function(isChecked)
+        toggleAlwaysCritical(isChecked);
+    end, isAlwaysCritical(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysKnockdown"), function(isChecked)
+        toggleAlwaysKnockdown(isChecked);
+    end, isAlwaysKnockdown(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
         toggleExtraDamage(isChecked);
         if(not isChecked) then
             resetWeaponsStats()
         end
     end, isExtraDamage(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedAmmo"), function(isChecked)
+        EtherDebugClient.toggleSelf("unlimitedAmmo", isChecked);
+    end, isUnlimitedAmmo(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_ZombieDontAttack"), function(isChecked)
+        toggleZombieDontAttack(isChecked);
+    end, isZombieDontAttack(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
+        toggleNightVision(isChecked);
+    end, isEnableNightVision(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedCarry", isChecked);
@@ -108,10 +124,18 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedEndurance"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedEndurance", isChecked);
     end, isUnlimitedEndurance(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_BuildCheat"), function(isChecked)
+        ISBuildMenu.cheat = isChecked;
+    end, ISBuildMenu.cheat, false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedAmmo"), function(isChecked)
-        EtherDebugClient.toggleSelf("unlimitedAmmo", isChecked);
-    end, isUnlimitedAmmo(), false);
+    self:addCheckBox(getTranslate("UI_CharacterPanel_FarmingCheat"), function(isChecked)
+        ISFarmingMenu.cheat = isChecked;
+    end, ISFarmingMenu.cheat, false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_TimedActionCheat"), function(isChecked)
+        toggleTimedActionCheat(isChecked);
+    end, isTimedActionCheat(), false);	
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCondition"), function(isChecked)
         toggleUnlimitedCondition(isChecked);
@@ -204,7 +228,19 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_OptimalWeight"), function(isChecked)
         toggleOptimalWeight(isChecked);
     end, isOptimalWeight(), false);
-    
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_GodMode"), function(isChecked)
+        EtherDebugClient.toggleSelf("god", isChecked);
+    end, isEnableGodMode(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_NoClip"), function(isChecked)
+        EtherDebugClient.toggleSelf("noclip", isChecked);
+    end, isEnableNoclip(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_Invisible"), function(isChecked)
+        EtherDebugClient.toggleSelf("invisible", isChecked);
+    end, isEnableInvisible(), false);
+
     self:updatePanel();
 end
 
