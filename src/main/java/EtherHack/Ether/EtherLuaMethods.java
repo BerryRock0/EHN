@@ -24,7 +24,6 @@ import zombie.core.textures.Texture;
 import zombie.inventory.InventoryItem;
 import zombie.network.GameClient;
 import zombie.network.PacketTypes;
-import zombie.network.packets.PlayerPacket;
 import zombie.scripting.ScriptManager;
 import zombie.scripting.objects.Recipe;
 
