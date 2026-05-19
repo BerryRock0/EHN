@@ -308,7 +308,6 @@ public class EtherAPI {
                   var5.setMaxRange(var7[3]);
                   var5.setMinRange(var7[4]);
                   var5.setHitChance((int)var7[5]);
-                  var5.setCritDmgMultiplier(var7[6]);
                }
             }
          }
