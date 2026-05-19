@@ -34,9 +34,6 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 		subMenu:addOption(window:isPermaLocked() and getTranslate("UI_DebugObject_WindowPermUnlock") or getTranslate("UI_DebugObject_WindowPermLock"), worldobjects, EtherEditWorldObjects.OnWindowPermLock, window)
 	end
 
-	local metalDrum = nil
-	local rainBarrel = nil
-
 	for _,obj in ipairs(worldobjects) do
 		if instanceof(obj, "IsoDoor") or (instanceof(obj, "IsoThumpable") and obj:isDoor()) then
 			subMenu:addOption(getTranslate("UI_DebugObject_DoorKey"), worldobjects, EtherEditWorldObjects.OnGetDoorKey, obj, player)
