@@ -163,7 +163,7 @@ function EtherPlayerEditor:createChildren()
     editKillsBtn:instantiate()
     self:addChild(editKillsBtn)
 
-    self:addLabel(getText("IGUI_PlayerStats_AccessLevel") .. " ".. accessLevel, 300, 10);
+    self:addLabel(getText("IGUI_PlayerStats_AccessLevel") .. ": ".. accessLevel, 300, 10);
     local editAccessBtn = ISButton:new(250, 10, 60, 18, getTranslate("UI_PlayerEditor_EditAccess"), self, self.onEditAccessButton)
     editTimeBtn:initialise()
     editTimeBtn:instantiate()
