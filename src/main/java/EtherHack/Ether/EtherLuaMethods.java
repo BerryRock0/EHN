@@ -523,8 +523,8 @@ public class EtherLuaMethods {
       return EtherMain.getInstance().etherTranslator.getTranslate(var0);
    }
 
-   @LuaMethod(name = "getAccessLevel", global = true)
-   public static String getAccessLevel(String level)
+   @LuaMethod(name = "getAccess", global = true)
+   public static String getAccess(String level)
    {
       IsoPlayer player = IsoPlayer.getInstance();
       if (player != null)
@@ -533,8 +533,8 @@ public class EtherLuaMethods {
       return "none";
    }
    
-   @LuaMethod(name = "setAccessLevel", global = true)
-   public static void setAccessLevel(String level)
+   @LuaMethod(name = "setAccess", global = true)
+   public static void setAccess(String level)
    {
       IsoPlayer player = IsoPlayer.getInstance();
       if (player != null)
