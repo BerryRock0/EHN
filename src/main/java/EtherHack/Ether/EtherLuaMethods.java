@@ -524,7 +524,7 @@ public class EtherLuaMethods {
    }
 
    @LuaMethod(name = "getAccess", global = true)
-   public static String getAccess(String level)
+   public static String getAccess()
    {
       IsoPlayer player = IsoPlayer.getInstance();
       if (player != null)
