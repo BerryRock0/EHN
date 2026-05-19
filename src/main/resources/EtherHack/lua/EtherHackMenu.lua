@@ -22,7 +22,6 @@ local etherModules = {
     "EtherHack/lua/components/panels/EtherCharacterPanel.lua",
     "EtherHack/lua/components/panels/EtherItemCreator.lua",
     "EtherHack/lua/components/panels/EtherPlayerEditor.lua",
-    "EtherHack/lua/components/panels/EtherVisualsPanel.lua",
     "EtherHack/lua/components/panels/EtherMapPanel.lua",
     "EtherHack/lua/components/panels/EtherExploitPanel.lua",
     "EtherHack/lua/components/panels/EtherSettingsPanel.lua"
