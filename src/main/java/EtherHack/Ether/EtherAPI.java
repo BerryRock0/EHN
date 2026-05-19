@@ -629,10 +629,10 @@ public class EtherAPI {
 
       private void bypassDebugMode()
       {
-         Core.bDebug = this.isBypassDebugMode;
+         Core.debug = this.isBypassDebugMode;
       }
 
-   @SubscribeLuaEvent(eventName = "OnPostUIDraw")
+/*   @SubscribeLuaEvent(eventName = "OnPostUIDraw")
    public void updateVisuals() {
       try {
          this.updatePlayersVisuals();
@@ -642,9 +642,9 @@ public class EtherAPI {
       } catch (Exception ignored) {
       }
 
-   }
+   } */
 
-   public void updateUltraPlayerVision() {
+/*   public void updateUltraPlayerVision() {
       if (this.isVisualEnable360Vision) {
          ArrayList var1 = IsoWorld.instance.getCell().getVehicles();
          if (var1 != null && !var1.isEmpty()) {
@@ -797,7 +797,7 @@ public class EtherAPI {
             }
          }
       }
-   }
+   } */
    @SubscribeLuaEvent(eventName = "OnRenderTick")
    public synchronized void updateAPI() {
       try {
