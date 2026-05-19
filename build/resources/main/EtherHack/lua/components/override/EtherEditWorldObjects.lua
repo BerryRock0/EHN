@@ -34,9 +34,6 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 		subMenu:addOption(window:isPermaLocked() and getTranslate("UI_DebugObject_WindowPermUnlock") or getTranslate("UI_DebugObject_WindowPermLock"), worldobjects, EtherEditWorldObjects.OnWindowPermLock, window)
 	end
 
-	local metalDrum = nil
-	local rainBarrel = nil
-
 	for _,obj in ipairs(worldobjects) do
 		if instanceof(obj, "IsoDoor") or (instanceof(obj, "IsoThumpable") and obj:isDoor()) then
 			subMenu:addOption(getTranslate("UI_DebugObject_DoorKey"), worldobjects, EtherEditWorldObjects.OnGetDoorKey, obj, player)
@@ -58,17 +55,15 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 			subMenu:addOption(getTranslate("UI_DebugObject_CampfireZeroFuel"), obj, EtherEditWorldObjects.OnCampfireZeroFuel)
 			subMenu:addOption(getTranslate("UI_DebugObject_CampfireSetFuel"), obj, EtherEditWorldObjects.OnCampfireSetFuel)
 		end
-		if not metalDrum and CMetalDrumSystem:isValidIsoObject(obj) then
-			if obj:hasModData() and not obj:getModData().haveLogs and not obj:getModData().haveCharcoal then
-				subMenu:addOption(getTranslate("UI_DebugObject_MDrumZeroFuel"), obj, EtherEditWorldObjects.OnMetalDrumZeroWater)
-				subMenu:addOption(getTranslate("UI_DebugObject_MDrumSetFuel"), obj, EtherEditWorldObjects.OnMetalDrumSetWater)
-			end
-			metalDrum = obj
+		
+		if CMetalDrumSystem:isValidIsoObject(obj) then
+			subMenu:addOption(getTranslate("UI_DebugObject_MDrumZeroFuel"), obj, EtherEditWorldObjects.OnMetalDrumZeroWater)
+			subMenu:addOption(getTranslate("UI_DebugObject_MDrumSetFuel"), obj, EtherEditWorldObjects.OnMetalDrumSetWater)
 		end
-		if not rainBarrel and CRainBarrelSystem:isValidIsoObject(obj) then
+
+		if CRainBarrelSystem:isValidIsoObject(obj) then
 			subMenu:addOption(getTranslate("UI_DebugObject_RBarrelZeroFuel"), obj, EtherEditWorldObjects.OnRainBarrelZeroWater)
 			subMenu:addOption(getTranslate("UI_DebugObject_RBarrelSetFuel"), obj, EtherEditWorldObjects.OnRainBarrelSetWater)
-			rainBarrel = obj
 		end
 	end
 
