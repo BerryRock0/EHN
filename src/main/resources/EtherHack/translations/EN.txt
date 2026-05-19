@@ -165,6 +165,7 @@
 	UI_PlayerEditor_PlayerInfo_Calories = "Calories",
 	UI_PlayerEditor_PanelWorkOnlyInGame = "Character editing is only available in-game!",
 	UI_PlayerEditor_EditStats = "Edit"
+	UI_PlayerEditor_EditAccess = "Edit Access"
     UI_PlayerEditor_EditHoursTitle = "Edit Hours Survived"
     UI_PlayerEditor_EditKillsTitle = "Edit Zombie Kills"
 
