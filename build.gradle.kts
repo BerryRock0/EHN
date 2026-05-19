@@ -38,7 +38,7 @@ dependencies {
     implementation("org.ow2.asm:asm-tree:9.9.1")
     implementation(files("lib/fmod.jar"))
     implementation(files("lib/zombie.jar"))
-    implementation(files("lib/Kahlua.jar"))
+    implementation(files("lib/se.jar"))
     implementation(files("lib/org.jar"))
 
     tasks.named<Jar>("jar") {
