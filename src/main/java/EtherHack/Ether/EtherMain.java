@@ -6,7 +6,6 @@ public class EtherMain {
    private static EtherMain instance;
    private static boolean initialized;
    public EtherTranslator etherTranslator;
-   public EtherCredits etherCredits;
    public EtherLuaManager etherLuaManager;
    public EtherAPI etherAPI;
 
@@ -32,7 +31,6 @@ public class EtherMain {
       Logger.printLog("Initializing EtherHack...");
       this.etherTranslator = new EtherTranslator();
       this.etherTranslator.loadTranslations();
-      this.etherCredits = new EtherCredits();
       this.etherAPI = new EtherAPI();
       this.etherAPI.loadAPI();
       this.etherLuaManager = new EtherLuaManager();
