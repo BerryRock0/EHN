@@ -35,35 +35,35 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 	end
 
 	for _,obj in ipairs(worldobjects) do
-		if instanceof(obj, "IsoDoor") or (instanceof(obj, "IsoThumpable") and obj:isDoor()) then
+		if obj ~= nil and instanceof(obj, "IsoDoor") or (instanceof(obj, "IsoThumpable") and obj:isDoor()) then
 			subMenu:addOption(getTranslate("UI_DebugObject_DoorKey"), worldobjects, EtherEditWorldObjects.OnGetDoorKey, obj, player)
 			subMenu:addOption(obj:isLocked() and getTranslate("UI_DebugObject_DoorUnlock") or getTranslate("UI_DebugObject_DoorLock"), worldobjects, EtherEditWorldObjects.OnDoorLock, obj)
 		end
 		
-		if instanceof(obj, "IsoGenerator") then
+		if obj ~= nil and instanceof(obj, "IsoGenerator") then
 			subMenu:addOption(getTranslate("UI_DebugObject_GeneratorSetFuel"), obj, EtherEditWorldObjects.OnGeneratorSetFuel)
 		end
 		
-		if instanceof(obj, "IsoBarbecue") then
+		if obj ~= nil and instanceof(obj, "IsoBarbecue") then
 			subMenu:addOption(getTranslate("UI_DebugObject_BBQZeroFuel"), obj, EtherEditWorldObjects.OnBBQZeroFuel)
 			subMenu:addOption(getTranslate("UI_DebugObject_BBQSetFuel"), obj, EtherEditWorldObjects.OnBBQSetFuel)
 		end
-		if instanceof(obj, "IsoFireplace") then
+		if obj ~= nil and instanceof(obj, "IsoFireplace") then
 			subMenu:addOption(getTranslate("UI_DebugObject_FireplaceZeroFuel"), obj, EtherEditWorldObjects.OnFireplaceZeroFuel)
 			subMenu:addOption(getTranslate("UI_DebugObject_FireplaceSetFuel"), obj, EtherEditWorldObjects.OnFireplaceSetFuel)
 		end
 		
-		if CCampfireSystem.instance:isValidIsoObject(obj) then
+		if obj ~= nil and CCampfireSystem.instance:isValidIsoObject(obj) then
 			subMenu:addOption(getTranslate("UI_DebugObject_CampfireZeroFuel"), obj, EtherEditWorldObjects.OnCampfireZeroFuel)
 			subMenu:addOption(getTranslate("UI_DebugObject_CampfireSetFuel"), obj, EtherEditWorldObjects.OnCampfireSetFuel)
 		end
 		
-		if CMetalDrumSystem:isValidIsoObject(obj) then
+		if obj ~= nil and CMetalDrumSystem:isValidIsoObject(obj) then
 			subMenu:addOption(getTranslate("UI_DebugObject_MDrumZeroFuel"), obj, EtherEditWorldObjects.OnMetalDrumZeroWater)
 			subMenu:addOption(getTranslate("UI_DebugObject_MDrumSetFuel"), obj, EtherEditWorldObjects.OnMetalDrumSetWater)
 		end
 		
-		if CRainBarrelSystem:isValidIsoObject(obj) then
+		if obj ~= nil and CRainBarrelSystem:isValidIsoObject(obj) then
 			subMenu:addOption(getTranslate("UI_DebugObject_RBarrelZeroFuel"), obj, EtherEditWorldObjects.OnRainBarrelZeroWater)
 			subMenu:addOption(getTranslate("UI_DebugObject_RBarrelSetFuel"), obj, EtherEditWorldObjects.OnRainBarrelSetWater)
 		end
@@ -73,16 +73,16 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 	if square then
 		for i=1,square:getObjects():size() do
 			local obj = square:getObjects():get(i-1)
-			if BentFences.getInstance():isBentObject(obj) then
+			if obj ~= nil and BentFences.getInstance():isBentObject(obj) then
 				subMenu:addOption(getTranslate("UI_DebugObject_UnbendFence"), worldobjects, EtherEditWorldObjects.OnUnbendFence, obj)
 			end
-			if BentFences.getInstance():isUnbentObject(obj) then
+			if obj ~= nil and BentFences.getInstance():isUnbentObject(obj) then
 				subMenu:addOption(getTranslate("UI_DebugObject_BendFence"), worldobjects, EtherEditWorldObjects.OnBendFence, obj)
 			end
-			if BrokenFences.getInstance():isBreakableObject(obj) then
+			if obj ~= nil and BrokenFences.getInstance():isBreakableObject(obj) then
 				subMenu:addOption(getTranslate("UI_DebugObject_BreakFence"), worldobjects, EtherEditWorldObjects.OnBreakFence, obj)
 			end
-			if instanceof(obj, "IsoCompost") then
+			if obj ~= nil and instanceof(obj, "IsoCompost") then
 				subMenu:addOption(getTranslate("UI_DebugObject_SetCompost"), worldobjects, EtherEditWorldObjects.OnSetCompost, obj)
 			end
 		end
