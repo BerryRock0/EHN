@@ -97,13 +97,6 @@ function EtherCharacterPanel:createChildren()
 	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysKnockdown"), function(isChecked)
         toggleAlwaysKnockdown(isChecked);
     end, isAlwaysKnockdown(), false);
-	
-	self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
-        toggleExtraDamage(isChecked);
-        if(not isChecked) then
-            resetWeaponsStats()
-        end
-    end, isExtraDamage(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedAmmo"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedAmmo", isChecked);
