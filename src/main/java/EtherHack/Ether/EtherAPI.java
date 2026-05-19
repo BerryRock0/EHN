@@ -562,7 +562,7 @@ public class EtherAPI {
                }
             }
          }
-
+/*
          if (this.isUnlimitedEndurance)
             var1.getStats().setEndurance(1.0F);
 
@@ -624,7 +624,7 @@ public class EtherAPI {
             var1.getNutrition().setCalories(1200.0F);
 
          if (this.isOptimalWeight)
-            var1.getNutrition().setWeight(80.0);
+            var1.getNutrition().setWeight(80.0); */
    }
 
       private void bypassDebugMode()
