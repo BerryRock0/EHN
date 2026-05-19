@@ -202,14 +202,6 @@ public class EtherLuaMethods {
             player.setLz(player.getZ());
 
             GameClient.instance.sendPlayer(player);
-
-            if (GameClient.connection != null && PlayerPacket.l_send.playerPacket.set(player))
-            {
-               ByteBufferWriter writer = GameClient.connection.startPacket();
-               PacketTypes.PacketType.PlayerUpdateReliable.doPacket(writer);
-               PlayerPacket.l_send.playerPacket.write(writer);
-               PacketTypes.PacketType.PlayerUpdateReliable.send(GameClient.connection);
-            }
          }
 
          EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = false;
