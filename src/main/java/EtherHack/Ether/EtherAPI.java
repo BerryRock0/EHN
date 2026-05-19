@@ -52,7 +52,6 @@ public class EtherAPI {
    public boolean isAlwaysAiming;
    public boolean isPlayerInSafeTeleported;
    public boolean isMultiHitZombies;
-   public boolean isExtraDamage;
    public boolean isTimedActionCheat;
    public boolean isEnableGodMode;
    public boolean isEnableNoclip;
@@ -89,7 +88,6 @@ public class EtherAPI {
       var3.setProperty("isMultiHitZombies", Boolean.toString(this.isMultiHitZombies));
       var3.setProperty("isPlayerInSafeTeleported", Boolean.toString(this.isPlayerInSafeTeleported));
       var3.setProperty("isMultiHitZombies", Boolean.toString(this.isMultiHitZombies));
-      var3.setProperty("isExtraDamage", Boolean.toString(this.isExtraDamage));
       var3.setProperty("isTimedActionCheat", Boolean.toString(this.isTimedActionCheat));
       var3.setProperty("isEnableGodMode", Boolean.toString(this.isEnableGodMode));
       var3.setProperty("isEnableNoclip", Boolean.toString(this.isEnableNoclip));
@@ -170,7 +168,6 @@ public class EtherAPI {
       this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysCritical", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var3, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var3, "isMultiHitZombies", false);
-      this.isExtraDamage = ConfigUtils.getBooleanFromConfig(var3, "isExtraDamage", false);
       this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(var3, "isTimedActionCheat", false);
       this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(var3, "isEnableGodMode", false);
       this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(var3, "isEnableNoclip", false);
@@ -222,7 +219,6 @@ public class EtherAPI {
       this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var1, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var1, "isMultiHitZombies", false);
-      this.isExtraDamage = ConfigUtils.getBooleanFromConfig(var1, "isExtraDamage", false);
       this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(var1, "isTimedActionCheat", false);
       this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(var1, "isEnableGodMode", false);
       this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(var1, "isEnableNoclip", false);
@@ -323,10 +319,6 @@ public class EtherAPI {
       
       if (var1 == null)
          return;
-
-         if (this.isExtraDamage && var2 != null && (var2.getStringItemType().equals("RangedWeapon") || var2.getStringItemType().equals("MeleeWeapon")) && var2 instanceof HandWeapon)
-            if (!this.originalWeaponStats.containsKey(var4))
-               this.originalWeaponStats.put(var4, new float[]{var3.getExtraDamage(), var3.getMaxDamage(), var3.getMinDamage(), var3.getMaxRange(), var3.getMinRange(), (float)var3.getHitChance(), var3.getCritDmgMultiplier()});
 
          if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
             SandboxOptions.instance.set("MultiHitZombies", this.isMultiHitZombies);
