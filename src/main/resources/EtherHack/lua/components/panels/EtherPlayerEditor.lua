@@ -201,13 +201,13 @@ end
 
 function EtherPlayerEditor:onEditAccessButton()
 	local modal = ISTextBox:new(0, 0, 280, 180, getTranslate("UI_PlayerEditor_EditAccessTitle"),
-		tostring(getAccessLevel()),
+		tostring(getAccess()),
         self,
 		function(target, button)
 			if button.internal == "OK" then
 				local value = tostring(button.parent.entry:getText())
 				if value then
-					setAccesslevel(value)
+					setAccess(value)
 					self:updateLabels()
 				end
 			end
