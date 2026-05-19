@@ -162,58 +162,6 @@ public class EtherLuaMethods {
       EtherMain.getInstance().etherAPI.saveConfig(var0);
    }
 
-   @LuaMethod(name = "safePlayerTeleport", global = true)
-   public static void safePlayerTeleport(int x, int y) {
-      try
-      {
-         EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = true;
-         IsoPlayer player = IsoPlayer.getInstance();
-
-         float z = player.z;
-         float dx = x - player.x;
-         float dy = y - player.y;
-         float dz = z - player.z;
-
-         float absDx = Math.abs(dx);
-         float absDy = Math.abs(dy);
-         float absDz = Math.abs(dz);
-
-         while (absDx > 0 || absDy > 0 || absDz > 0) {
-            float step = 1.0f;
-            float stepX = Math.min(Math.min(absDx, step), 1.0f);
-            float stepY = Math.min(Math.min(absDy, step), 1.0f);
-            float stepZ = Math.min(Math.min(absDz, step), 1.0f);
-
-            absDx -= stepX;
-            absDy -= stepY;
-            absDz -= stepZ;
-
-            if (dx < 0) stepX = -stepX;
-            if (dy < 0) stepY = -stepY;
-            if (dz < 0) stepZ = -stepZ;
-
-            player.setX(player.x + stepX);
-            player.setY(player.y + stepY);
-            player.setZ(player.z + stepZ);
-            player.setLx(player.getX());
-            player.setLy(player.getY());
-            player.setLz(player.getZ());
-
-            GameClient.instance.sendPlayer(player);
-         }
-
-         EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = false;
-      } catch (Exception e) {
-         Logger.printLog("Error in safePlayerTeleport: " + e.getMessage());
-         EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = false;
-      }
-   }
-
-   @LuaMethod(name = "isPlayerInSafeTeleported", global = true)
-   public static boolean isPlayerInSafeTeleported() {
-      return EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported;
-   }
-
    // Recipe and item manipulation
    @LuaMethod(name = "learnAllRecipes",global = true)
    public static void learnAllRecipes()
