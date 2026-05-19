@@ -380,16 +380,6 @@ public class EtherLuaMethods {
       EtherMain.getInstance().etherAPI.resetWeaponsStats();
    }
 
-   @LuaMethod(name = "isExtraDamage", global = true)
-   public static boolean isExtraDamage() {
-      return EtherMain.getInstance().etherAPI.isExtraDamage;
-   }
-
-   @LuaMethod(name = "toggleExtraDamage", global = true)
-   public static void toggleExtraDamage(boolean var0) {
-      EtherMain.getInstance().etherAPI.isExtraDamage = var0;
-   }
-
    @LuaMethod(name = "isTimedActionCheat", global = true)
    public static boolean isTimedActionCheat() {
       return EtherMain.getInstance().etherAPI.isTimedActionCheat;
