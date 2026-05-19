@@ -79,14 +79,11 @@ function EtherPlayerEditor:createChildren()
     self:addLabel(getText("IGUI_PlayerStats_DisplayName").. " ".. self.localPlayer:getDisplayName(), 90, 30);
     self:addLabel(getText("UI_characreation_forename").. ": " .. self.localPlayer:getDescriptor():getForename(), 90, 50);
     self:addLabel(getText("UI_characreation_surname").. ": " .. self.localPlayer:getDescriptor():getSurname(), 90, 70);
-    self:addLabel(getText("IGUI_PlayerStats_Profession").. " ".. self.localPlayer:getDescriptor():getProfession(), 90, 90);
-    -- self:addLabel(getText("IGUI_char_Survived_For").. ": " .. self.localPlayer:getTimeSurvived(), 90, 110);
     self:addLabel(getText("IGUI_char_Survived_For").. ": " .. self.localPlayer:getTimeSurvived(), 90, 110);
     local editTimeBtn = ISButton:new(250, 110, 60, 18, getTranslate("UI_PlayerEditor_EditStats"), self, self.onEditTimeButton)
     editTimeBtn:initialise()
     editTimeBtn:instantiate()
     self:addChild(editTimeBtn)
-    -- self:addLabel(getText("IGUI_char_Zombies_Killed").. ": " .. tostring(self.localPlayer:getZombieKills()), 90, 130);
     self:addLabel(getText("IGUI_char_Zombies_Killed").. ": " .. tostring(self.localPlayer:getZombieKills()), 90, 130);
     local editKillsBtn = ISButton:new(250, 130, 60, 18, getTranslate("UI_PlayerEditor_EditStats"), self, self.onEditKillsButton)
     editKillsBtn:initialise()
