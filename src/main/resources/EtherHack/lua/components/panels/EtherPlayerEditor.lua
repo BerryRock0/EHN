@@ -164,7 +164,7 @@ function EtherPlayerEditor:createChildren()
     self:addChild(editKillsBtn)
 
     self:addLabel(getText("IGUI_PlayerStats_AccessLevel") .. " ".. accessLevel, 300, 10);
-    local editAccessBtn = ISButton:new(250, 110, 60, 18, getTranslate("UI_PlayerEditor_EditAccess"), self, self.onEditAccessButton)
+    local editAccessBtn = ISButton:new(250, 10, 60, 18, getTranslate("UI_PlayerEditor_EditAccess"), self, self.onEditAccessButton)
     editTimeBtn:initialise()
     editTimeBtn:instantiate()
     self:addChild(editAccessBtn)
@@ -174,7 +174,6 @@ function EtherPlayerEditor:createChildren()
     self:addLabel(getTranslate("UI_PlayerEditor_PlayerInfo_Calories").. ": ".. calories, 300, 70);
 
     self:addLabel(getTranslate("UI_PlayerEditor_PlayerTraits_Title"), 10, self.avatarPanel.x + self.avatarPanel.height + 5, UIFont.Medium )
-
     self.traitsPanel = UITraitsTable:new(10, 195, self.width - 10 * 2, 180);
     self.traitsPanel:initialise();
     self.traitsPanel.parent = self;
