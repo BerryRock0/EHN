@@ -803,7 +803,6 @@ public class EtherAPI {
       try {
          updateLocalPlayerFeatures();
       } catch (Exception e) {
-         Logger.printLog("Error in updateAPI: " + e.getMessage());
       }
    }
 }
