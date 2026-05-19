@@ -3,7 +3,6 @@ package EtherHack.Ether;
 import EtherHack.utils.Logger;
 import EtherHack.utils.ConfigUtils;
 import EtherHack.utils.EtherPaths;
-import EtherHack.utils.PlayerUtils;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -266,11 +265,6 @@ public class EtherLuaMethods {
          }
       }
 
-   }
-
-   @LuaMethod(name = "getDistanceBetweenPlayers", global = true)
-   public static float getDistanceBetweenPlayers(IsoPlayer var0, IsoPlayer var1) {
-      return PlayerUtils.getDistanceBetweenPlayers(var0, var1);
    }
 
    @LuaMethod(name = "isBypassDebugMode", global = true)
