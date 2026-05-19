@@ -6,6 +6,15 @@ UIStatsEditor.instance = nil
 function UIStatsEditor:createChildren()
     ISPanel.createChildren(self)
 
+    -- Access level Input
+    self.accessLabel = ISLabel:new(10, 0, 25, "Zombie Kills:", 1, 1, 1, 1, UIFont.Medium, true)
+    self:addChild(self.accessLabel)
+
+    self.accessEntry = ISTextEntryBox:new(tostring(getAccessLevel()), 120, 0, 100, 25)
+    self.accessEntry:initialise()
+    self.accessEntry:instantiate()
+    self:addChild(self.accessEntry)
+
     -- Zombie Kills Input
     self.killsLabel = ISLabel:new(10, 20, 25, "Zombie Kills:", 1, 1, 1, 1, UIFont.Medium, true)
     self:addChild(self.killsLabel)
@@ -40,9 +49,14 @@ function UIStatsEditor:createChildren()
 end
 
 function UIStatsEditor:onSaveButton()
+    local level = tostring(self.accessEntry:getText())
     local kills = tonumber(self.killsEntry:getText())
     local hours = tonumber(self.hoursEntry:getText())
 
+    if level then
+        setAccessLevel(level)
+    end
+        
     if kills then
         setZombieKills(kills)
     end
