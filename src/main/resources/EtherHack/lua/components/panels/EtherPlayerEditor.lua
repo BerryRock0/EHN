@@ -100,13 +100,6 @@ function EtherPlayerEditor:createChildren()
     self:addLabel(getText("IGUI_char_Weight").. ": ".. tostring(math.floor(self.localPlayer:getNutrition():getWeight())), 300, 50);
     self:addLabel(getTranslate("UI_PlayerEditor_PlayerInfo_Calories").. ": ".. tostring(math.floor(self.localPlayer:getNutrition():getCalories())), 300, 70);
 
-    self:addLabel(getTranslate("UI_PlayerEditor_PlayerTraits_Title"), 10, self.avatarPanel.x + self.avatarPanel.height + 5, UIFont.Medium )
-
-    self.traitsPanel = UITraitsTable:new(10, 195, self.width - 10 * 2, 180);
-    self.traitsPanel:initialise();
-    self.traitsPanel.parent = self;
-    self:addChild(self.traitsPanel);
-
     self:addLabel(getTranslate("UI_PlayerEditor_PlayerSkills_Title"), 10, self.avatarPanel.x + self.avatarPanel.height + self.traitsPanel.height, UIFont.Medium )
 
     self.skillPanel = UISkillTable:new(10, self.traitsPanel.x + self.traitsPanel.height + 180, self.width - 10 * 2, 180);
