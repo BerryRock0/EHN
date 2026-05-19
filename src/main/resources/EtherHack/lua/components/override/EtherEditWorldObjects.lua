@@ -42,9 +42,11 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 			subMenu:addOption(getTranslate("UI_DebugObject_DoorKey"), worldobjects, EtherEditWorldObjects.OnGetDoorKey, obj, player)
 			subMenu:addOption(obj:isLocked() and getTranslate("UI_DebugObject_DoorUnlock") or getTranslate("UI_DebugObject_DoorLock"), worldobjects, EtherEditWorldObjects.OnDoorLock, obj)
 		end
+		
 		if instanceof(obj, "IsoGenerator") then
 			subMenu:addOption(getTranslate("UI_DebugObject_GeneratorSetFuel"), obj, EtherEditWorldObjects.OnGeneratorSetFuel)
 		end
+		
 		if instanceof(obj, "IsoBarbecue") then
 			subMenu:addOption(getTranslate("UI_DebugObject_BBQZeroFuel"), obj, EtherEditWorldObjects.OnBBQZeroFuel)
 			subMenu:addOption(getTranslate("UI_DebugObject_BBQSetFuel"), obj, EtherEditWorldObjects.OnBBQSetFuel)
@@ -58,17 +60,15 @@ function EtherEditWorldObjects.doDebugObjectMenu(player, context, worldobjects, 
 			subMenu:addOption(getTranslate("UI_DebugObject_CampfireZeroFuel"), obj, EtherEditWorldObjects.OnCampfireZeroFuel)
 			subMenu:addOption(getTranslate("UI_DebugObject_CampfireSetFuel"), obj, EtherEditWorldObjects.OnCampfireSetFuel)
 		end
-		if not metalDrum and CMetalDrumSystem:isValidIsoObject(obj) then
-			if obj:hasModData() and not obj:getModData().haveLogs and not obj:getModData().haveCharcoal then
-				subMenu:addOption(getTranslate("UI_DebugObject_MDrumZeroFuel"), obj, EtherEditWorldObjects.OnMetalDrumZeroWater)
-				subMenu:addOption(getTranslate("UI_DebugObject_MDrumSetFuel"), obj, EtherEditWorldObjects.OnMetalDrumSetWater)
-			end
-			metalDrum = obj
+		
+		if CMetalDrumSystem:isValidIsoObject(obj) then
+			subMenu:addOption(getTranslate("UI_DebugObject_MDrumZeroFuel"), obj, EtherEditWorldObjects.OnMetalDrumZeroWater)
+			subMenu:addOption(getTranslate("UI_DebugObject_MDrumSetFuel"), obj, EtherEditWorldObjects.OnMetalDrumSetWater)
 		end
-		if not rainBarrel and CRainBarrelSystem:isValidIsoObject(obj) then
+		
+		if CRainBarrelSystem:isValidIsoObject(obj) then
 			subMenu:addOption(getTranslate("UI_DebugObject_RBarrelZeroFuel"), obj, EtherEditWorldObjects.OnRainBarrelZeroWater)
 			subMenu:addOption(getTranslate("UI_DebugObject_RBarrelSetFuel"), obj, EtherEditWorldObjects.OnRainBarrelSetWater)
-			rainBarrel = obj
 		end
 	end
 
