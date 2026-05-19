@@ -523,38 +523,45 @@ public class EtherLuaMethods {
       return EtherMain.getInstance().etherTranslator.getTranslate(var0);
    }
 
+   @LuaMethod(name = "setAccessLevel", global = true)
+   public static void setAccesslevel(String level)
+   {
+      IsoPlayer player = IsoPlayer.getInstance();
+      if (player != null)
+         player.accessLevel = level;
+   }
+
    @LuaMethod(name = "setZombieKills", global = true)
    public static void setZombieKills(int kills) {
       IsoPlayer player = IsoPlayer.getInstance();
-      if (player != null) {
+      if (player != null)
          player.setZombieKills(kills);
-      }
+
    }
 
    @LuaMethod(name = "setHoursAlive", global = true)
    public static void setHoursAlive(int hours) {
       IsoPlayer player = IsoPlayer.getInstance();
-      if (player != null) {
-         // Convert hours to game time units (1 hour = 1.0f)
+      if (player != null)
          player.setHoursSurvived(hours);
-      }
+
    }
 
    @LuaMethod(name = "getZombieKills", global = true)
    public static int getZombieKills() {
       IsoPlayer player = IsoPlayer.getInstance();
-      if (player != null) {
+      if (player != null)
          return player.getZombieKills();
-      }
+
       return 0;
    }
 
    @LuaMethod(name = "getHoursAlive", global = true)
    public static int getHoursAlive() {
       IsoPlayer player = IsoPlayer.getInstance();
-      if (player != null) {
+      if (player != null)
          return (int) player.getHoursSurvived();
-      }
+
       return 0;
    }
 
@@ -565,9 +572,9 @@ public class EtherLuaMethods {
 
    // Singleton pattern
    public static EtherLuaMethods getInstance() {
-      if (instance == null) {
+      if (instance == null)
          instance = new EtherLuaMethods();
-      }
+      
       return instance;
    }
 }
