@@ -32,8 +32,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.projectlombok:lombok:1.18.36")
-    annotationProcessor("org.projectlombok:lombok:1.18.36")
+    implementation("org.projectlombok:lombok:1.18.46")
+    annotationProcessor("org.projectlombok:lombok:1.18.46")
     implementation("org.ow2.asm:asm:9.9.1")
     implementation("org.ow2.asm:asm-tree:9.9.1")
     implementation(files("lib/fmod.jar"))
