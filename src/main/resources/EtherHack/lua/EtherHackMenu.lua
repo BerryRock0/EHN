@@ -226,7 +226,6 @@ function EtherMain:createChildren()
     self.buttonsPanel:addButton("EtherHack/media/ui/character.png", EtherCharacterPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/itemCreator.png", EtherItemCreator);
     self.buttonsPanel:addButton("EtherHack/media/ui/playerEditor.png", EtherPlayerEditor);
-    self.buttonsPanel:addButton("EtherHack/media/ui/visuals.png", EtherVisualsPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/teleport.png", EtherMapPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/exploit.png", EtherExploitPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/settings.png", EtherSettingsPanel);
