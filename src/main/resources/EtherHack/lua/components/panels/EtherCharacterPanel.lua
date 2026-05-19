@@ -120,10 +120,6 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedCarry", isChecked);
     end, isEnableUnlimitedCarry(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedEndurance"), function(isChecked)
-        EtherDebugClient.toggleSelf("unlimitedEndurance", isChecked);
-    end, isUnlimitedEndurance(), false);
 	
     self:addCheckBox(getTranslate("UI_CharacterPanel_BuildCheat"), function(isChecked)
         ISBuildMenu.cheat = isChecked;
@@ -148,86 +144,6 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
         toggleNoRecoil(isChecked)
     end, isNoRecoil(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFatigue"), function(isChecked)
-        toggleDisableFatigue(isChecked);
-    end, isDisableFatigue(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableHunger"), function(isChecked)
-        toggleDisableHunger(isChecked);
-    end, isDisableHunger(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableThirst"), function(isChecked)
-        toggleDisableThirst(isChecked);
-    end, isDisableThirst(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableDrunkenness"), function(isChecked)
-        toggleDisableDrunkenness(isChecked);
-    end, isDisableDrunkenness(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableAnger"), function(isChecked)
-        toggleDisableAnger(isChecked);
-    end, isDisableAnger(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFear"), function(isChecked)
-        toggleDisableFear(isChecked);
-    end, isDisableFear(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisablePain"), function(isChecked)
-        toggleDisablePain(isChecked);
-    end, isDisablePain(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisablePanic"), function(isChecked)
-        toggleDisablePanic(isChecked);
-    end, isDisablePanic(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableMorale"), function(isChecked)
-        toggleDisableMorale(isChecked);
-    end, isDisableMorale(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableStress"), function(isChecked)
-        toggleDisableStress(isChecked);
-    end, isDisableStress(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableSickness"), function(isChecked)
-        toggleDisableSickness(isChecked);
-    end, isDisableSickness(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableStressFromCigarettes"), function(isChecked)
-        toggleDisableStressFromCigarettes(isChecked);
-    end, isDisableStressFromCigarettes(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableSanity"), function(isChecked)
-        toggleDisableSanity(isChecked);
-    end, isDisableSanity(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableBoredomLevel"), function(isChecked)
-        toggleDisableBoredomLevel(isChecked);
-    end, isDisableBoredomLevel(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableUnhappynessLevel"), function(isChecked)
-        toggleDisableUnhappynessLevel(isChecked);
-    end, isDisableUnhappynessLevel(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableWetness"), function(isChecked)
-        toggleDisableWetness(isChecked);
-    end, isDisableWetness(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableInfectionLevel"), function(isChecked)
-        toggleDisableInfectionLevel(isChecked);
-    end, isDisableInfectionLevel(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFakeInfectionLevel"), function(isChecked)
-        toggleDisableFakeInfectionLevel(isChecked);
-    end, isDisableFakeInfectionLevel(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_OptimalCalories"), function(isChecked)
-        toggleOptimalCalories(isChecked);
-    end, isOptimalCalories(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_OptimalWeight"), function(isChecked)
-        toggleOptimalWeight(isChecked);
-    end, isOptimalWeight(), false);
 
 	self:addCheckBox(getTranslate("UI_CharacterPanel_GodMode"), function(isChecked)
         EtherDebugClient.toggleSelf("god", isChecked);
