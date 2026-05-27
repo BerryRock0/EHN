@@ -61,6 +61,10 @@
 
 	UI_Exploit_TraitPointTitle = "Character trait points",
 	UI_Exploit_DebugBypass = "Bypass debug mode prohibition",
+	UI_Exploit_GameDebuggerTitle = "Game debug menu",
+	UI_Exploit_GameDebuggerButton = "Open",
+	UI_Exploit_DebugMenuTitle = "Debug menu",
+	UI_Exploit_DebugMenuButton = "Open",
 	UI_Exploit_MechanicsMenuTitle = "Vehicle mechanics menu",
 	UI_Exploit_MechanicsMenuButton = "Open",
 	UI_Exploit_MedicMenuTitle = "Medicine menu",
