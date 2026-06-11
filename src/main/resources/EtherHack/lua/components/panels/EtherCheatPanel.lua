@@ -58,33 +58,51 @@ function EtherCheatPanel:createChildren()
     self:setScrollHeight(0)
     self:addScrollBars();
 
-	self:addCheckBox(getTranslate("UI_CheatPanel_Escalate"), function(isChecked) toggleEscalate(isChecked); end, isEscalate(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_GodMode"), function(isChecked) toggleGodMod(isChecked); end, isGodMod(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Invisible"), function(isChecked) toggleInvisible(isChecked); end, isInvisible(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedEndurance"), function(isChecked) toggleEndurance(isChecked); end, isEndurance(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedAmmo"), function(isChecked) toggleAmmo(isChecked); end, isAmmo(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_KnowAllRecipes"), function(isChecked) toggleKnowAllRecipes(isChecked); end, isKnowAllRecipes(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedCarry"), function(isChecked) toggleCarry(isChecked); end, isCarry(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Build"), function(isChecked) toggleBuild(isChecked); end, isBuild(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Farming"), function(isChecked) toggleFarming(isChecked); end, isFarming(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Fishing"), function(isChecked) toggleFishing(isChecked); end, isFishing(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Health"), function(isChecked) toggleHealth(isChecked); end, isHealth(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Mechanics"), function(isChecked) toggleMechanics(isChecked); end, isMechanics(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_FastMove"), function(isChecked) toggleFastMove(isChecked); end, isFastMove(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Movables"), function(isChecked) toggleMovables(isChecked); end, isMovables(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_TimedActionInstant"), function(isChecked) toggleTimedActionInstant(isChecked); end, isTimedActionInstant(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_BrushTool"), function(isChecked) toggleBrushTool(isChecked); end, isBrushTool(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_NoClip"), function(isChecked) toggleNoClip(isChecked); end, isNoClip(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_CanSeeEveryone"), function(isChecked) toggleSee(isChecked); end, isSee(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_CanHearEveryone"), function(isChecked) toggleHear(isChecked); end, isHear(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_ZombiesDontAttack"), function(isChecked) toggleZombiesDontAttack(isChecked); end, isZombiesDontAttack(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_LootZed"), function(isChecked) toggleLootZed(isChecked); end, isLootZed(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_LootLog"), function(isChecked) toggleLootLog(isChecked); end, isLootLog(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_DebugMenuContext"), function(isChecked) toggleDebugMenuContext(isChecked); end, isDebugMenuContext(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Animal"), function(isChecked) toggleAnimal(isChecked); end, isAnimal(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_AnimalExtraValues"), function(isChecked) toggleAnimalExtraValues(isChecked); end, isAnimalExtraValues(), false);
+	local addRoleBtn = ISButton:new(250, 10, 60, 18, getTranslate("UI_CheatPanel_AddRole"), self, self.onAddRoleButton)
+    editTimeBtn:initialise()
+    editTimeBtn:instantiate()
+    self:addChild(addRoleBtn)
 
+	local removeRoleBtn = ISButton:new(250, 30, 60, 18, getTranslate("UI_CheatPanel_RemoveRole"), self, self.onRemoveRoleButton)
+    editTimeBtn:initialise()
+    editTimeBtn:instantiate()
+    self:addChild(removeRoleBtn)
+	
     self:updatePanel();
+end
+
+function EtherPlayerEditor:onAddRoleButton()
+	local modal = ISTextBox:new(0, 0, 280, 180, getTranslate("UI_CheatPanel_AddRole"),
+		tostring(getRole()),
+        self,
+		function(target, button)
+			if button.internal == "OK" then
+				local value = tostring(button.parent.entry:getText())
+				if value then
+					addRole(value)
+					self:updateLabels()
+				end
+			end
+		end)
+	modal:initialise()
+    modal:addToUIManager()
+end
+
+function EtherPlayerEditor:onRemoveRoleButton()
+	local modal = ISTextBox:new(0, 0, 280, 180, getTranslate("UI_CheatPanel_RemoveRole"),
+		tostring(getRole()),
+        self,
+		function(target, button)
+			if button.internal == "OK" then
+				local value = tostring(button.parent.entry:getText())
+				if value then
+					removeRole(value)
+					self:updateLabels()
+				end
+			end
+		end)
+	modal:initialise()
+    modal:addToUIManager()
 end
 
 --*********************************************************
