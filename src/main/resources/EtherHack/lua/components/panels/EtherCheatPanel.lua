@@ -58,30 +58,30 @@ function EtherCheatPanel:createChildren()
     self:setScrollHeight(0)
     self:addScrollBars();
 
-    self:addCheckBox(getTranslate("UI_CheatPanel_GodMode"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Invisible"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedEndurance"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedAmmo"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_KnowAllRecipes"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedCarry"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Build"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Farming"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Fishing"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Health"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Mechanics"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_FastMove"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Movables"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_TimedActionInstant"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_BrushTool"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_NoClip"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_CanSeeEveryone"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_CanHearEveryone"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_ZombiesDontAttack"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_LootZed"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_LootLog"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_DebugContextMenu"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Animal"), function(isChecked) toggle(isChecked); end, is(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_AnimalExtraValues"), function(isChecked) toggle(isChecked); end, is(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_GodMode"), function(isChecked) toggleGodMod(isChecked); end, isGodMod(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Invisible"), function(isChecked) toggleInvisible(isChecked); end, isInvisible(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedEndurance"), function(isChecked) toggleEndurance(isChecked); end, isEndurance(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedAmmo"), function(isChecked) toggleAmmo(isChecked); end, isAmmo(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_KnowAllRecipes"), function(isChecked) toggleKnowAllRecipes(isChecked); end, isKnowAllRecipes(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedCarry"), function(isChecked) toggleCarry(isChecked); end, isCarry(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Build"), function(isChecked) toggleBuild(isChecked); end, isBuild(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Farming"), function(isChecked) toggleFarming(isChecked); end, isFarming(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Fishing"), function(isChecked) toggleFishing(isChecked); end, is(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Health"), function(isChecked) toggleHealth(isChecked); end, isHealth(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Mechanics"), function(isChecked) toggleMechanics(isChecked); end, isMechanics(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_FastMove"), function(isChecked) toggleFastMove(isChecked); end, isFastMove(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Movables"), function(isChecked) toggleMovables(isChecked); end, isMovables(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_TimedActionInstant"), function(isChecked) toggleTimedActionInstant(isChecked); end, isTimedActionInstant(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_BrushTool"), function(isChecked) toggleBrushTool(isChecked); end, isBrushTool(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_NoClip"), function(isChecked) toggleNoClip(isChecked); end, isNoClip(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_CanSeeEveryone"), function(isChecked) toggleSee(isChecked); end, isSee(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_CanHearEveryone"), function(isChecked) toggleHear(isChecked); end, isHear(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_ZombiesDontAttack"), function(isChecked) toggleZombiesDontAttack(isChecked); end, isZombiesDontAttack(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_LootZed"), function(isChecked) toggleLootZed(isChecked); end, isLootZed(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_LootLog"), function(isChecked) toggleLootLog(isChecked); end, isLootLog(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_DebugContextMenu"), function(isChecked) toggleDebugContextMenu(isChecked); end, isDebugContextMenu(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Animal"), function(isChecked) toggleAnimal(isChecked); end, isAnimal(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_AnimalExtraValues"), function(isChecked) toggleAnimalExtraValues(isChecked); end, isAnimalExtraValues(), false);
 
     self:updatePanel();
 end
