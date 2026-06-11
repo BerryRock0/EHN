@@ -79,7 +79,7 @@ function EtherCheatPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CheatPanel_ZombiesDontAttack"), function(isChecked) toggleZombiesDontAttack(isChecked); end, isZombiesDontAttack(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_LootZed"), function(isChecked) toggleLootZed(isChecked); end, isLootZed(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_LootLog"), function(isChecked) toggleLootLog(isChecked); end, isLootLog(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_DebugContextMenu"), function(isChecked) toggleDebugContextMenu(isChecked); end, isDebugContextMenu(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_DebugMenuContext"), function(isChecked) toggleDebugMenuContext(isChecked); end, isDebugMenuContext(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_Animal"), function(isChecked) toggleAnimal(isChecked); end, isAnimal(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_AnimalExtraValues"), function(isChecked) toggleAnimalExtraValues(isChecked); end, isAnimalExtraValues(), false);
 
