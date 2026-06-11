@@ -29,21 +29,9 @@ local function applyLocalToggle(name, enabled)
     local player = getLocalPlayer()
     enabled = enabled == true
 
-    if name == "god" then
-        if toggleGodMode then toggleGodMode(enabled) end
-        if player then player:setGodMod(enabled) end
-    elseif name == "invisible" then
-        if toggleInvisible then toggleInvisible(enabled) end
-        if player then player:setInvisible(enabled) end
-    elseif name == "noclip" then
-        if toggleNoclip then toggleNoclip(enabled) end
-        if player then player:setNoClip(enabled) end
-    elseif name == "unlimitedCarry" then
+    if name == "unlimitedCarry" then
         if toggleEnableUnlimitedCarry then toggleEnableUnlimitedCarry(enabled) end
         if player and player.setUnlimitedCarry then player:setUnlimitedCarry(enabled) end
-    elseif name == "unlimitedEndurance" then
-        if toggleUnlimitedEndurance then toggleUnlimitedEndurance(enabled) end
-        if player and player.setUnlimitedEndurance then player:setUnlimitedEndurance(enabled) end
     elseif name == "unlimitedAmmo" then
         if toggleUnlimitedAmmo then toggleUnlimitedAmmo(enabled) end
         if player and player.setUnlimitedAmmo then player:setUnlimitedAmmo(enabled) end
