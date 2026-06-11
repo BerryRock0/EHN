@@ -24,7 +24,6 @@ local etherModules = {
     "EtherHack/lua/components/panels/EtherItemCreator.lua",
     "EtherHack/lua/components/panels/EtherPlayerEditor.lua",
     "EtherHack/lua/components/panels/EtherMapPanel.lua",
-    "EtherHack/lua/components/panels/EtherCheatPanel.lua",
     "EtherHack/lua/components/panels/EtherExploitPanel.lua",
     "EtherHack/lua/components/panels/EtherSettingsPanel.lua"
 }
@@ -229,7 +228,6 @@ function EtherMain:createChildren()
     self.buttonsPanel:addButton("EtherHack/media/ui/itemCreator.png", EtherItemCreator);
     self.buttonsPanel:addButton("EtherHack/media/ui/playerEditor.png", EtherPlayerEditor);
     self.buttonsPanel:addButton("EtherHack/media/ui/teleport.png", EtherMapPanel);
-    self.buttonsPanel:addButton("EtherHack/media/ui/cheat.png", EtherCheatPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/exploit.png", EtherExploitPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/settings.png", EtherSettingsPanel);
 
