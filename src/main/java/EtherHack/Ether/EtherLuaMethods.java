@@ -272,8 +272,8 @@ public class EtherLuaMethods {
    @LuaMethod(name = "toggleFastMove", global = true) public static void toggleFastMove(boolean var0){EtherMain.getInstance().etherAPI.fastmove = var0;}
    @LuaMethod(name = "isFastMove", global = true)  public static boolean isFastMove(){return EtherMain.getInstance().etherAPI.fastmove;}
 
-   @LuaMethod(name = "toggleMovables", global = true) public static void toggleMovables(boolean var0){EtherMain.getInstance().etherAPI.movable = var0;}
-   @LuaMethod(name = "isMovables", global = true)  public static boolean isMovables(){return EtherMain.getInstance().etherAPI.movable;}
+   @LuaMethod(name = "toggleMovables", global = true) public static void toggleMovables(boolean var0){EtherMain.getInstance().etherAPI.movables = var0;}
+   @LuaMethod(name = "isMovables", global = true)  public static boolean isMovables(){return EtherMain.getInstance().etherAPI.movables;}
 
    @LuaMethod(name = "toggleTimedActionInstant", global = true) public static void toggleTimedActionInstant(boolean var0){EtherMain.getInstance().etherAPI.timedactioninstant = var0;}
    @LuaMethod(name = "isTimedActionInstant", global = true)  public static boolean isTimedActionInstant(){return EtherMain.getInstance().etherAPI.timedactioninstant;}
