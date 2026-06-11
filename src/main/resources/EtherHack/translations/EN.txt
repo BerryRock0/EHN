@@ -59,6 +59,31 @@
 	UI_CharacterPanel_OptimalCalories = "Maintain optimal calories",
 	UI_CharacterPanel_OptimalWeight = "Maintain optimal weight",
 
+	UI_CheatPanel_GodMode = "GodMode";
+	UI_CheatPanel_Invisible = "Invisible";
+	UI_CheatPanel_UnlimitedEndurance = "UnlimitedEndurance";
+	UI_CheatPanel_UnlimitedAmmo = "UnlimitedAmmo";
+	UI_CheatPanel_KnowAllRecipes = "KnowAllRecipes";
+	UI_CheatPanel_UnlimitedCarry = "UnlimitedCarry";
+	UI_CheatPanel_Build = "Build";
+	UI_CheatPanel_Farming = "Farming";
+	UI_CheatPanel_Fishing = "Fishing";
+	UI_CheatPanel_Health = "Health";
+	UI_CheatPanel_Mechanics = "Mechanics";
+	UI_CheatPanel_FastMove = "FastMove";
+	UI_CheatPanel_Movables = "Movables";
+	UI_CheatPanel_TimedActionInstant = "TimedActionInstant";
+	UI_CheatPanel_BrushTool = "BrushTool";
+	UI_CheatPanel_NoClip = "NoClip";
+	UI_CheatPanel_CanSeeEveryone = "CanSeeEveryone";
+	UI_CheatPanel_CanHearEveryone = "CanHearEveryone";
+	UI_CheatPanel_ZombiesDontAttack = "ZombiesDontAttack";
+	UI_CheatPanel_LootZed = "LootZed";
+	UI_CheatPanel_LootLog = "LootLog";
+	UI_CheatPanel_DebugContextMenu = "DebugContextMenu";
+	UI_CheatPanel_Animal = "Animal";
+	UI_CheatPanel_AnimalExtraValues = "AnimalExtraValues";
+
 	UI_Exploit_TraitPointTitle = "Character trait points",
 	UI_Exploit_DebugBypass = "Bypass debug mode prohibition",
 	UI_Exploit_GameDebuggerTitle = "Game debug menu",
