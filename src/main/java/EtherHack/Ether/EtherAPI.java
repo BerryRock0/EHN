@@ -53,9 +53,6 @@ public class EtherAPI {
    public boolean isPlayerInSafeTeleported;
    public boolean isMultiHitZombies;
    public boolean isTimedActionCheat;
-   public boolean isEnableGodMode;
-   public boolean isEnableNoclip;
-   public boolean isEnableInvisible;
    public boolean isEnableNightVision;
    public boolean isZombieDontAttack;
    public boolean isNoRecoil;
@@ -70,6 +67,33 @@ public class EtherAPI {
    public boolean isMapDrawAllPlayers;
    public boolean isMapDrawVehicles;
    public boolean isMapDrawZombies;
+   public boolean godmod;
+   public boolean invisible;
+   public boolean invulnerable;
+   public boolean endurance;
+   public boolean ammo;
+   public boolean carry;
+   public boolean build;
+   public boolean farming;
+   public boolean fishing;
+   public boolean health;
+   public boolean mechanics;
+   public boolean fastmove;
+   public boolean movables;
+   public boolean timedactioninstant;
+   public boolean knowallrecipes;
+   public boolean brushtool;
+   public boolean noclip;
+   public boolean see;
+   public boolean hear;
+   public boolean zombiesdontattack;
+   public boolean lootzed;
+   public boolean lootlog;
+   public boolean debugmenucontext;
+   public boolean animal;
+   public boolean animalextravalues;
+
+   
 
    public void saveConfig(String var1) {
       String var2 = EtherPaths.resolveWritablePath("EtherHack/config/" + var1 + ".properties").toString();
@@ -88,10 +112,6 @@ public class EtherAPI {
       var3.setProperty("isMultiHitZombies", Boolean.toString(this.isMultiHitZombies));
       var3.setProperty("isPlayerInSafeTeleported", Boolean.toString(this.isPlayerInSafeTeleported));
       var3.setProperty("isMultiHitZombies", Boolean.toString(this.isMultiHitZombies));
-      var3.setProperty("isTimedActionCheat", Boolean.toString(this.isTimedActionCheat));
-      var3.setProperty("isEnableGodMode", Boolean.toString(this.isEnableGodMode));
-      var3.setProperty("isEnableNoclip", Boolean.toString(this.isEnableNoclip));
-      var3.setProperty("isEnableInvisible", Boolean.toString(this.isEnableInvisible));
       var3.setProperty("isEnableNightVision", Boolean.toString(this.isEnableNightVision));
       var3.setProperty("isZombieDontAttack", Boolean.toString(this.isZombieDontAttack));
       var3.setProperty("isNoRecoil", Boolean.toString(this.isNoRecoil));
@@ -106,6 +126,31 @@ public class EtherAPI {
       var3.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
       var3.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
       var3.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
+      var3.setProperty("godmod", Boolean.toString(this.));
+      var3.setProperty("invisible", Boolean.toString(this.));
+      var3.setProperty("invulnerable", Boolean.toString(this.));
+      var3.setProperty("endurance", Boolean.toString(this.));
+      var3.setProperty("ammo", Boolean.toString(this.));
+      var3.setProperty("carry", Boolean.toString(this.));
+      var3.setProperty("build", Boolean.toString(this.));
+      var3.setProperty("farming", Boolean.toString(this.));
+      var3.setProperty("fishing", Boolean.toString(this.));
+      var3.setProperty("health", Boolean.toString(this.));
+      var3.setProperty("mechanics", Boolean.toString(this.));
+      var3.setProperty("fastmove", Boolean.toString(this.));
+      var3.setProperty("movables", Boolean.toString(this.));
+      var3.setProperty("timedactioninstant", Boolean.toString(this.));
+      var3.setProperty("knowallrecipes", Boolean.toString(this.));
+      var3.setProperty("brushtool", Boolean.toString(this.));
+      var3.setProperty("noclip", Boolean.toString(this.));
+      var3.setProperty("see", Boolean.toString(this.));
+      var3.setProperty("hear", Boolean.toString(this.));
+      var3.setProperty("zombiesdontattack", Boolean.toString(this.));
+      var3.setProperty("lootzed", Boolean.toString(this.));
+      var3.setProperty("lootlog", Boolean.toString(this.));
+      var3.setProperty("debugmenucontext", Boolean.toString(this.));
+      var3.setProperty("animal", Boolean.toString(this.));
+      var3.setProperty("animalextravalues", Boolean.toString(this.));
 
       try {
          java.nio.file.Files.createDirectories(java.nio.file.Path.of(var2).getParent());
@@ -168,10 +213,6 @@ public class EtherAPI {
       this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysCritical", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var3, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var3, "isMultiHitZombies", false);
-      this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(var3, "isTimedActionCheat", false);
-      this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(var3, "isEnableGodMode", false);
-      this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(var3, "isEnableNoclip", false);
-      this.isEnableInvisible = ConfigUtils.getBooleanFromConfig(var3, "isEnableInvisible", false);
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var3, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var3, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var3, "isNoRecoil", false);
@@ -186,6 +227,31 @@ public class EtherAPI {
       this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawAllPlayers", false);
       this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawVehicles", false);
       this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawZombies", false);
+      this.godmod = ConfigUtils.getBooleanFromConfig(var3, "godmod", false);
+      this.invisible = ConfigUtils.getBooleanFromConfig(var3, "invisible", false);
+      this.invulnerable = ConfigUtils.getBooleanFromConfig(var3, "endurance", false);
+      this.endurance = ConfigUtils.getBooleanFromConfig(var3, "", false);
+      this.ammo = ConfigUtils.getBooleanFromConfig(var3, "ammo", false);
+      this.carry = ConfigUtils.getBooleanFromConfig(var3, "carry", false);
+      this.build = ConfigUtils.getBooleanFromConfig(var3, "build", false);
+      this.farming = ConfigUtils.getBooleanFromConfig(var3, "farming", false);
+      this.fishing = ConfigUtils.getBooleanFromConfig(var3, "fishing", false);
+      this.health = ConfigUtils.getBooleanFromConfig(var3, "health", false);
+      this.mechanics = ConfigUtils.getBooleanFromConfig(var3, "mechanics", false);
+      this.fastmove = ConfigUtils.getBooleanFromConfig(var3, "fastmove", false);
+      this.movables = ConfigUtils.getBooleanFromConfig(var3, "movables", false);
+      this.timedactioninstant = ConfigUtils.getBooleanFromConfig(var3, "timedactioninstant", false);
+      this.knowallrecipes = ConfigUtils.getBooleanFromConfig(var3, "knowallrecipes", false);
+      this.brushtool = ConfigUtils.getBooleanFromConfig(var3, "brushtool", false);
+      this.noclip = ConfigUtils.getBooleanFromConfig(var3, "noclip", false);
+      this.see = ConfigUtils.getBooleanFromConfig(var3, "see", false);
+      this.hear = ConfigUtils.getBooleanFromConfig(var3, "hear", false);
+      this.zombiesdontattack = ConfigUtils.getBooleanFromConfig(var3, "zombiesdontattack", false);
+      this.lootzed = ConfigUtils.getBooleanFromConfig(var3, "lootzed", false);
+      this.lootlog = ConfigUtils.getBooleanFromConfig(var3, "lootlog", false);
+      this.debugmenucontext = ConfigUtils.getBooleanFromConfig(var3, "debugmenucontext", false);
+      this.animal = ConfigUtils.getBooleanFromConfig(var3, "animal", false);
+      this.animalextravalues = ConfigUtils.getBooleanFromConfig(var3, "animalextravalues", false);
    }
 
    private void initStartupConfig() {
@@ -219,10 +285,6 @@ public class EtherAPI {
       this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var1, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var1, "isMultiHitZombies", false);
-      this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(var1, "isTimedActionCheat", false);
-      this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(var1, "isEnableGodMode", false);
-      this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(var1, "isEnableNoclip", false);
-      this.isEnableInvisible = ConfigUtils.getBooleanFromConfig(var1, "isEnableInvisible", false);
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var1, "isEnableNightVision", false);
       this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var1, "isZombieDontAttack", false);
       this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var1, "isNoRecoil", false);
@@ -237,6 +299,31 @@ public class EtherAPI {
       this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawAllPlayers", false);
       this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawVehicles", false);
       this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawZombies", false);
+      this.godmod = ConfigUtils.getBooleanFromConfig(var1, "godmod", false);
+      this.invisible = ConfigUtils.getBooleanFromConfig(var1, "invisible", false);
+      this.invulnerable = ConfigUtils.getBooleanFromConfig(var1, "endurance", false);
+      this.endurance = ConfigUtils.getBooleanFromConfig(var1, "", false);
+      this.ammo = ConfigUtils.getBooleanFromConfig(var1, "ammo", false);
+      this.carry = ConfigUtils.getBooleanFromConfig(var1, "carry", false);
+      this.build = ConfigUtils.getBooleanFromConfig(var1, "build", false);
+      this.farming = ConfigUtils.getBooleanFromConfig(var1, "farming", false);
+      this.fishing = ConfigUtils.getBooleanFromConfig(var1, "fishing", false);
+      this.health = ConfigUtils.getBooleanFromConfig(var1, "health", false);
+      this.mechanics = ConfigUtils.getBooleanFromConfig(var1, "mechanics", false);
+      this.fastmove = ConfigUtils.getBooleanFromConfig(var1, "fastmove", false);
+      this.movables = ConfigUtils.getBooleanFromConfig(var1, "movables", false);
+      this.timedactioninstant = ConfigUtils.getBooleanFromConfig(var1, "timedactioninstant", false);
+      this.knowallrecipes = ConfigUtils.getBooleanFromConfig(var1, "knowallrecipes", false);
+      this.brushtool = ConfigUtils.getBooleanFromConfig(var1, "brushtool", false);
+      this.noclip = ConfigUtils.getBooleanFromConfig(var1, "noclip", false);
+      this.see = ConfigUtils.getBooleanFromConfig(var1, "see", false);
+      this.hear = ConfigUtils.getBooleanFromConfig(var1, "hear", false);
+      this.zombiesdontattack = ConfigUtils.getBooleanFromConfig(var1, "zombiesdontattack", false);
+      this.lootzed = ConfigUtils.getBooleanFromConfig(var1, "lootzed", false);
+      this.lootlog = ConfigUtils.getBooleanFromConfig(var1, "lootlog", false);
+      this.debugmenucontext = ConfigUtils.getBooleanFromConfig(var1, "debugmenucontext", false);
+      this.animal = ConfigUtils.getBooleanFromConfig(var1, "animal", false);
+      this.animalextravalues = ConfigUtils.getBooleanFromConfig(var1, "animalextravalues", false);
    }
 
    public EtherAPI() {
@@ -310,6 +397,37 @@ public class EtherAPI {
       }
    }
 
+   private void updateCharacterPrivilegies()
+   {
+      IsoPlayer var1 = IsoPlayer.getInstance();
+
+      if (var1.isGodMod() != this.godmod) var1.setGodMod(this.godmod);
+      if (var1.isInvisible() != this.invisible) var1.setInvisible(this.invisible);
+      if (var1.isInvulnerable() != this.invulnerable) var1.setInvulnerable(this.invulnerable);      
+      if (var1.isCanUseBrushTool() != this.brushtool) var1.setCanUseBrushTool(this.brushtool);
+      if (var1.isCanUseDebugMenuContext() != this.debugmenucontext) var1.setCanUseDebugMenuContext(this.debugmenucontext);
+      if (var1.isZombiesDontAttack() != this.zombiesdontattack) var1.setZombiesDontAttack(this.zombiesdontattack);
+      if (var1.isUnlimitedCarry() != this.carry) var1.setUnlimitedCarry(this.carry);
+      if (var1.isBuildCheat() != this.build) var1.setBuildCheat(this.build);
+      if (var1.isFarmingCheat() != this.farming) var1.setFarmingCheat(this.farming);
+      if (var1.isFishingCheat() != this.fishing) var1.setFishingCheat(this.fishing);
+      if (var1.isHealthCheat() != this.health) var1.setHealthCheat(this.health);
+      if (var1.isMechanicsCheat() != this.mechanics) var1.setMechanicsCheat(this.mechanics);
+      if (var1.isFastMoveCheat() != this.fastmove) var1.setFastMoveCheat(this.fastmove);
+      if (var1.isMovablesCheat() != this.movables) var1.setMovablesCheat(this.movables);
+      if (var1.isAnimalCheat() != this.animal) var1.setAnimalCheat(this.animal);
+      if (var1.isAnimalExtraValuesCheat() != this.animalextravalues) var1.setAnimalExtraValuesCheat(this.animalextravalues);
+      if (var1.isTimedActionInstantCheat() != this.timedactioninstant) var1.setTimedActionInstantCheat(this.timedactioninstant);
+      if (var1.isKnowAllRecipes() != this.knowallrecipes) var1.setKnowAllRecipes(this.knowallrecipes);
+      if (var1.isUnlimitedAmmo() != this.ammo) var1.setUnlimitedAmmo(this.ammo);
+      if (var1.isUnlimitedEndurance() != this.endurance) var1.setUnlimitedEndurance(this.endurance);
+      if (var1.canUseLootZed() != this.lootzed) var1.setCanUseLootZed(this.lootzed);
+      if (var1.canUseLootLog() != this.lootlog) var1.setCanUseLootLog(this.lootlog);
+      if (var1.canSeeAll() != this.see) var1.setCanSeeAll(this.see);
+      if (var1.canHearAll() != this.hear) var1.setCanHearAll(this.hear);
+   }
+
+   
    private void updateLocalPlayerFeatures()
    {
       IsoPlayer var1 = IsoPlayer.getInstance();
@@ -324,28 +442,8 @@ public class EtherAPI {
             SandboxOptions.instance.set("MultiHitZombies", this.isMultiHitZombies);
 
 
-         if (var1.isTimedActionInstantCheat() != this.isTimedActionCheat)
-            var1.setTimedActionInstantCheat(this.isTimedActionCheat);
-
-
          if (var1.isWearingNightVisionGoggles() != this.isEnableNightVision)
             var1.setWearingNightVisionGoggles(this.isEnableNightVision);
-
-
-         if (var1.isGodMod() != this.isEnableGodMode)
-            var1.setGodMod(this.isEnableGodMode);
-
-
-         if (var1.isNoClip() != this.isEnableNoclip)
-            var1.setNoClip(this.isEnableNoclip);
-
-
-         if (var1.isInvisible() != this.isEnableInvisible)
-            var1.setInvisible(this.isEnableInvisible);
-
-
-         if (var1.isZombiesDontAttack() != this.isZombieDontAttack)
-            var1.setZombiesDontAttack(this.isZombieDontAttack);
 
 
          if (var2 != null && var2.getStringItemType().equals("RangedWeapon") && var2 instanceof HandWeapon)
