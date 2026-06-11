@@ -405,7 +405,7 @@ public class EtherAPI {
       if (var1.isInvisible() != this.invisible) var1.setInvisible(this.invisible);
       if (var1.isInvulnerable() != this.invulnerable) var1.setInvulnerable(this.invulnerable);      
       if (var1.isCanUseBrushTool() != this.brushtool) var1.setCanUseBrushTool(this.brushtool);
-      if (var1.canUseDebugMenuContext() != this.debugmenucontext) var1.setCanUseDebugMenuContext(this.debugmenucontext);
+      if (var1.canUseDebugContextMenu() != this.debugmenucontext) var1.setCanUseDebugContextMenu(this.debugmenucontext);
       if (var1.isZombiesDontAttack() != this.zombiesdontattack) var1.setZombiesDontAttack(this.zombiesdontattack);
       if (var1.isUnlimitedCarry() != this.carry) var1.setUnlimitedCarry(this.carry);
       if (var1.isBuildCheat() != this.build) var1.setBuildCheat(this.build);
