@@ -334,7 +334,7 @@ public class EtherLuaMethods {
    public static String getTranslate(String var0) {
       return EtherMain.getInstance().etherTranslator.getTranslate(var0);
    }
-
+   
    @LuaMethod(name = "getAccess", global = true)
    public static String getAccess()
    {
