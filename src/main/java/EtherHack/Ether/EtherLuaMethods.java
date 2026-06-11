@@ -305,9 +305,6 @@ public class EtherLuaMethods {
    @LuaMethod(name = "toggleDebugMenuContext", global = true) public static void toggleDebugMenuContext(boolean var0){EtherMain.getInstance().etherAPI.debugmenucontext = var0;}
    @LuaMethod(name = "isDebugMenuContext", global = true) public static boolean isDebugMenuContext(){return EtherMain.getInstance().etherAPI.debugmenucontext;}
    
-    @LuaMethod(name = "toggleDebugMenuContext", global = true) public static void toggleDebugMenuContext(boolean var0){EtherMain.getInstance().etherAPI.debugmenucontext = var0;}
-   @LuaMethod(name = "isDebugMenuContext", global = true) public static boolean isDebugMenuContext(){return EtherMain.getInstance().etherAPI.debugmenucontext;}
-   
    @LuaMethod(name = "toggleAnimal", global = true) public static void toggleAnimal(boolean var0){EtherMain.getInstance().etherAPI.animal = var0;}
    @LuaMethod(name = "isAnimal", global = true) public static boolean isAnimal(){return EtherMain.getInstance().etherAPI.animal;}
    
