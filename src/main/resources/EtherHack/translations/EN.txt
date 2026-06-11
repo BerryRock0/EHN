@@ -59,6 +59,7 @@
 	UI_CharacterPanel_OptimalCalories = "Maintain optimal calories",
 	UI_CharacterPanel_OptimalWeight = "Maintain optimal weight",
 
+	UI_CheatPanel_Escalate = "Escalate";
 	UI_CheatPanel_GodMode = "GodMode";
 	UI_CheatPanel_Invisible = "Invisible";
 	UI_CheatPanel_UnlimitedEndurance = "UnlimitedEndurance";
