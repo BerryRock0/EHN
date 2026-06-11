@@ -97,34 +97,18 @@ function EtherCharacterPanel:createChildren()
 	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysKnockdown"), function(isChecked)
         toggleAlwaysKnockdown(isChecked);
     end, isAlwaysKnockdown(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
+        toggleNightVision(isChecked);
+    end, isEnableNightVision(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedAmmo"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedAmmo", isChecked);
     end, isUnlimitedAmmo(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_ZombieDontAttack"), function(isChecked)
-        toggleZombieDontAttack(isChecked);
-    end, isZombieDontAttack(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
-        toggleNightVision(isChecked);
-    end, isEnableNightVision(), false);
-
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedCarry", isChecked);
     end, isEnableUnlimitedCarry(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_BuildCheat"), function(isChecked)
-        ISBuildMenu.cheat = isChecked;
-    end, ISBuildMenu.cheat, false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_FarmingCheat"), function(isChecked)
-        ISFarmingMenu.cheat = isChecked;
-    end, ISFarmingMenu.cheat, false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_TimedActionCheat"), function(isChecked)
-        toggleTimedActionCheat(isChecked);
-    end, isTimedActionCheat(), false);	
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCondition"), function(isChecked)
         toggleUnlimitedCondition(isChecked);
@@ -137,18 +121,6 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
         toggleNoRecoil(isChecked)
     end, isNoRecoil(), false);
-
-	self:addCheckBox(getTranslate("UI_CharacterPanel_GodMode"), function(isChecked)
-        EtherDebugClient.toggleSelf("god", isChecked);
-    end, isEnableGodMode(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_NoClip"), function(isChecked)
-        EtherDebugClient.toggleSelf("noclip", isChecked);
-    end, isEnableNoclip(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_Invisible"), function(isChecked)
-        EtherDebugClient.toggleSelf("invisible", isChecked);
-    end, isEnableInvisible(), false);
 
     self:updatePanel();
 end
