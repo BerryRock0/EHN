@@ -80,7 +80,7 @@
 	UI_CheatPanel_ZombiesDontAttack = "ZombiesDontAttack";
 	UI_CheatPanel_LootZed = "LootZed";
 	UI_CheatPanel_LootLog = "LootLog";
-	UI_CheatPanel_DebugContextMenu = "DebugContextMenu";
+	UI_CheatPanel_DebugMenuContext = "DebugMenuContext";
 	UI_CheatPanel_Animal = "Animal";
 	UI_CheatPanel_AnimalExtraValues = "AnimalExtraValues";
 
