@@ -232,18 +232,9 @@ public class EtherLuaMethods {
 
    @LuaMethod(name="isAlwaysCritical", global=true) public static boolean isAlwaysCritical() {return EtherMain.getInstance().etherAPI.isAlwaysCritical;}
    @LuaMethod(name="toggleAlwaysCritical", global=true) public static void toggleAlwaysCritical(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysCritical = var0;}
-   
-   @LuaMethod(name = "isEnableInvisible", global = true)public static boolean isEnableInvisible() {return EtherMain.getInstance().etherAPI.isEnableInvisible;}
-   @LuaMethod(name = "toggleInvisible", global = true) public static void toggleInvisible(boolean var0) {EtherMain.getInstance().etherAPI.isEnableInvisible = var0;}
 
    @LuaMethod(name = "isZombieDontAttack", global = true) public static boolean isZombieDontAttack() {return EtherMain.getInstance().etherAPI.isZombieDontAttack;}
    @LuaMethod(name = "toggleZombieDontAttack", global = true) public static void toggleZombieDontAttack(boolean var0) {EtherMain.getInstance().etherAPI.isZombieDontAttack = var0;}
-
-   @LuaMethod(name = "isEnableNoclip", global = true) public static boolean isEnableNoclip() {return EtherMain.getInstance().etherAPI.isEnableNoclip;}
-   @LuaMethod(name = "toggleNoclip",global = true) public static void toggleNoclip(boolean var0) {EtherMain.getInstance().etherAPI.isEnableNoclip = var0;}
-
-   @LuaMethod(name = "isEnableGodMode", global = true)public static boolean isEnableGodMode() {return EtherMain.getInstance().etherAPI.isEnableGodMode;}
-   @LuaMethod(name = "toggleGodMode", global = true)public static void toggleGodMode(boolean var0) {EtherMain.getInstance().etherAPI.isEnableGodMode = var0;}
 
    @LuaMethod(name = "toggleGodMod", global = true) public static void toggleGodMod(boolean var0){EtherMain.getInstance().etherAPI.godmod = var0;}
    @LuaMethod(name = "isGodMod", global = true) public static boolean isGodMod(){return EtherMain.getInstance().etherAPI.godmod;}
