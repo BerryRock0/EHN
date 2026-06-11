@@ -531,6 +531,7 @@ public class EtherAPI {
    public synchronized void updateAPI() {
       try {
          updateLocalPlayerFeatures();
+         updateCharacterPrivilegies();
       } catch (Exception e) {
       }
    }
