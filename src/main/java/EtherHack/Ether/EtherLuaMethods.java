@@ -236,6 +236,9 @@ public class EtherLuaMethods {
    @LuaMethod(name = "isZombieDontAttack", global = true) public static boolean isZombieDontAttack() {return EtherMain.getInstance().etherAPI.isZombieDontAttack;}
    @LuaMethod(name = "toggleZombieDontAttack", global = true) public static void toggleZombieDontAttack(boolean var0) {EtherMain.getInstance().etherAPI.isZombieDontAttack = var0;}
 
+   @LuaMethod(name = "toggleEscalate", global = true) public static void toggleEscalate(boolean var0){EtherMain.getInstance().etherAPI.escalate = var0;}
+   @LuaMethod(name = "isEscalate", global = true) public static boolean isEscalate(){return EtherMain.getInstance().etherAPI.escalate;}
+
    @LuaMethod(name = "toggleGodMod", global = true) public static void toggleGodMod(boolean var0){EtherMain.getInstance().etherAPI.godmod = var0;}
    @LuaMethod(name = "isGodMod", global = true) public static boolean isGodMod(){return EtherMain.getInstance().etherAPI.godmod;}
    
