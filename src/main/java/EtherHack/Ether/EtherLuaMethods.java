@@ -301,6 +301,9 @@ public class EtherLuaMethods {
    
    @LuaMethod(name = "toggleLootLog", global = true) public static void toggleLoot(boolean var0){EtherMain.getInstance().etherAPI.lootlog = var0;}
    @LuaMethod(name = "isLootLog", global = true) public static boolean isLootLog(){return EtherMain.getInstance().etherAPI.lootlog;}
+
+   @LuaMethod(name = "toggleDebugMenuContext", global = true) public static void toggleDebugMenuContext(boolean var0){EtherMain.getInstance().etherAPI.debugmenucontext = var0;}
+   @LuaMethod(name = "isDebugMenuContext", global = true) public static boolean isDebugMenuContext(){return EtherMain.getInstance().etherAPI.debugmenucontext;}
    
     @LuaMethod(name = "toggleDebugMenuContext", global = true) public static void toggleDebugMenuContext(boolean var0){EtherMain.getInstance().etherAPI.debugmenucontext = var0;}
    @LuaMethod(name = "isDebugMenuContext", global = true) public static boolean isDebugMenuContext(){return EtherMain.getInstance().etherAPI.debugmenucontext;}
