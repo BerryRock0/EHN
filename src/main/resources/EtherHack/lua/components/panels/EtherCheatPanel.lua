@@ -66,7 +66,7 @@ function EtherCheatPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedCarry"), function(isChecked) toggleCarry(isChecked); end, isCarry(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_Build"), function(isChecked) toggleBuild(isChecked); end, isBuild(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_Farming"), function(isChecked) toggleFarming(isChecked); end, isFarming(), false);
-    self:addCheckBox(getTranslate("UI_CheatPanel_Fishing"), function(isChecked) toggleFishing(isChecked); end, is(), false);
+    self:addCheckBox(getTranslate("UI_CheatPanel_Fishing"), function(isChecked) toggleFishing(isChecked); end, isFishing(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_Health"), function(isChecked) toggleHealth(isChecked); end, isHealth(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_Mechanics"), function(isChecked) toggleMechanics(isChecked); end, isMechanics(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_FastMove"), function(isChecked) toggleFastMove(isChecked); end, isFastMove(), false);
