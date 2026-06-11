@@ -2,6 +2,7 @@ require "ISUI/ISPanel"
 
 local etherModules = {
     "EtherHack/lua/EtherDebugClient.lua",
+    "EtherHack/lua/components/override/EtherAdminMenu.lua",
     "EtherHack/lua/components/override/EtherEditInventoryItem.lua",
     "EtherHack/lua/components/override/EtherEditWorldObjects.lua",
     "EtherHack/lua/components/override/EtherDebugMenu.lua",
