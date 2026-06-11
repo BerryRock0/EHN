@@ -31,7 +31,7 @@ end
 --*********************************************************
 --* Создание слайдера
 --*********************************************************
-function EtherVisualsPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
+function EtherCharacterPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
     local slider = UISlider:new(posX, posY, width, height, value, minValue, maxValue, method)
     slider:initialise();
     slider:instantiate();
