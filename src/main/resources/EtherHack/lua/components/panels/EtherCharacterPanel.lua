@@ -29,6 +29,17 @@ function EtherCharacterPanel:addCheckBox(title, method, isSelected, isOnlyInGame
 end
 
 --*********************************************************
+--* Создание слайдера
+--*********************************************************
+function EtherVisualsPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
+    local slider = UISlider:new(posX, posY, width, height, value, minValue, maxValue, method)
+    slider:initialise();
+    slider:instantiate();
+    self:addChild(slider);
+    return slider
+end
+	
+--*********************************************************
 --* Обработка событий колесика мыши
 --*********************************************************
 function EtherCharacterPanel:onMouseWheel(del)
@@ -121,6 +132,8 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
         toggleNoRecoil(isChecked)
     end, isNoRecoil(), false);
+
+	self:
 
     self:updatePanel();
 end
