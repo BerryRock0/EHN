@@ -67,6 +67,7 @@ public class EtherAPI {
    public boolean isMapDrawAllPlayers;
    public boolean isMapDrawVehicles;
    public boolean isMapDrawZombies;
+   public boolean escalate;
    public boolean godmod;
    public boolean invisible;
    public boolean invulnerable;
@@ -126,6 +127,7 @@ public class EtherAPI {
       var3.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
       var3.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
       var3.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
+      var3.setProperty("escalate", Boolean.toString(this.escalate));
       var3.setProperty("godmod", Boolean.toString(this.godmod));
       var3.setProperty("invisible", Boolean.toString(this.invisible));
       var3.setProperty("invulnerable", Boolean.toString(this.invulnerable));
@@ -227,6 +229,7 @@ public class EtherAPI {
       this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawAllPlayers", false);
       this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawVehicles", false);
       this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawZombies", false);
+      this.escalate = ConfigUtils.getBooleanFromConfig(var3, "escalate", false);
       this.godmod = ConfigUtils.getBooleanFromConfig(var3, "godmod", false);
       this.invisible = ConfigUtils.getBooleanFromConfig(var3, "invisible", false);
       this.invulnerable = ConfigUtils.getBooleanFromConfig(var3, "endurance", false);
@@ -299,6 +302,7 @@ public class EtherAPI {
       this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawAllPlayers", false);
       this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawVehicles", false);
       this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawZombies", false);
+      this.escalate = ConfigUtils.getBooleanFromConfig(var1, "escalate", false);
       this.godmod = ConfigUtils.getBooleanFromConfig(var1, "godmod", false);
       this.invisible = ConfigUtils.getBooleanFromConfig(var1, "invisible", false);
       this.invulnerable = ConfigUtils.getBooleanFromConfig(var1, "endurance", false);
@@ -401,30 +405,30 @@ public class EtherAPI {
    {
       IsoPlayer var1 = IsoPlayer.getInstance();
 
-      if (var1.isGodMod() != this.godmod) var1.setGodMod(this.godmod);
-      if (var1.isInvisible() != this.invisible) var1.setInvisible(this.invisible);
-      if (var1.isInvulnerable() != this.invulnerable) var1.setInvulnerable(this.invulnerable);      
-      if (var1.isCanUseBrushTool() != this.brushtool) var1.setCanUseBrushTool(this.brushtool);
-      if (var1.canUseDebugContextMenu() != this.debugmenucontext) var1.setCanUseDebugContextMenu(this.debugmenucontext);
-      if (var1.isZombiesDontAttack() != this.zombiesdontattack) var1.setZombiesDontAttack(this.zombiesdontattack);
-      if (var1.isUnlimitedCarry() != this.carry) var1.setUnlimitedCarry(this.carry);
-      if (var1.isBuildCheat() != this.build) var1.setBuildCheat(this.build);
-      if (var1.isFarmingCheat() != this.farming) var1.setFarmingCheat(this.farming);
-      if (var1.isFishingCheat() != this.fishing) var1.setFishingCheat(this.fishing);
-      if (var1.isHealthCheat() != this.health) var1.setHealthCheat(this.health);
-      if (var1.isMechanicsCheat() != this.mechanics) var1.setMechanicsCheat(this.mechanics);
-      if (var1.isFastMoveCheat() != this.fastmove) var1.setFastMoveCheat(this.fastmove);
-      if (var1.isMovablesCheat() != this.movables) var1.setMovablesCheat(this.movables);
-      if (var1.isAnimalCheat() != this.animal) var1.setAnimalCheat(this.animal);
-      if (var1.isAnimalExtraValuesCheat() != this.animalextravalues) var1.setAnimalExtraValuesCheat(this.animalextravalues);
-      if (var1.isTimedActionInstantCheat() != this.timedactioninstant) var1.setTimedActionInstantCheat(this.timedactioninstant);
-      if (var1.isKnowAllRecipes() != this.knowallrecipes) var1.setKnowAllRecipes(this.knowallrecipes);
-      if (var1.isUnlimitedAmmo() != this.ammo) var1.setUnlimitedAmmo(this.ammo);
-      if (var1.isUnlimitedEndurance() != this.endurance) var1.setUnlimitedEndurance(this.endurance);
-      if (var1.canUseLootZed() != this.lootzed) var1.setCanUseLootZed(this.lootzed);
-      if (var1.canUseLootLog() != this.lootlog) var1.setCanUseLootLog(this.lootlog);
-      if (var1.canSeeAll() != this.see) var1.setCanSeeAll(this.see);
-      if (var1.canHearAll() != this.hear) var1.setCanHearAll(this.hear);
+      if (this.escalate) var1.setGodMod(this.godmod);
+      if (this.escalate) var1.setInvisible(this.invisible);
+      if (this.escalate) var1.setInvulnerable(this.invulnerable);      
+      if (this.escalate) var1.setCanUseBrushTool(this.brushtool);
+      if (this.escalate) var1.setCanUseDebugContextMenu(this.debugmenucontext);
+      if (this.escalate) var1.setZombiesDontAttack(this.zombiesdontattack);
+      if (this.escalate) var1.setUnlimitedCarry(this.carry);
+      if (this.escalate) var1.setBuildCheat(this.build);
+      if (this.escalate) var1.setFarmingCheat(this.farming);
+      if (this.escalate) var1.setFishingCheat(this.fishing);
+      if (this.escalate) var1.setHealthCheat(this.health);
+      if (this.escalate) var1.setMechanicsCheat(this.mechanics);
+      if (this.escalate) var1.setFastMoveCheat(this.fastmove);
+      if (this.escalate) var1.setMovablesCheat(this.movables);
+      if (this.escalate) var1.setAnimalCheat(this.animal);
+      if (this.escalate) var1.setAnimalExtraValuesCheat(this.animalextravalues);
+      if (this.escalate) var1.setTimedActionInstantCheat(this.timedactioninstant);
+      if (this.escalate) var1.setKnowAllRecipes(this.knowallrecipes);
+      if (this.escalate) var1.setUnlimitedAmmo(this.ammo);
+      if (this.escalate) var1.setUnlimitedEndurance(this.endurance);
+      if (this.escalate) var1.setCanUseLootZed(this.lootzed);
+      if (this.escalate) var1.setCanUseLootLog(this.lootlog);
+      if (this.escalate) var1.setCanSeeAll(this.see);
+      if (this.escalate) var1.setCanHearAll(this.hear);
    }
 
    
