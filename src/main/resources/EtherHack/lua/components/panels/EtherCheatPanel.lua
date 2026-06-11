@@ -58,6 +58,7 @@ function EtherCheatPanel:createChildren()
     self:setScrollHeight(0)
     self:addScrollBars();
 
+	self:addCheckBox(getTranslate("UI_CheatPanel_Escalate"), function(isChecked) toggleGodMod(isChecked); end, isGodMod(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_GodMode"), function(isChecked) toggleGodMod(isChecked); end, isGodMod(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_Invisible"), function(isChecked) toggleInvisible(isChecked); end, isInvisible(), false);
     self:addCheckBox(getTranslate("UI_CheatPanel_UnlimitedEndurance"), function(isChecked) toggleEndurance(isChecked); end, isEndurance(), false);
