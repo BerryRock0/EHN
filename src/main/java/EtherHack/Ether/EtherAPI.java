@@ -59,6 +59,7 @@ public class EtherAPI {
    public boolean isNoReload;
    public boolean isNoJam;
    public boolean isNoSpentRoundChamber;
+   public boolean isFastCorpseDrag;
    public boolean isUnlimitedCarry;
    public boolean isUnlimitedCondition;
    public boolean isUnlimitedAmmo;
@@ -91,6 +92,7 @@ public class EtherAPI {
       var3.setProperty("isNoReload", Boolean.toString(this.isNoReload));
       var3.setProperty("isNoJam", Boolean.toString(this.isNoJam));
       var3.setProperty("isNoSpentRoundChamber", Boolean.toString(this.isNoSpentRoundChamber));
+      var3.setProperty("isFastCorpseDrag", Boolean.toString(this.isFastCorpseDrag));
       var3.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
       var3.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
       var3.setProperty("isUnlimitedAmmo", Boolean.toString(this.isUnlimitedAmmo));
@@ -167,6 +169,7 @@ public class EtherAPI {
       this.isNoReload = ConfigUtils.getBooleanFromConfig(var3, "isNoReload", false);
       this.isNoJam = ConfigUtils.getBooleanFromConfig(var3, "isNoJam", false);
       this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isNoSpentRoundChamber", false);
+      this.isFastCorpseDrag = ConfigUtils.getBooleanFromConfig(var3, "isFastCorpseDrag", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCondition", false);
       this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedAmmo", false);
@@ -214,6 +217,7 @@ public class EtherAPI {
       this.isNoReload = ConfigUtils.getBooleanFromConfig(var1, "isNoReload", false);
       this.isNoJam = ConfigUtils.getBooleanFromConfig(var1, "isNoJam", false);
       this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isNoSpentRoundChamber", false);
+      this.isFastCorpseDrag = ConfigUtils.getBooleanFromConfig(var1, "isFastCorpseDrag", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCondition", false);
       this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedAmmo", false);
@@ -389,6 +393,12 @@ public class EtherAPI {
          }
    }
 
+      private void setDragSpeed()
+      {
+         IsoPlayer player = IsoPlayer.getInstance();
+         player.setVariable("WalkSpeedGrapple", 1.2f);
+      }
+   
       private void bypassDebugMode()
       {
          Core.debug = this.isBypassDebugMode;
