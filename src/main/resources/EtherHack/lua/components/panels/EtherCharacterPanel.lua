@@ -27,17 +27,6 @@ function EtherCharacterPanel:addCheckBox(title, method, isSelected, isOnlyInGame
 
     table.insert(self.checkBoxList, checkbox);
 end
-
---*********************************************************
---* Создание слайдера
---*********************************************************
-function EtherCharacterPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
-    local slider = UISlider:new(posX, posY, width, height, value, minValue, maxValue, method)
-    slider:initialise();
-    slider:instantiate();
-    self:addChild(slider);
-    return slider
-end
 	
 --*********************************************************
 --* Обработка событий колесика мыши
