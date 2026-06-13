@@ -1,20 +1,10 @@
 package EtherHack.Ether;
 
-import EtherHack.annotations.LuaEvents;
-import EtherHack.annotations.SubscribeLuaEvent;
-import EtherHack.utils.ColorUtils;
-import EtherHack.utils.ConfigUtils;
-import EtherHack.utils.EtherPaths;
-import EtherHack.utils.EventSubscriber;
-import EtherHack.utils.Exposer;
-import EtherHack.utils.Logger;
-import EtherHack.utils.Rendering;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
 
 import se.krka.kahlua.converter.KahluaConverterManager;
 import se.krka.kahlua.j2se.J2SEPlatform;
@@ -33,6 +23,17 @@ import zombie.inventory.types.HandWeapon;
 import zombie.iso.IsoWorld;
 import zombie.ui.UIFont;
 import zombie.vehicles.BaseVehicle;
+
+
+import EtherHack.annotations.LuaEvents;
+import EtherHack.annotations.SubscribeLuaEvent;
+import EtherHack.utils.ColorUtils;
+import EtherHack.utils.ConfigUtils;
+import EtherHack.utils.EtherPaths;
+import EtherHack.utils.EventSubscriber;
+import EtherHack.utils.Exposer;
+import EtherHack.utils.Logger;
+import EtherHack.utils.Rendering;
 
 import static zombie.Lua.LuaManager.env;
 
@@ -392,12 +393,6 @@ public class EtherAPI {
             }
          }
    }
-
-      private void setDragSpeed()
-      {
-         IsoPlayer player = IsoPlayer.getInstance();
-         player.setVariable("WalkSpeedGrapple", 1.2f);
-      }
    
       private void bypassDebugMode()
       {
