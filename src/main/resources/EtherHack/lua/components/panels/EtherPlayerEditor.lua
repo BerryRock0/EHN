@@ -164,11 +164,6 @@ function EtherPlayerEditor:createChildren()
     self:addChild(editKillsBtn)
 
     self:addLabel(getText("IGUI_PlayerStats_AccessLevel") .. ": ".. accessLevel, 300, 10);
-    local editAccessBtn = ISButton:new(250, 10, 60, 18, getTranslate("UI_PlayerEditor_EditAccess"), self, self.onEditAccessButton)
-    editTimeBtn:initialise()
-    editTimeBtn:instantiate()
-    self:addChild(editAccessBtn)
-
     self:addLabel(getText("IGUI_PlayerStats_ChatMuted").. " ".. chatMuted, 300, 30);
     self:addLabel(getText("IGUI_char_Weight").. ": ".. weight, 300, 50);
     self:addLabel(getTranslate("UI_PlayerEditor_PlayerInfo_Calories").. ": ".. calories, 300, 70);
@@ -197,23 +192,6 @@ function EtherPlayerEditor:updateLabels()
     end
     -- Recreate all elements
     self:createChildren()
-end
-
-function EtherPlayerEditor:onEditAccessButton()
-	local modal = ISTextBox:new(0, 0, 280, 180, getTranslate("UI_PlayerEditor_EditAccessTitle"),
-		tostring(getAccess()),
-        self,
-		function(target, button)
-			if button.internal == "OK" then
-				local value = tostring(button.parent.entry:getText())
-				if value then
-					setAccess(value)
-					self:updateLabels()
-				end
-			end
-		end)
-	modal:initialise()
-    modal:addToUIManager()
 end
 
 function EtherPlayerEditor:onEditTimeButton()
