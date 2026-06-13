@@ -49,13 +49,8 @@ function UIStatsEditor:createChildren()
 end
 
 function UIStatsEditor:onSaveButton()
-    local level = tostring(self.accessEntry:getText())
     local kills = tonumber(self.killsEntry:getText())
     local hours = tonumber(self.hoursEntry:getText())
-
-    if level then
-        setAccessLevel(level)
-    end
         
     if kills then
         setZombieKills(kills)
