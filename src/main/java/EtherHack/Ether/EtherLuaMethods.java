@@ -334,24 +334,6 @@ public class EtherLuaMethods {
    public static String getTranslate(String var0) {
       return EtherMain.getInstance().etherTranslator.getTranslate(var0);
    }
-   
-   @LuaMethod(name = "getAccess", global = true)
-   public static String getAccess()
-   {
-      IsoPlayer player = IsoPlayer.getInstance();
-      if (player != null)
-         return player.getAccessLevel();
-
-      return "none";
-   }
-   
-   @LuaMethod(name = "setAccess", global = true)
-   public static void setAccess(String level)
-   {
-      IsoPlayer player = IsoPlayer.getInstance();
-      if (player != null)
-         player.accessLevel = level;
-   }
 
    @LuaMethod(name = "setZombieKills", global = true)
    public static void setZombieKills(int kills) {
