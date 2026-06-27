@@ -189,6 +189,15 @@ function EtherAdminMenu:create()
     self.showStatisticsBtn.tooltip = getTextOrNull("IGUI_AdminPanel_TooltipShowStatistics")
     y = y + btnHgt + btnGapY
 
+    self.usersListBtn = ISButton:new(10 + btnWid + 20, y, btnWid, btnHgt, getText("IGUI_AdminPanel_UsersList"), self, EtherAdminMenu.onOptionMouseDown)
+    self.usersListBtn.internal = "USERSLIST"
+    self.usersListBtn:initialise()
+    self.usersListBtn:instantiate()
+    self.usersListBtn.borderColor = self.buttonBorderColor
+    self:addChild(self.usersListBtn)
+    self.usersListBtn.tooltip = getTextOrNull("IGUI_AdminPanel_TooltipUsersList")
+    y = y + btnHgt + btnGapY
+
     local width = 0
     local bottom = 0
     for _,child in pairs(self:getChildren()) do
