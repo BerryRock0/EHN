@@ -175,6 +175,14 @@ end
 function EtherDebugMenu.onClickCheats()
     if isBypassDebugMode() then
         ISAdminPowerUI.OnOpenPanel()
+		else
+        local modal = ISModalDialog:new(
+            getCore():getScreenWidth() / 2 - 200,
+            getCore():getScreenHeight() / 2 - 75,
+            400, 150,
+            "Enable 'Bypass debug mode prohibition' in the Exploit panel first",
+            false, nil, nil
+        );
         modal:initialise();
         modal:addToUIManager();
     end
