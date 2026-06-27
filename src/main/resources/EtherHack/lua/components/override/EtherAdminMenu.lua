@@ -409,7 +409,7 @@ function EtherAdminMenu:onOptionMouseDown(button, x, y)
         if ISUsersList.instance then
             ISStatisticsUI.instance:close()
         end
-        local ui = ISUsersListUI:new(150, 150, 800, 800 getPlayer())
+        local ui = ISUsersListUI:new(150, 150, 800, 800, getPlayer())
         ui:initialise()
         ui:addToUIManager()
     end
