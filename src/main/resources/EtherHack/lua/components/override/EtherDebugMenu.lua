@@ -14,28 +14,39 @@ EtherDebugMenu.tab = "MAIN"
 
 function EtherDebugMenu:setupButtons()
     -- MAIN
-    self:addButtonInfo("General debuggers", function() ISGeneralDebug.OnOpenPanel() end, "MAIN");
+    self:addButtonInfo("General", function() ISGeneralDebug.OnOpenPanel() end, "MAIN");
     self:addButtonInfo("Cheats", EtherDebugMenu.onClickCheats, "MAIN");
-    self:addButtonInfo("Climate debuggers", function() ClimateControlDebug.OnOpenPanel() end, "MAIN");
-    self:addButtonInfo("Player's Stats", function() ISPlayerStatsUI.OnOpenPanel() end, "MAIN");
-    self:addButtonInfo("Items List", function() ISItemsListViewer.OnOpenPanel() end, "MAIN");
+    self:addButtonInfo("Climate", function() ClimateControlDebug.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("CraftRecipies", function() .OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("Player", function() ISPlayerStatsUI.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("Items", function() ISItemsListViewer.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("Fluids", function() ISFluidDebugWindow.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("Entities", function() ISEntitiesDebugWindow.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("Scripts", function() ISScriptsDebugWindow.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("XUI", function() XuiDebugWindow.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("RecipeMonitor", function() ISRecipeMonitor.OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("Sandbox", function() ISDebugMenu:onClickSandboxSettings() end, "MAIN");
     self:addButtonInfo("Close", nil, "MAIN", 10);
 
     -- DEV
+    self:addButtonInfo("Audio", function() ISAudioDebugPanel.OnOpenPanel() end, "DEV");
     self:addButtonInfo("IsoRegions", function() IsoRegionsWindow.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Zombie Population", function() ZombiePopulationWindow.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Stash debuggers", function() StashDebug.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Anim monitor", function() ISAnimDebugMonitor.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Zomboid Radio", function() ZomboidRadioDebug.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Animation Viewer", showAnimationViewer, "DEV");
-    self:addButtonInfo("Attachment Editor", showAttachmentEditor, "DEV");
-    self:addButtonInfo("Chunk Debugger", showChunkDebugger, "DEV");
-    self:addButtonInfo("Global Objects", showGlobalObjectDebugger, "DEV");
-    self:addButtonInfo("Map Editor", function() showWorldMapEditor(nil) end, "DEV");
-    self:addButtonInfo("Vehicle Editor", function() showVehicleEditor(nil) end, "DEV");
-    self:addButtonInfo("World Flares", function() WorldFlaresDebug.OnOpenPanel() end, "DEV");
-	self:addButtonInfo("Statistic", function() ISGameStatisticPanel.OnOpenPanel() end, "DEV");
+    self:addButtonInfo("Population", function() ZombiePopulationWindow.OnOpenPanel() end, "DEV");
+    self:addButtonInfo(("Stash", function() StashDebug.OnOpenPanel() end, "DEV");
+    self:addButtonInfo("AnimMonitor", function() ISAnimDebugMonitor.OnOpenPanel() end, "DEV");
+    self:addButtonInfo("Radio", function() ZomboidRadioDebug.OnOpenPanel() end, "DEV");
+    self:addButtonInfo("AnimViewer", showAnimationViewer, "DEV");
+    self:addButtonInfo("Attachment", showAttachmentEditor, "DEV");
+    self:addButtonInfo("ChunkDebug", showChunkDebugger, "DEV");
+    self:addButtonInfo("GlobalObject", showGlobalObjectDebugger, "DEV");
+    self:addButtonInfo("MapEdit", function() showWorldMapEditor(nil) end, "DEV");
+    self:addButtonInfo("VehicleEdit", function() showVehicleEditor(nil) end, "DEV");
+    self:addButtonInfo("WorldFlares", function() WorldFlaresDebug.OnOpenPanel() end, "DEV");
     self:addButtonInfo("GlobalModData", function() GlobalModDataDebug.OnOpenPanel() end, "DEV");
+    self:addButtonInfo("NewUI", function() doNewUIDebug() end, "DEV");
+    self:addButtonInfo("UnitTests", function() UnitTestsDebug:OnOpenPanel() end, "DEV");
+    self:addButtonInfo("CharacterDebug", function() ISCharacterDebugUI.OnOpenPanel() end, "DEV");
+    self:addButtonInfo("ForgetRecipes", function() ISDebugMenu:onForgetRecipes() end, "DEV");
     self:addButtonInfo("Close", nil, "DEV", 10);
 
 end
@@ -47,7 +58,6 @@ function EtherDebugMenu:addButtonInfo(_title, _func, _tab, _marginTop)
 end
 
 function EtherDebugMenu.OnOpenPanel()
-    -- if getCore():getDebug() or EtherDebugMenu.forceEnable then
         if EtherDebugMenu.instance==nil then
             EtherDebugMenu.instance = EtherDebugMenu:new (100, 100, 200, 20, getPlayer());
             EtherDebugMenu.instance:initialise();
@@ -58,7 +68,6 @@ function EtherDebugMenu.OnOpenPanel()
         EtherDebugMenu.instance:setVisible(true);
 
         return EtherDebugMenu.instance;
-    -- end
 end
 
 function EtherDebugMenu:initialise()
@@ -166,14 +175,6 @@ end
 function EtherDebugMenu.onClickCheats()
     if isBypassDebugMode() then
         ISAdminPowerUI.OnOpenPanel()
-    else
-        local modal = ISModalDialog:new(
-            getCore():getScreenWidth() / 2 - 200,
-            getCore():getScreenHeight() / 2 - 75,
-            400, 150,
-            "Enable 'Bypass debug mode prohibition' in the Exploit panel first",
-            false, nil, nil
-        );
         modal:initialise();
         modal:addToUIManager();
     end
