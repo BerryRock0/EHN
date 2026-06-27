@@ -122,8 +122,6 @@ function EtherCharacterPanel:createChildren()
         toggleNoRecoil(isChecked)
     end, isNoRecoil(), false);
 
-	self:
-
     self:updatePanel();
 end
 
