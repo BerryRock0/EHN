@@ -17,7 +17,7 @@ function EtherDebugMenu:setupButtons()
     self:addButtonInfo("General", function() ISGeneralDebug.OnOpenPanel() end, "MAIN");
     self:addButtonInfo("Cheats", EtherDebugMenu.onClickCheats, "MAIN");
     self:addButtonInfo("Climate", function() ClimateControlDebug.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("CraftRecipies", function() .OnOpenPanel() end, "MAIN");
+	self:addButtonInfo("CraftRecipies", function() ISCraftRecipeDbgWindow.OnOpenPanel() end, "MAIN");
 	self:addButtonInfo("Player", function() ISPlayerStatsUI.OnOpenPanel() end, "MAIN");
 	self:addButtonInfo("Items", function() ISItemsListViewer.OnOpenPanel() end, "MAIN");
 	self:addButtonInfo("Fluids", function() ISFluidDebugWindow.OnOpenPanel() end, "MAIN");
