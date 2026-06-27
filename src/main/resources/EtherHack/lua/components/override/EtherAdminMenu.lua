@@ -382,7 +382,7 @@ function EtherAdminMenu:onOptionMouseDown(button, x, y)
         ui:addToUIManager()
     end
     if button.internal == "CLIMATE" then
-        --local ui = ISAdminWeather:new(150, 150,800, 600, getPlayer())
+        --local ui = ISAdminWeather:new(150, 150, 800, 600, getPlayer())
         --ui:initialise()
         --ui:addToUIManager()
         local ui = ISAdminWeather.OnOpenPanel();
@@ -393,6 +393,14 @@ function EtherAdminMenu:onOptionMouseDown(button, x, y)
             ISStatisticsUI.instance:close()
         end
         local ui = ISStatisticsUI:new(50, 50, getPlayer())
+        ui:initialise()
+        ui:addToUIManager()
+    end
+    if button.internal == "USERSLIST" then
+        if ISUsersList.instance then
+            ISStatisticsUI.instance:close()
+        end
+        local ui = ISUsersListUI:new(150, 150, 800, 800 getPlayer())
         ui:initialise()
         ui:addToUIManager()
     end
