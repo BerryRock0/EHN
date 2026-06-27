@@ -248,6 +248,7 @@ function EtherAdminMenu:updateButtons()
     self.itemListBtn.enable = enabled;
     self.climateOptionsBtn.enable = enabled;
     self.showStatisticsBtn.enable = enabled;
+    self.usersListBtn.enable = enabled;
     if self.nonpvpzoneBtn then
         self.nonpvpzoneBtn.enable = enabled;
     end;
