@@ -93,6 +93,8 @@
 	UI_Exploit_DebugMenuButton = "Open",
 	UI_Exploit_MechanicsMenuTitle = "Vehicle mechanics menu",
 	UI_Exploit_MechanicsMenuButton = "Open",
+	UI_Exploit_AdminMenuTitle = "Admin menu",
+	UI_Exploit_AdminMenuButton = "Open",
 	UI_Exploit_MedicMenuTitle = "Medicine menu",
 	UI_Exploit_MedicMenuButton = "Open",
 	UI_Exploit_LearnAllRecipesTitle = "Learn all available crafting recipes",
