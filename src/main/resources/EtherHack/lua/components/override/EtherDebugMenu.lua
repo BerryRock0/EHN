@@ -175,7 +175,7 @@ function EtherDebugMenu:createChildren()
     self:ignoreWidthChange()
 
     local x,y = 10,10;
-    local w,h = self.width-20,60;
+    local w,h = self.width-20,20;
     local margin = 5;
 
     local y, obj = ISDebugUtils.addLabel(self,"Header",x+(w/2),y,"DEBUG MENU",UIFont.Medium);
