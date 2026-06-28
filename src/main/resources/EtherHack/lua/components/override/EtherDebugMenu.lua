@@ -72,6 +72,7 @@ self:addButtonInfo("LootZed", EtherDebugMenu.onClickLootZed, "CHEATS");
 self:addButtonInfo("LootLog", EtherDebugMenu.onClickLootLog, "CHEATS");
 self:addButtonInfo("AnimalCheat", EtherDebugMenu.onClickAnimalCheat, "CHEATS");
 self:addButtonInfo("AnimalExtraValues", EtherDebugMenu.onClickAnimalExtraValues, "CHEATS");
+self:addButtonInfo("Close", nil, "CHEATS", 10);
 
 end
 
