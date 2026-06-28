@@ -72,10 +72,10 @@ function EtherDebugMenu.onClickPopulation() ZombiePopulationWindow.OnOpenPanel()
 function EtherDebugMenu.onClickStash() StashDebug.OnOpenPanel() end
 function EtherDebugMenu.onClickAnimMonitor() ISAnimDebugMonitor.OnOpenPanel() end
 function EtherDebugMenu.onClickRadio() ZomboidRadioDebug.OnOpenPanel() end
-function EtherDebugMenu.onClickAnimViewer() showAnimationViewer(nil) end
-function EtherDebugMenu.onClickAttachment() showAttachmentEditor(nil) end
-function EtherDebugMenu.onClickChunkDebug() showChunkDebugger(nil) end
-function EtherDebugMenu.onClickGlobalObject() showGlobalObjectDebugger(nil) end
+function EtherDebugMenu.onClickAnimViewer() showAnimationViewer() end
+function EtherDebugMenu.onClickAttachment() showAttachmentEditor() end
+function EtherDebugMenu.onClickChunkDebug() showChunkDebugger() end
+function EtherDebugMenu.onClickGlobalObject() showGlobalObjectDebugger() end
 function EtherDebugMenu.onClickMapEdit() showWorldMapEditor(nil) end
 function EtherDebugMenu.onClickVehicleEdit() showVehicleEditor(nil) end
 function EtherDebugMenu.onClickWorldFlares() WorldFlaresDebug.OnOpenPanel() end
