@@ -15,6 +15,7 @@ EtherDebugMenu.tab = "MAIN"
 function EtherDebugMenu:setupButtons()
 -- MAIN
 self:addButtonInfo("General", EtherDebugMenu.onClickGeneral, "MAIN");
+self:addButtonInfo("Cheats", EtherDebugMenu.onClickCheats, "MAIN");
 self:addButtonInfo("Climate", EtherDebugMenu.onClickClimate, "MAIN");
 self:addButtonInfo("CraftRecipies", EtherDebugMenu.onClickCraftRecipes, "MAIN");
 self:addButtonInfo("Player", EtherDebugMenu.onClickPlayer, "MAIN");
@@ -78,6 +79,7 @@ end
 
 --MAIN
 function EtherDebugMenu.onClickGeneral() ISGeneralDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickCheats() ISAdminPowerUI.OnOpenPanel() end
 function EtherDebugMenu.onClickClimate() ClimateControlDebug.OnOpenPanel() end
 function EtherDebugMenu.onClickCraftRecipes() ISCraftRecipeDbgWindow.OnOpenPanel() end
 function EtherDebugMenu.onClickPlayer() ISPlayerStatsUI.OnOpenPanel() end
