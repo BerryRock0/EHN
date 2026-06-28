@@ -65,7 +65,7 @@ function EtherDebugMenu.onClickScripts() ISScriptsDebugWindow.OnOpenPanel() end
 function EtherDebugMenu.onClickXUI() XuiDebugWindow.OnOpenPanel() end
 function EtherDebugMenu.onClickRecipeMonitor() ISRecipeMonitor.OnOpenPanel() end
 function EtherDebugMenu.onClickSandbox() ISDebugMenu:onClickSandboxSettings() end
-function EtherDebugMenu.onClickBrushTool() BrushToolManager.openPanel(nil) end
+function EtherDebugMenu.onClickBrushTool() BrushToolManager.openPanel(getPlayer()) end
 
 --DEV
 function EtherDebugMenu.onClickAudio() ISAudioDebugPanel.OnOpenPanel() end
