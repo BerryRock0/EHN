@@ -76,8 +76,8 @@ function EtherDebugMenu.onClickAnimViewer() showAnimationViewer() end
 function EtherDebugMenu.onClickAttachment() showAttachmentEditor() end
 function EtherDebugMenu.onClickChunkDebug() showChunkDebugger() end
 function EtherDebugMenu.onClickGlobalObject() showGlobalObjectDebugger() end
-function EtherDebugMenu.onClickMapEdit() showWorldMapEditor() end
-function EtherDebugMenu.onClickVehicleEdit() showVehicleEditor() end
+function EtherDebugMenu.onClickMapEdit() showWorldMapEditor(nil) end
+function EtherDebugMenu.onClickVehicleEdit() showVehicleEditor(nil) end
 function EtherDebugMenu.onClickWorldFlares() WorldFlaresDebug.OnOpenPanel() end
 function EtherDebugMenu.onClickGlobalModData() GlobalModDataDebug.OnOpenPanel() end
 function EtherDebugMenu.onClickNewUI() doNewUIDebug() end
