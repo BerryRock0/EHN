@@ -183,15 +183,15 @@ function EtherDebugMenu:createChildren()
 
     y = y+5;
 
-    self.mainButton = ISButton:new(x,y+margin,w/2-3,h,"Main", self, self:update());
+    self.mainButton = ISButton:new(x,y+margin,w/2-3,h,"Main", self,  EtherDebugMenu.onClick_Main);
     self.mainButton:initialise();
     self:addChild(self.mainButton);
 
-    self.devButton = ISButton:new(x + w/2+6,y+margin,w/2-6,h,"Dev", self, self:update());
+    self.devButton = ISButton:new(x + w/2+6,y+margin,w/2-6,h,"Dev", self,  EtherDebugMenu.onClick_Dev);
     self.devButton:initialise();
     self:addChild(self.devButton);
 
-    self.cheatsButton = ISButton:new(x + w/3+9,y+margin,w/3-9,h,"Cheats", self, self:update());
+    self.cheatsButton = ISButton:new(x + w/3+9,y+margin,w/3-9,h,"Cheats", self,  EtherDebugMenu.onClick_Cheats);
     self.cheatsButton:initialise();
     self:addChild(self.cheatsButton);
 
