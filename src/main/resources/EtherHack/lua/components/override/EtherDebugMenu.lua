@@ -26,6 +26,7 @@ self:addButtonInfo("Scripts", EtherDebugMenu.onClickScripts, "MAIN");
 self:addButtonInfo("XUI", EtherDebugMenu.onClickXUI, "MAIN");
 self:addButtonInfo("RecipeMonitor", EtherDebugMenu.onClickRecipeMonitor, "MAIN");
 self:addButtonInfo("Sandbox", EtherDebugMenu.onClickSandbox, "MAIN");
+self:addButtonInfo("BrushTool", EtherDebugMenu.onClickBrushTool, "MAIN");
 self:addButtonInfo("Close", nil, "MAIN", 10);
 
 -- DEV
@@ -64,6 +65,7 @@ function EtherDebugMenu.onClickScripts() ISScriptsDebugWindow.OnOpenPanel() end
 function EtherDebugMenu.onClickXUI() XuiDebugWindow.OnOpenPanel() end
 function EtherDebugMenu.onClickRecipeMonitor() ISRecipeMonitor.OnOpenPanel() end
 function EtherDebugMenu.onClickSandbox() ISDebugMenu:onClickSandboxSettings() end
+function EtherDebugMenu.onClickBrushTool() BrushToolManager.openPanel(nil) end
 
 --DEV
 function EtherDebugMenu.onClickAudio() ISAudioDebugPanel.OnOpenPanel() end
