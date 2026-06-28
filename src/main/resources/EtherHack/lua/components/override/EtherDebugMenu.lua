@@ -13,43 +13,77 @@ EtherDebugMenu.shiftDown = 0;
 EtherDebugMenu.tab = "MAIN"
 
 function EtherDebugMenu:setupButtons()
-    -- MAIN
-    self:addButtonInfo("General", function() ISGeneralDebug.OnOpenPanel() end, "MAIN");
-    self:addButtonInfo("Cheats", EtherDebugMenu.onClickCheats, "MAIN");
-    self:addButtonInfo("Climate", function() ClimateControlDebug.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("CraftRecipies", function() ISCraftRecipeDbgWindow.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("Player", function() ISPlayerStatsUI.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("Items", function() ISItemsListViewer.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("Fluids", function() ISFluidDebugWindow.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("Entities", function() ISEntitiesDebugWindow.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("Scripts", function() ISScriptsDebugWindow.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("XUI", function() XuiDebugWindow.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("RecipeMonitor", function() ISRecipeMonitor.OnOpenPanel() end, "MAIN");
-	self:addButtonInfo("Sandbox", function() ISDebugMenu:onClickSandboxSettings() end, "MAIN");
-    self:addButtonInfo("Close", nil, "MAIN", 10);
+-- MAIN
+self:addButtonInfo("General", EtherDebugMenu.onClickGeneral, "MAIN");
+self:addButtonInfo("Cheats", EtherDebugMenu.onClickCheats, "MAIN");
+self:addButtonInfo("Climate", EtherDebugMenu.onClickClimate, "MAIN");
+self:addButtonInfo("CraftRecipies", EtherDebugMenu.onClickCraftRecipes, "MAIN");
+self:addButtonInfo("Player", EtherDebugMenu.onClickPlayer, "MAIN");
+self:addButtonInfo("Items", EtherDebugMenu.onClickItems, "MAIN");
+self:addButtonInfo("Fluids", EtherDebugMenu.onClickFluids, "MAIN");
+self:addButtonInfo("Entities", EtherDebugMenu.onClickEntities, "MAIN");
+self:addButtonInfo("Scripts", EtherDebugMenu.onClickScripts, "MAIN");
+self:addButtonInfo("XUI", EtherDebugMenu.onClickXUI, "MAIN");
+self:addButtonInfo("RecipeMonitor", EtherDebugMenu.onClickRecipeMonitor, "MAIN");
+self:addButtonInfo("Sandbox", EtherDebugMenu.onClickSandbox, "MAIN");
+self:addButtonInfo("Close", nil, "MAIN", 10);
 
-    -- DEV
-    self:addButtonInfo("Audio", function() ISAudioDebugPanel.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("IsoRegions", function() IsoRegionsWindow.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Population", function() ZombiePopulationWindow.OnOpenPanel() end, "DEV");
-    self:addButtonInfo(("Stash", function() StashDebug.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("AnimMonitor", function() ISAnimDebugMonitor.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("Radio", function() ZomboidRadioDebug.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("AnimViewer", showAnimationViewer, "DEV");
-    self:addButtonInfo("Attachment", showAttachmentEditor, "DEV");
-    self:addButtonInfo("ChunkDebug", showChunkDebugger, "DEV");
-    self:addButtonInfo("GlobalObject", showGlobalObjectDebugger, "DEV");
-    self:addButtonInfo("MapEdit", function() showWorldMapEditor(nil) end, "DEV");
-    self:addButtonInfo("VehicleEdit", function() showVehicleEditor(nil) end, "DEV");
-    self:addButtonInfo("WorldFlares", function() WorldFlaresDebug.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("GlobalModData", function() GlobalModDataDebug.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("NewUI", function() doNewUIDebug() end, "DEV");
-    self:addButtonInfo("UnitTests", function() UnitTestsDebug:OnOpenPanel() end, "DEV");
-    self:addButtonInfo("CharacterDebug", function() ISCharacterDebugUI.OnOpenPanel() end, "DEV");
-    self:addButtonInfo("ForgetRecipes", function() ISDebugMenu:onForgetRecipes() end, "DEV");
-    self:addButtonInfo("Close", nil, "DEV", 10);
+-- DEV
+self:addButtonInfo("Audio", EtherDebugMenu.onClickAudio, "DEV");
+self:addButtonInfo("IsoRegions", EtherDebugMenu.onClickIsoRegions, "DEV");
+self:addButtonInfo("Population", EtherDebugMenu.onClickPopulation, "DEV");
+self:addButtonInfo("Stash", EtherDebugMenu.onClickStash, "DEV");
+self:addButtonInfo("AnimMonitor", EtherDebugMenu.onClickAnimMonitor, "DEV");
+self:addButtonInfo("Radio", EtherDebugMenu.onClickRadio, "DEV");
+self:addButtonInfo("AnimViewer", EtherDebugMenu.onClickAnimViewer, "DEV");
+self:addButtonInfo("Attachment", EtherDebugMenu.onClickAttachment, "DEV");
+self:addButtonInfo("ChunkDebug", EtherDebugMenu.onClickChunkDebug, "DEV");
+self:addButtonInfo("GlobalObject", EtherDebugMenu.onClickGlobalObject, "DEV");
+self:addButtonInfo("MapEdit", EtherDebugMenu.onClickMapEdit, "DEV");
+self:addButtonInfo("VehicleEdit", EtherDebugMenu.onClickVehicleEdit, "DEV");
+self:addButtonInfo("WorldFlares", EtherDebugMenu.onClickWorldFlares, "DEV");
+self:addButtonInfo("GlobalModData", EtherDebugMenu.onClickGlobalModData, "DEV");
+self:addButtonInfo("NewUI", EtherDebugMenu.onClickNewUI, "DEV");
+self:addButtonInfo("UnitTests", EtherDebugMenu.onClickUnitTests, "DEV");
+self:addButtonInfo("CharacterDebug", EtherDebugMenu.onClickCharacterDebug, "DEV");
+self:addButtonInfo("ForgetRecipes", EtherDebugMenu.onClickForgetRecipes, "DEV");
+self:addButtonInfo("Close", nil, "DEV", 10);
 
 end
+
+--MAIN
+function EtherDebugMenu.onClickGeneral() ISGeneralDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickCheats() ISAdminPowerUI.OnOpenPanel() end
+function EtherDebugMenu.onClickClimate() ClimateControlDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickCraftRecipes() ISCraftRecipeDbgWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickPlayer() ISPlayerStatsUI.OnOpenPanel() end
+function EtherDebugMenu.onClickItems() ISItemsListViewer.OnOpenPanel() end
+function EtherDebugMenu.onClickFluids()  ISFluidDebugWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickEntities() ISEntitiesDebugWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickScripts() ISScriptsDebugWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickXUI() XuiDebugWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickRecipeMonitor() ISRecipeMonitor.OnOpenPanel() end
+function EtherDebugMenu.onClickSandbox() ISDebugMenu:onClickSandboxSettings() end
+
+--DEV
+function EtherDebugMenu.onClickAudio() ISAudioDebugPanel.OnOpenPanel() end
+function EtherDebugMenu.onClickIsoRegions() IsoRegionsWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickPopulation() ZombiePopulationWindow.OnOpenPanel() end
+function EtherDebugMenu.onClickStash() StashDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickAnimMonitor() ISAnimDebugMonitor.OnOpenPanel() end
+function EtherDebugMenu.onClickRadio() ZomboidRadioDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickAnimViewer() showAnimationViewer end
+function EtherDebugMenu.onClickAttachment() showAttachmentEditor end
+function EtherDebugMenu.onClickChunkDebug() showChunkDebugger end
+function EtherDebugMenu.onClickGlobalObject() showGlobalObjectDebugger end
+function EtherDebugMenu.onClickMapEdit() showWorldMapEditor(nil) end
+function EtherDebugMenu.onClickVehicleEdit() showVehicleEditor(nil) end
+function EtherDebugMenu.onClickWorldFlares() WorldFlaresDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickGlobalModData() GlobalModDataDebug.OnOpenPanel() end
+function EtherDebugMenu.onClickNewUI() doNewUIDebug() end
+function EtherDebugMenu.onClickUnitTests() UnitTestsDebug:OnOpenPanel() end
+function EtherDebugMenu.onClickCharacterDebug() ISCharacterDebugUI.OnOpenPanel() end
+function EtherDebugMenu.onClickForgetRecipes() ISDebugMenu:onForgetRecipes() end
 
 function EtherDebugMenu:addButtonInfo(_title, _func, _tab, _marginTop)
     self.buttons = self.buttons or {};
@@ -170,22 +204,6 @@ function EtherDebugMenu:onClick_Main()
         b:setVisible(true)
     end
     self:setHeight(self.mainTab._y+10);
-end
-
-function EtherDebugMenu.onClickCheats()
-    if isBypassDebugMode() then
-        ISAdminPowerUI.OnOpenPanel()
-		else
-        local modal = ISModalDialog:new(
-            getCore():getScreenWidth() / 2 - 200,
-            getCore():getScreenHeight() / 2 - 75,
-            400, 150,
-            "Enable 'Bypass debug mode prohibition' in the Exploit panel first",
-            false, nil, nil
-        );
-        modal:initialise();
-        modal:addToUIManager();
-    end
 end
 
 function EtherDebugMenu:onClick(_button)
