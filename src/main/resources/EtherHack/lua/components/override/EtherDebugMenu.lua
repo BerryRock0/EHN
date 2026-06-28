@@ -145,7 +145,7 @@ end
 
 function EtherDebugMenu.OnOpenPanel()
         if EtherDebugMenu.instance==nil then
-            EtherDebugMenu.instance = EtherDebugMenu:new (100, 100, 400, 20, getPlayer());
+            EtherDebugMenu.instance = EtherDebugMenu:new (100, 100, 200, 20, getPlayer());
             EtherDebugMenu.instance:initialise();
             EtherDebugMenu.instance:instantiate();
         end
@@ -191,7 +191,7 @@ function EtherDebugMenu:createChildren()
     self.devButton:initialise();
     self:addChild(self.devButton);
 
-    self.cheatsButton = ISButton:new(x + w/2+9,y+margin,w/2-9,h,"Cheats", self, self:update());
+    self.cheatsButton = ISButton:new(x + w/3+9,y+margin,w/3-9,h,"Cheats", self, self:update());
     self.cheatsButton:initialise();
     self:addChild(self.cheatsButton);
 
