@@ -145,7 +145,7 @@ end
 
 function EtherDebugMenu.OnOpenPanel()
         if EtherDebugMenu.instance==nil then
-            EtherDebugMenu.instance = EtherDebugMenu:new (100, 100, 200, 20, getPlayer());
+            EtherDebugMenu.instance = EtherDebugMenu:new (100, 100, 400, 20, getPlayer());
             EtherDebugMenu.instance:initialise();
             EtherDebugMenu.instance:instantiate();
         end
@@ -183,15 +183,15 @@ function EtherDebugMenu:createChildren()
 
     y = y+5;
 
-    self.mainButton = ISButton:new(x,y+margin,w/2-3,h,"Main", self, self:updateVisibility());
+    self.mainButton = ISButton:new(x,y+margin,w/2-3,h,"Main", self, self:update());
     self.mainButton:initialise();
     self:addChild(self.mainButton);
 
-    self.devButton = ISButton:new(x + w/2+6,y+margin,w/2-6,h,"Dev", self, self:updateVisibility());
+    self.devButton = ISButton:new(x + w/2+6,y+margin,w/2-6,h,"Dev", self, self:update());
     self.devButton:initialise();
     self:addChild(self.devButton);
 
-    self.cheatsButton = ISButton:new(x + w/2+9,y+margin,w/2-9,h,"Cheats", self, self:updateVisibility());
+    self.cheatsButton = ISButton:new(x + w/2+9,y+margin,w/2-9,h,"Cheats", self, self:update());
     self.cheatsButton:initialise();
     self:addChild(self.cheatsButton);
 
@@ -217,19 +217,27 @@ function EtherDebugMenu:createChildren()
             table.insert(self.cheatsTab._buttons, obj)
         end        
     end
-     
-
 end
 
-function EtherDebugMenu:updateVisibility()
-if EtherDebugMenu.tab == "MAIN" then EtherDebugMenu.tab = "MAIN" end
-if EtherDebugMenu.tab == "DEV" then EtherDebugMenu.tab = "DEV" end
-if EtherDebugMenu.tab == "CHEATS" then EtherDebugMenu.tab = "CHEATS" end
+function EtherDebugMenu:update()
+    self:tab()
+    self:visibility()
+    self:height()
+end
 
-  for _, b in ipairs(self.mainTab._buttons) do b:setVisible(EtherDebugMenu.tab == "MAIN") end 
-   for _, b in ipairs(self.devTab._buttons) do b:setVisible(EtherDebugMenu.tab == "DEV") end 
+function EtherDebugMenu:visibility()
+    for _, b in ipairs(self.mainTab._buttons) do b:setVisible(EtherDebugMenu.tab == "MAIN") end 
+    for _, b in ipairs(self.devTab._buttons) do b:setVisible(EtherDebugMenu.tab == "DEV") end 
     for _, b in ipairs(self.cheatsTab._buttons) do b:setVisible(EtherDebugMenu.tab == "CHEATS") end 
-    
+end
+
+function EtherDebugMenu:tab()
+    if EtherDebugMenu.tab == "MAIN" then EtherDebugMenu.tab = "MAIN" end
+    if EtherDebugMenu.tab == "DEV" then EtherDebugMenu.tab = "DEV" end
+    if EtherDebugMenu.tab == "CHEATS" then EtherDebugMenu.tab = "CHEATS" end    
+end
+
+function EtherDebugMenu:height()
     if EtherDebugMenu.tab == "MAIN" then self:setHeight(self.mainTab._y+10); end
     if EtherDebugMenu.tab == "DEV" then self:setHeight(self.devTab._y+10); end
     if EtherDebugMenu.tab == "CHEATS" then self:setHeight(self.cheatsTab._y+10); end
