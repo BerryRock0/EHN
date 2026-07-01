@@ -4,7 +4,6 @@
 --***********************************************************
 
 require "ISUI/ISPanel"
-require "ISUI/AdminPanel/ISAdminPowerUI"
 
 EtherDebugMenu = ISPanel:derive("EtherDebugMenu");
 EtherDebugMenu.instance = nil;
