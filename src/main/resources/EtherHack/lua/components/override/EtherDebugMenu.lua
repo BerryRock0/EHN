@@ -15,7 +15,7 @@ EtherDebugMenu.tab = "MAIN"
 function EtherDebugMenu:setupButtons()
 -- MAIN
 self:addButtonInfo("General", EtherDebugMenu.onClickGeneral, "MAIN");
-self:addButtonInfo("Cheats", EtherDebugMenu.onClickCheats, "MAIN");
+self:addButtonInfo("BrushTool", EtherDebugMenu.onClickBrushTool, "MAIN");
 self:addButtonInfo("Climate", EtherDebugMenu.onClickClimate, "MAIN");
 self:addButtonInfo("CraftRecipies", EtherDebugMenu.onClickCraftRecipes, "MAIN");
 self:addButtonInfo("Player", EtherDebugMenu.onClickPlayer, "MAIN");
@@ -49,37 +49,11 @@ self:addButtonInfo("CharacterDebug", EtherDebugMenu.onClickCharacterDebug, "DEV"
 self:addButtonInfo("ForgetRecipes", EtherDebugMenu.onClickForgetRecipes, "DEV");
 self:addButtonInfo("Close", nil, "DEV", 10);
 
---CHEATS
-self:addButtonInfo("Invisible", EtherDebugMenu.onClickInvisible, "CHEATS");
-self:addButtonInfo("GodMod", EtherDebugMenu.onClickGodMod, "CHEATS");
-self:addButtonInfo("NoClip", EtherDebugMenu.onClickNoClip, "CHEATS");
-self:addButtonInfo("FastMove", EtherDebugMenu.onClickFastMove, "CHEATS");
-self:addButtonInfo("TimedActionInstant", EtherDebugMenu.onClickTimedActionInstant, "CHEATS");
-self:addButtonInfo("UnlimitedCarry", EtherDebugMenu.onClickUnlimitedCarry, "CHEATS");
-self:addButtonInfo("UnlimitedEndurance", EtherDebugMenu.onClickUnlimitedEndurance, "CHEATS");
-self:addButtonInfo("UnlimitedAmmo", EtherDebugMenu.onClickUnlimitedAmmo, "CHEATS");
-self:addButtonInfo("KnowAllRecipes", EtherDebugMenu.onClickKnowAllRecipes, "CHEATS");
-self:addButtonInfo("BuildCheat", EtherDebugMenu.onClickBuildCheat, "CHEATS");
-self:addButtonInfo("FarmingCheat", EtherDebugMenu.onClickFarmingCheat, "CHEATS");
-self:addButtonInfo("FishingCheat", EtherDebugMenu.onClickFishingCheat, "CHEATS");
-self:addButtonInfo("HealthCheat", EtherDebugMenu.onClickHealthCheat, "CHEATS");
-self:addButtonInfo("MechanicsCheat", EtherDebugMenu.onClickMechanicsCheat, "CHEATS");
-self:addButtonInfo("MoveableCheat", EtherDebugMenu.onClickMoveableCheat, "CHEATS");
-self:addButtonInfo("CanSeeAll", EtherDebugMenu.onClickCanSeeAll, "CHEATS");
-self:addButtonInfo("CanHearAll", EtherDebugMenu.onClickCanHearAll, "CHEATS");
-self:addButtonInfo("ZombiesDontAttack", EtherDebugMenu.onClickZombiesDontAttack, "CHEATS");
-self:addButtonInfo("BrushTool", EtherDebugMenu.onClickBrushTool, "CHEATS");    
-self:addButtonInfo("LootZed", EtherDebugMenu.onClickLootZed, "CHEATS");
-self:addButtonInfo("LootLog", EtherDebugMenu.onClickLootLog, "CHEATS");
-self:addButtonInfo("AnimalCheat", EtherDebugMenu.onClickAnimalCheat, "CHEATS");
-self:addButtonInfo("AnimalExtraValues", EtherDebugMenu.onClickAnimalExtraValues, "CHEATS");
-self:addButtonInfo("Close", nil, "CHEATS", 10);
-
 end
 
 --MAIN
 function EtherDebugMenu.onClickGeneral() ISGeneralDebug.OnOpenPanel() end
-function EtherDebugMenu.onClickCheats() ISAdminPowerUI.OnOpenPanel() end
+function EtherDebugMenu.onClickBrushTool() BrushToolManager.openPanel(getPlayer()) end
 function EtherDebugMenu.onClickClimate() ClimateControlDebug.OnOpenPanel() end
 function EtherDebugMenu.onClickCraftRecipes() ISCraftRecipeDbgWindow.OnOpenPanel() end
 function EtherDebugMenu.onClickPlayer() ISPlayerStatsUI.OnOpenPanel() end
@@ -111,31 +85,6 @@ function EtherDebugMenu.onClickNewUI() doNewUIDebug() end
 function EtherDebugMenu.onClickUnitTests() UnitTestsDebug:OnOpenPanel() end
 function EtherDebugMenu.onClickCharacterDebug() ISCharacterDebugUI.OnOpenPanel() end
 function EtherDebugMenu.onClickForgetRecipes() ISDebugMenu:onForgetRecipes() end
-
---CHEATS
-function EtherDebugMenu.onClickInvisible() self.player:setInvisible(not self.player:isInvisible()) end
-function EtherDebugMenu.onClickGodMod() self.player:setGodMod(not self.player:isGodMod()) end
-function EtherDebugMenu.onClickNoClip() self.player:setNoClip(not self.player:isNoClip()) end
-function EtherDebugMenu.onClickFastMove() self.player:setFastMoveCheat(not ISFastTeleportMove.cheat) end
-function EtherDebugMenu.onClickTimedActionInstant() self.player:setTimedActionInstantCheat(not self.player:isTimedActionInstantCheat()) end
-function EtherDebugMenu.onClickUnlimitedCarry() self.player:setUnlimitedCarry(not self.player:isUnlimitedCarry()) end
-function EtherDebugMenu.onClickUnlimitedEndurance() self.player:setUnlimitedEndurance(not isUnlimitedEndurance()) end
-function EtherDebugMenu.onClickUnlimitedAmmo() self.player:setUnlimitedAmmo(not self.player:isUnlimitedAmmo()) end
-function EtherDebugMenu.onClickKnowAllRecipes() self.player:setKnowAllRecipes(not self.player:isKnowAllRecipes()) end
-function EtherDebugMenu.onClickBuildCheat() self.player:setBuildCheat(not ISBuildMenu.cheat) end
-function EtherDebugMenu.onClickFarmingCheat() self.player:setFarmingCheat(not ISFarmingMenu.cheat) end
-function EtherDebugMenu.onClickFishingCheat() self.player:setFishingCheat(not self.player:isFishingCheat()) end
-function EtherDebugMenu.onClickHealthCheat() self.player:setHealthCheat(not ISHealthPanel.cheat) end
-function EtherDebugMenu.onClickMechanicsCheat() self.player:setMechanicsCheat(not ISVehicleMechanics.cheat) end
-function EtherDebugMenu.onClickMoveableCheat() self.player:setMovablesCheat(not ISMoveableDefinitions.cheat) end
-function EtherDebugMenu.onClickCanSeeAll() self.player:setCanSeeAll(not self.player:canSeeAll()) end
-function EtherDebugMenu.onClickCanHearAll() self.player:setCanHearAll(not self.player:canHearAll()) end
-function EtherDebugMenu.onClickZombiesDontAttack() self.player:setZombiesDontAttack(not self.player:isZombiesDontAttack()) end
-function EtherDebugMenu.onClickBrushTool() self.player:setCanUseBrushTool(not BrushToolManager.cheat) end
-function EtherDebugMenu.onClickLootZed() self.player:setCanUseLootZed(not ISLootZed.cheat) end
-function EtherDebugMenu.onClickLootLog() self.player:setCanUseLootLog(not ISLootLog.cheat) end
-function EtherDebugMenu.onClickAnimalCheat() self.player:setAnimalCheat(not AnimalContextMenu.cheat) end
-function EtherDebugMenu.onClickAnimalExtraValues() self.player:setAnimalExtraValuesCheat(not self.player:isAnimalExtraValuesCheat()) end
 
 function EtherDebugMenu:addButtonInfo(_title, _func, _tab, _marginTop)
     self.buttons = self.buttons or {};
@@ -191,10 +140,6 @@ function EtherDebugMenu:createChildren()
     self.devButton:initialise();
     self:addChild(self.devButton);
 
-    self.cheatsButton = ISButton:new(x + w/3+9,y+margin,w/3-9,h,"Cheats", self,  EtherDebugMenu.onClick_Cheats);
-    self.cheatsButton:initialise();
-    self:addChild(self.cheatsButton);
-
     y = y + h + 5
     self.mainTab = { _y=y, _buttons = {} }
     self.devTab = { _y=y, _buttons = {} }
@@ -210,27 +155,19 @@ function EtherDebugMenu:createChildren()
             if v.marginTop and v.marginTop > 0 then self.devTab._y = self.devTab._y + v.marginTop end
             self.devTab._y, obj = ISDebugUtils.addButton(self,v,x,self.devTab._y+margin,w,h,v.title,EtherDebugMenu.onClick);
             table.insert(self.devTab._buttons, obj)
-        end
-        if v.tab == "CHEATS" then
-            if v.marginTop and v.marginTop > 0 then self.cheatsTab._y = self.cheatsTab._y + v.marginTop end
-            self.cheatsTab._y, obj = ISDebugUtils.addButton(self,v,x,self.cheatsTab._y+margin,w,h,v.title,EtherDebugMenu.onClick);
-            table.insert(self.cheatsTab._buttons, obj)
-        end        
+        end    
     end
 
 if EtherDebugMenu.tab == "MAIN" then self:onClick_Main() end
 if EtherDebugMenu.tab == "DEV" then self:onClick_Dev() end
-if EtherDebugMenu.tab == "CHEATS" then self:onClick_Cheats() end
 end
 
 function EtherDebugMenu:onClick_Main() EtherDebugMenu.tab = "MAIN" self:visibility() self:setHeight(self.mainTab._y+10); end
 function EtherDebugMenu:onClick_Dev() EtherDebugMenu.tab = "DEV" self:visibility() self:setHeight(self.devTab._y+10); end
-function EtherDebugMenu:onClick_Cheats() EtherDebugMenu.tab = "CHEATS" self:visibility() self:setHeight(self.cheatsTab._y+10); end
 
 function EtherDebugMenu:visibility()
     for _, b in ipairs(self.mainTab._buttons) do b:setVisible(EtherDebugMenu.tab == "MAIN") end
     for _, b in ipairs(self.devTab._buttons) do b:setVisible(EtherDebugMenu.tab == "DEV") end 
-    for _, b in ipairs(self.cheatsTab._buttons) do b:setVisible(EtherDebugMenu.tab == "CHEATS") end 
 end
 
 function EtherDebugMenu:onClick(_button)
