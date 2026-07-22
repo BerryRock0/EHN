@@ -334,7 +334,7 @@ public class EtherAPI {
 
          if(playerItem != null)
          {
-            if (playerItem.getStringItemType().equals("RangedWeapon") && var4 instanceof HandWeapon)
+            if (playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
             {
                if(this.isAlwaysKnockdown)
                 weapon.setAlwaysKnockdown(true);
@@ -367,49 +367,48 @@ public class EtherAPI {
                 playerItem.setCurrentAmmoCount(var4.getMaxAmmo());
             }
 
-
-            if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
-            {
-               for (InventoryItem item : inventoryItems)
-               {
-                  if (item == null)
-                     continue;
-               
-                  if (this.isNoBroken) 
-                  item.setBroken(false);
-
-                  if (playerItem.getVisual() != null)
-                  { 
-                     if(this.isNoHoled)
-                     for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
-                     item.getVisual().removeHole(i);
-
-                     if(this.isNoDirted)
-                     item.getVisual().removeDirt(); 
-               
-                     if(this.isNoBlooded)
-                     item.getVisual().removeBlood();
-                  }
-               
-                  if(this.isAlwaysRepaired)
-                  item.setHaveBeenRepaired(1);
-
-                  if(this.isUnlimitedCondition)
-                  item.setCondition(playerItem.getConditionMax());
-
-                  if(this.isNoWet)
-                  item.setWet(false);
-
-                  if(this.isNoInfected)
-                  item.setInfected(false); 
-               }
-            }
-            
             if(this.isAlwaysRepaired)
             playerItem.setHaveBeenRepaired(1);
             
             if(this.isUnlimitedCondition)
             playerItem.setCondition(playerItem.getConditionMax());
+         }
+
+         if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+         {
+            for (InventoryItem item : inventoryItems)
+            {
+               if (item == null)
+                  continue;
+               
+               if (this.isNoBroken) 
+               item.setBroken(false);
+
+               if (playerItem.getVisual() != null)
+               { 
+                  if(this.isNoHoled)
+                  for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
+                  item.getVisual().removeHole(i);
+
+                  if(this.isNoDirted)
+                  item.getVisual().removeDirt(); 
+               
+                  if(this.isNoBlooded)
+                  item.getVisual().removeBlood();
+               }
+               
+               if(this.isAlwaysRepaired)
+               item.setHaveBeenRepaired(1);
+
+               if(this.isUnlimitedCondition)
+               item.setCondition(playerItem.getConditionMax());
+
+               if(this.isNoWet)
+               item.setWet(false);
+
+               if(this.isNoInfected)
+               item.setInfected(false); 
+            }
          }
    }
    
