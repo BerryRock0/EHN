@@ -85,6 +85,10 @@ function EtherCharacterPanel:createChildren()
 	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRoundChamber"), function(isChecked)
         toggleAlwaysRoundChamber(isChecked);
     end, isAlwaysRoundChamber(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRepaired"), function(isChecked)
+        toggleAlwaysRepaired(isChecked);
+    end, isAlwaysRepaired(), false);
 	
     self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
         toggleAlwaysAiming(isChecked);
@@ -102,6 +106,26 @@ function EtherCharacterPanel:createChildren()
         toggleNightVision(isChecked);
     end, isEnableNightVision(), false);
 
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiWet"), function(isChecked)
+        toggleNoWet(isChecked);
+    end, isNoWet(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiHoled"), function(isChecked)
+        toggleNoHoled(isChecked);
+    end, isNoHoled(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiDirted"), function(isChecked)
+        toggleNoDirted(isChecked);
+    end, isNoDirted(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiBlooded"), function(isChecked)
+        toggleNoBlooded(isChecked);
+    end, isNoBlooded(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiInfected"), function(isChecked)
+        toggleNoInfected(isChecked);
+    end, isNoInfected(), false);
+
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedAmmo"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedAmmo", isChecked);
     end, isUnlimitedAmmo(), false);
@@ -113,10 +137,6 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCondition"), function(isChecked)
         toggleUnlimitedCondition(isChecked);
     end, isUnlimitedCondition(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_AutoRepairsItems"), function(isChecked)
-        toggleAutoRepairItems(isChecked);
-    end, isAutoRepairItems(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
         toggleNoRecoil(isChecked)
