@@ -109,7 +109,6 @@ public class EtherAPI {
       var3.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
       var3.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
       var3.setProperty("isUnlimitedAmmo", Boolean.toString(this.isUnlimitedAmmo));
-      var3.setProperty("isAutoRepairItems", Boolean.toString(this.isAutoRepairItems));
       var3.setProperty("isMapDrawLocalPlayer", Boolean.toString(this.isMapDrawLocalPlayer));
       var3.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
       var3.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
@@ -192,7 +191,6 @@ public class EtherAPI {
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCondition", false);
       this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedAmmo", false);
-      this.isAutoRepairItems = ConfigUtils.getBooleanFromConfig(var3, "isAutoRepairItems", false);
       this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawLocalPlayer", true);
       this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawAllPlayers", false);
       this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var3, "isMapDrawVehicles", false);
@@ -332,7 +330,7 @@ public class EtherAPI {
    {
       IsoPlayer var1 = IsoPlayer.getInstance();
       ArrayList var2 = var1.getInventory().getItems();
-      Iterator var3 = var3.iterator();
+      Iterator var3 = var2.iterator();
       InventoryItem var4 = (InventoryItem)var3.next();
       HandWeapon var5 = (HandWeapon)var4;
       String var6 = var5.getFullType();
@@ -380,7 +378,7 @@ public class EtherAPI {
                 var5.setReloadTime(0);
 
                if (this.isUnlimitedAmmo)
-                var4.setCurrentAmmoCount(var2.getMaxAmmo());
+                var4.setCurrentAmmoCount(var4.getMaxAmmo());
             }
 
             if (var4.getVisual() != null)
@@ -397,7 +395,7 @@ public class EtherAPI {
             }
  
             if(this.isUnlimitedCondition)
-            var4.setCondition(var2.getConditionMax());
+            var4.setCondition(var4.getConditionMax());
 
             if (this.isNoBroken) 
             var4.setBroken(false);
