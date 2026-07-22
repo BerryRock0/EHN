@@ -224,6 +224,9 @@ public class EtherLuaMethods {
    @LuaMethod(name="isAlwaysRoundChamber", global=true) public static boolean isAlwaysRoundChamber() {return EtherMain.getInstance().etherAPI.isAlwaysRoundChamber;}
    @LuaMethod(name="toggleAlwaysRoundChamber", global=true) public static void toggleAlwaysRoundChamber(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = var0;}
 
+   @LuaMethod(name="isAlwaysRepaired", global=true) public static boolean isAlwaysRepaired() {return EtherMain.getInstance().etherAPI.isAlwaysRepaired;}
+   @LuaMethod(name="toggleAlwaysRepaired", global=true) public static void toggleAlwaysRepaired(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRepaired = var0;}
+
    @LuaMethod(name="isAlwaysKnockdown", global=true) public static boolean isAlwaysKnockdown() {return EtherMain.getInstance().etherAPI.isAlwaysKnockdown;}
    @LuaMethod(name="toggleAlwaysKnockdown", global=true) public static void toggleAlwaysKnockdown(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysKnockdown = var0;}
 
@@ -251,8 +254,23 @@ public class EtherLuaMethods {
    @LuaMethod(name="isNoSpentRoundChamber", global=true) public static boolean isNoSpentRoundChamber() {return EtherMain.getInstance().etherAPI.isNoSpentRoundChamber;}
    @LuaMethod(name="toggleNoSpentRoundChamber", global=true) public static void toggleNoSpentRoundChamber(boolean var0) {EtherMain.getInstance().etherAPI.isNoSpentRoundChamber = var0;}
 
-   @LuaMethod(name = "isAutoRepairItems", global = true) public static boolean isAutoRepairItems() {return EtherMain.getInstance().etherAPI.isAutoRepairItems;}
-   @LuaMethod(name = "toggleAutoRepairItems", global = true) public static void toggleAutoRepairItems(boolean var0) {EtherMain.getInstance().etherAPI.isAutoRepairItems = var0;}
+   @LuaMethod(name="isNoBroken", global=true) public static boolean isNoBroken() {return EtherMain.getInstance().etherAPI.isNoBroken;}
+   @LuaMethod(name="toggleNoBroken", global=true) public static void toggleNoBroken(boolean var0) {EtherMain.getInstance().etherAPI.isNoBroken = var0;}
+
+   @LuaMethod(name="isNoInfected", global=true) public static boolean isNoInfected() {return EtherMain.getInstance().etherAPI.isNoInfected;}
+   @LuaMethod(name="toggleNoInfected", global=true) public static void toggleNoInfected(boolean var0) {EtherMain.getInstance().etherAPI.isNoInfected = var0;}
+
+   @LuaMethod(name="isNoWet", global=true) public static boolean isNoWet() {return EtherMain.getInstance().etherAPI.isNoWet;}
+   @LuaMethod(name="toggleNoWet", global=true) public static void toggleNoWet(boolean var0) {EtherMain.getInstance().etherAPI.isNoWet = var0;}
+
+   @LuaMethod(name="isNoHoled", global=true) public static boolean isNoHoled() {return EtherMain.getInstance().etherAPI.isNoHoled;}
+   @LuaMethod(name="toggleNoHoled", global=true) public static void toggleNoHoled(boolean var0) {EtherMain.getInstance().etherAPI.isNoHoled = var0;}
+
+   @LuaMethod(name="isNoDirted", global=true) public static boolean isNoDirted() {return EtherMain.getInstance().etherAPI.isNoDirted;}
+   @LuaMethod(name="toggleNoDirted", global=true) public static void toggleNoDirted(boolean var0) {EtherMain.getInstance().etherAPI.isNoDirted = var0;}
+
+   @LuaMethod(name="isNoBlooded", global=true) public static boolean isNoBlooded() {return EtherMain.getInstance().etherAPI.isNoBlooded;}
+   @LuaMethod(name="toggleNo", global=true) public static void toggleNoBlooded(boolean var0) {EtherMain.getInstance().etherAPI.isNoBlooded = var0;}
 
    @LuaMethod(name = "resetWeaponsStats", global = true) public static void resetWeaponsStats() {EtherMain.getInstance().etherAPI.resetWeaponsStats();}
    @LuaMethod(name = "isTimedActionCheat", global = true) public static boolean isTimedActionCheat() {return EtherMain.getInstance().etherAPI.isTimedActionCheat;}
