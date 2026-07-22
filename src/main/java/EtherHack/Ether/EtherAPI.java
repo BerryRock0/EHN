@@ -308,7 +308,6 @@ public class EtherAPI {
                 weapon.setMaxRange(values[3]);
                 weapon.setMinRange(values[4]);
                 weapon.setHitChance((int)values[5]);
-                weapon.setCritDmgMultiplier(values[6]);
             }
         }
     }
@@ -364,7 +363,7 @@ public class EtherAPI {
                 weapon.setReloadTime(0);
 
                if (this.isUnlimitedAmmo)
-                playerItem.setCurrentAmmoCount(var4.getMaxAmmo());
+                playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
             }
 
             if(this.isAlwaysRepaired)
