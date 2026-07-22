@@ -289,53 +289,39 @@ public class EtherAPI {
       }
    }
 
-   public void resetWeaponsStats() {
-      IsoPlayer var1 = IsoPlayer.getInstance();
-      if (var1 != null) {
-         ArrayList var2 = var1.getInventory().getItems();
-         if (var2 != null && !var2.isEmpty()) {
-            Iterator var3 = var2.iterator();
-
-            while(true) {
-               InventoryItem var4;
-               HandWeapon var5;
-               do {
-                  do {
-                     if (!var3.hasNext()) {
-                        return;
-                     }
-
-                     var4 = (InventoryItem)var3.next();
-                  } while(!(var4 instanceof HandWeapon));
-
-                  var5 = (HandWeapon)var4;
-               } while(!var4.getStringItemType().equals("RangedWeapon") && !var4.getStringItemType().equals("MeleeWeapon"));
-
-               String var6 = var5.getFullType();
-               if (this.originalWeaponStats.containsKey(var6)) {
-                  float[] var7 = (float[])this.originalWeaponStats.get(var6);
-                  var5.setExtraDamage(var7[0]);
-                  var5.setMaxDamage(var7[1]);
-                  var5.setMinDamage(var7[2]);
-                  var5.setMaxRange(var7[3]);
-                  var5.setMinRange(var7[4]);
-                  var5.setHitChance((int)var7[5]);
-               }
+    public void resetWeaponsStats() {
+        IsoPlayer localPlayer = IsoPlayer.getInstance();
+        if (localPlayer == null) {
+            return;
+        }
+        ArrayList<InventoryItem> inventoryItems = localPlayer.getInventory().getItems();
+        if (inventoryItems != null && !inventoryItems.isEmpty()) {
+            for (InventoryItem item : inventoryItems) {
+                String type;
+                if (!(item instanceof HandWeapon)) continue;
+                HandWeapon weapon = (HandWeapon)item;
+                if (!item.getStringItemType().equals("RangedWeapon") && !item.getStringItemType().equals("MeleeWeapon") || !this.originalWeaponStats.containsKey(type = weapon.getFullType())) continue;
+                float[] values = this.originalWeaponStats.get(type);
+                weapon.setExtraDamage(values[0]);
+                weapon.setMaxDamage(values[1]);
+                weapon.setMinDamage(values[2]);
+                weapon.setMaxRange(values[3]);
+                weapon.setMinRange(values[4]);
+                weapon.setHitChance((int)values[5]);
+                weapon.setCritDmgMultiplier(values[6]);
             }
-         }
-      }
-   }
+        }
+    }
    
    private void updateLocalPlayerFeatures()
    {
-      IsoPlayer var1 = IsoPlayer.getInstance();
-      ArrayList var2 = var1.getInventory().getItems();
-      Iterator var3 = var2.iterator();
-      InventoryItem var4 = (InventoryItem)var3.next();
-      HandWeapon var5 = (HandWeapon)var4;
-      String var6 = var5.getFullType();
+      ArrayList<InventoryItem> inventoryItems;
+      IsoPlayer localPlayer = IsoPlayer.getInstance();
+      InventoryItem playerItem = localPlayer.getPrimaryHandItem();
+      HandWeapon weapon = (HandWeapon)playerItem;
+      String weaponType = weapon.getFullType();
       
-      if (var1 == null)
+      if (localPlayer == null)
          return;
 
          if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
@@ -343,71 +329,87 @@ public class EtherAPI {
 
 
          if (this.isEnableNightVision)
-            var1.setWearingNightVisionGoggles(this.isEnableNightVision);
+            localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
 
 
-         if(var4 != null)
+         if(playerItem != null)
          {
-            if (var4.getStringItemType().equals("RangedWeapon") && var4 instanceof HandWeapon)
+            if (playerItem.getStringItemType().equals("RangedWeapon") && var4 instanceof HandWeapon)
             {
                if(this.isAlwaysKnockdown)
-                var5.setAlwaysKnockdown(true);
+                weapon.setAlwaysKnockdown(true);
             
                if(this.isAlwaysCritical)
-                var5.setCriticalChance(100.0f);
+                weapon.setCriticalChance(100.0f);
             
                if(this.isAlwaysRack)
-                var5.setRackAfterShoot(true);
+                weapon.setRackAfterShoot(true);
             
                if(this.isNoJam)
-                var5.setJammed(false);
+                weapon.setJammed(false);
             
                if(this.isAlwaysRoundChamber)
-                var5.setRoundChambered(true);
+                weapon.setRoundChambered(true);
             
                if(this.isNoSpentRoundChamber)
-                var5.setSpentRoundChambered(false);
+                weapon.setSpentRoundChambered(false);
             
                if(this.isAlwaysAiming)
-                var5.setAimingTime(0);
+                weapon.setAimingTime(0);
             
                if(this.isNoRecoil)
-                var5.setRecoilDelay(0);
+                weapon.setRecoilDelay(0);
             
                if(this.isNoReload)
-                var5.setReloadTime(0);
+                weapon.setReloadTime(0);
 
                if (this.isUnlimitedAmmo)
-                var4.setCurrentAmmoCount(var4.getMaxAmmo());
+                playerItem.setCurrentAmmoCount(var4.getMaxAmmo());
             }
 
-            if (var4.getVisual() != null)
-            { 
-               if(this.isNoHoled)
-               for (int var7 = 0; var7 < BloodBodyPartType.MAX.index(); ++var7)
-               var4.getVisual().removeHole(var7);
 
-               if(this.isNoDirted)
-               var4.getVisual().removeDirt(); 
+            if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+            {
+               for (InventoryItem item : inventoryItems)
+               {
+                  if (item == null)
+                     continue;
                
-               if(this.isNoBlooded)
-               var4.getVisual().removeBlood();   
-            }
- 
-            if(this.isUnlimitedCondition)
-            var4.setCondition(var4.getConditionMax());
+                  if (this.isNoBroken) 
+                  item.setBroken(false);
 
-            if (this.isNoBroken) 
-            var4.setBroken(false);
+                  if (playerItem.getVisual() != null)
+                  { 
+                     if(this.isNoHoled)
+                     for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
+                     item.getVisual().removeHole(i);
+
+                     if(this.isNoDirted)
+                     item.getVisual().removeDirt(); 
+               
+                     if(this.isNoBlooded)
+                     item.getVisual().removeBlood();
+                  }
+               
+                  if(this.isAlwaysRepaired)
+                  item.setHaveBeenRepaired(1);
+
+                  if(this.isUnlimitedCondition)
+                  item.setCondition(playerItem.getConditionMax());
+
+                  if(this.isNoWet)
+                  item.setWet(false);
+
+                  if(this.isNoInfected)
+                  item.setInfected(false); 
+               }
+            }
             
             if(this.isAlwaysRepaired)
-            var4.setHaveBeenRepaired(1);
-
-            if(this.isNoWet)
-            var4.setWet(false);
-
-            if(this.isNoInfected)
-            var4.setInfected(false);
+            playerItem.setHaveBeenRepaired(1);
+            
+            if(this.isUnlimitedCondition)
+            playerItem.setCondition(playerItem.getConditionMax());
          }
    }
    
