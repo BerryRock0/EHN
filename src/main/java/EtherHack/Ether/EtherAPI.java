@@ -48,6 +48,7 @@ public class EtherAPI {
    public boolean isBypassDebugMode;
    public boolean isAlwaysRack;
    public boolean isAlwaysRoundChamber;
+   public boolean isAlwaysRepaired;
    public boolean isAlwaysKnockdown;
    public boolean isAlwaysCritical;
    public boolean isAlwaysAiming;
@@ -60,11 +61,16 @@ public class EtherAPI {
    public boolean isNoReload;
    public boolean isNoJam;
    public boolean isNoSpentRoundChamber;
+   public boolean isNoBroken;
+   public boolean isNoInfected;
+   public boolean isNoWet;
+   public boolean isNoHoled;
+   public boolean isNoDirted;
+   public boolean isNoBlooded;
    public boolean isFastCorpseDrag;
    public boolean isUnlimitedCarry;
    public boolean isUnlimitedCondition;
    public boolean isUnlimitedAmmo;
-   public boolean isAutoRepairItems;
    public boolean isMapDrawLocalPlayer;
    public boolean isMapDrawAllPlayers;
    public boolean isMapDrawVehicles;
@@ -80,6 +86,7 @@ public class EtherAPI {
       var3.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
       var3.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
       var3.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
+      var3.setProperty("isAlwaysRepaired", Boolean.toString(this.isAlwaysRepaired));
       var3.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
       var3.setProperty("isAlwaysAiming", Boolean.toString(this.isAlwaysAiming));
       var3.setProperty("isAlwaysCritical", Boolean.toString(this.isAlwaysCritical));
@@ -93,7 +100,12 @@ public class EtherAPI {
       var3.setProperty("isNoReload", Boolean.toString(this.isNoReload));
       var3.setProperty("isNoJam", Boolean.toString(this.isNoJam));
       var3.setProperty("isNoSpentRoundChamber", Boolean.toString(this.isNoSpentRoundChamber));
-      var3.setProperty("isFastCorpseDrag", Boolean.toString(this.isFastCorpseDrag));
+      var3.setProperty("isNoBroken", Boolean.toString(this.isNoBroken));
+      var3.setProperty("isNoInfected", Boolean.toString(this.isNoInfected));
+      var3.setProperty("isNoWet", Boolean.toString(this.isNoWet)); 
+      var3.setProperty("isNoHoled", Boolean.toString(this.isNoHoled));
+      var3.setProperty("isNoDirted", Boolean.toString(this.isNoDirted));
+      var3.setProperty("isNoBlooded", Boolean.toString(this.isNoBlooded));
       var3.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
       var3.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
       var3.setProperty("isUnlimitedAmmo", Boolean.toString(this.isUnlimitedAmmo));
@@ -159,6 +171,7 @@ public class EtherAPI {
       this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var3, "isBypassDebugMode", false);
       this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var3, (String)"isAlwaysRack", false);
       this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysRoundChamber", false);
+      this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysRepaired", false);
       this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysKnockdown", false);
       this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysAiming", false);
       this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(var3, "isAlwaysCritical", false);
@@ -170,7 +183,12 @@ public class EtherAPI {
       this.isNoReload = ConfigUtils.getBooleanFromConfig(var3, "isNoReload", false);
       this.isNoJam = ConfigUtils.getBooleanFromConfig(var3, "isNoJam", false);
       this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var3, "isNoSpentRoundChamber", false);
-      this.isFastCorpseDrag = ConfigUtils.getBooleanFromConfig(var3, "isFastCorpseDrag", false);
+      this.isNoBroken = ConfigUtils.getBooleanFromConfig(var3, "isNoBroken", false);
+      this.isNoInfected = ConfigUtils.getBooleanFromConfig(var3, "isNoInfected", false);
+      this.isNoWet = ConfigUtils.getBooleanFromConfig(var3, "isNoWet", false);
+      this.isNoHoled = ConfigUtils.getBooleanFromConfig(var3, "isNoHoled", false);      
+      this.isNoDirted = ConfigUtils.getBooleanFromConfig(var3, "isNoDirted", false);
+      this.isNoBlooded = ConfigUtils.getBooleanFromConfig(var3, "isNoBlooded", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedCondition", false);
       this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(var3, "isUnlimitedAmmo", false);
@@ -204,12 +222,18 @@ public class EtherAPI {
          Logger.printLog("Startup file not found. Loading default settings.");
       }
       
-      //this. = ConfigUtils.getBooleanFromConfig(var3, "", false);
+      //this. = ConfigUtils.getBooleanFromConfig(var1, "", false);
       this.mainUIAccentColor = ConfigUtils.getColorFromConfig(var1, "mainUIAccentColor", new Color(56, 239, 125));
       this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var1, "vehiclesUIColor", new Color(150, 150, 200));
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var1, "zombiesUIColor", new Color(255, 150, 100));
       this.playersUIColor = ConfigUtils.getColorFromConfig(var1, "playersUIColor", new Color(255, 50, 100));
       this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
+      this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var1, (String)"isAlwaysRack", false);
+      this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRoundChamber", false);
+      this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRepaired", false);
+      this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysKnockdown", false);
+      this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysAiming", false);
+      this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysCritical", false);
       this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var1, "isPlayerInSafeTeleported", false);
       this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var1, "isMultiHitZombies", false);
       this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var1, "isEnableNightVision", false);
@@ -218,11 +242,15 @@ public class EtherAPI {
       this.isNoReload = ConfigUtils.getBooleanFromConfig(var1, "isNoReload", false);
       this.isNoJam = ConfigUtils.getBooleanFromConfig(var1, "isNoJam", false);
       this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isNoSpentRoundChamber", false);
-      this.isFastCorpseDrag = ConfigUtils.getBooleanFromConfig(var1, "isFastCorpseDrag", false);
+      this.isNoBroken = ConfigUtils.getBooleanFromConfig(var1, "isNoBroken", false);
+      this.isNoInfected = ConfigUtils.getBooleanFromConfig(var1, "isNoInfected", false);
+      this.isNoWet = ConfigUtils.getBooleanFromConfig(var1, "isNoWet", false);
+      this.isNoHoled = ConfigUtils.getBooleanFromConfig(var1, "isNoHoled", false);      
+      this.isNoDirted = ConfigUtils.getBooleanFromConfig(var1, "isNoDirted", false);
+      this.isNoBlooded = ConfigUtils.getBooleanFromConfig(var1, "isNoBlooded", false);
       this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCarry", false);
       this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCondition", false);
       this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedAmmo", false);
-      this.isAutoRepairItems = ConfigUtils.getBooleanFromConfig(var1, "isAutoRepairItems", false);
       this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawLocalPlayer", true);
       this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawAllPlayers", false);
       this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawVehicles", false);
@@ -303,9 +331,11 @@ public class EtherAPI {
    private void updateLocalPlayerFeatures()
    {
       IsoPlayer var1 = IsoPlayer.getInstance();
-      InventoryItem var2 = var1.getPrimaryHandItem();
-      HandWeapon var3 = (HandWeapon)var2;
-      String var4 = var3.getFullType();
+      ArrayList var2 = var1.getInventory().getItems();
+      Iterator var3 = var3.iterator();
+      InventoryItem var4 = (InventoryItem)var3.next();
+      HandWeapon var5 = (HandWeapon)var4;
+      String var6 = var5.getFullType();
       
       if (var1 == null)
          return;
@@ -314,83 +344,72 @@ public class EtherAPI {
             SandboxOptions.instance.set("MultiHitZombies", this.isMultiHitZombies);
 
 
-         if (var1.isWearingNightVisionGoggles() != this.isEnableNightVision)
+         if (this.isEnableNightVision)
             var1.setWearingNightVisionGoggles(this.isEnableNightVision);
 
 
-         if (var2 != null && var2.getStringItemType().equals("RangedWeapon") && var2 instanceof HandWeapon)
+         if(var4 != null)
          {
-            if(this.isAlwaysKnockdown)
-                var3.setAlwaysKnockdown(true);
+            if (var4.getStringItemType().equals("RangedWeapon") && var4 instanceof HandWeapon)
+            {
+               if(this.isAlwaysKnockdown)
+                var5.setAlwaysKnockdown(true);
             
-            if(this.isAlwaysCritical)
-                var3.setCriticalChance(100.0f);
+               if(this.isAlwaysCritical)
+                var5.setCriticalChance(100.0f);
             
-            if(this.isAlwaysRack)
-                var3.setRackAfterShoot(true);
+               if(this.isAlwaysRack)
+                var5.setRackAfterShoot(true);
             
-            if(this.isNoJam)
-                var3.setJammed(false);
+               if(this.isNoJam)
+                var5.setJammed(false);
             
-            if(this.isAlwaysRoundChamber)
-                var3.setRoundChambered(true);
+               if(this.isAlwaysRoundChamber)
+                var5.setRoundChambered(true);
             
-            if(this.isNoSpentRoundChamber)
-                var3.setSpentRoundChambered(false);
+               if(this.isNoSpentRoundChamber)
+                var5.setSpentRoundChambered(false);
             
-            if(this.isAlwaysAiming)
-                var3.setAimingTime(0);
+               if(this.isAlwaysAiming)
+                var5.setAimingTime(0);
             
-            if(this.isNoRecoil)
-                var3.setRecoilDelay(0);
+               if(this.isNoRecoil)
+                var5.setRecoilDelay(0);
             
-            if(this.isNoReload)
-                var3.setReloadTime(0);
+               if(this.isNoReload)
+                var5.setReloadTime(0);
 
-            if (this.isUnlimitedAmmo)
-                var2.setCurrentAmmoCount(var2.getMaxAmmo());
-         }
-
-         if (this.isUnlimitedCondition && var2 != null)
-         {
-            var2.setHaveBeenRepaired(1);
-            var2.setCondition(var2.getConditionMax());
-         }
-
-         if (this.isAutoRepairItems) {
-            ArrayList var7 = var1.getInventory().getItems();
-            if (var7 != null && !var7.isEmpty()) {
-               Iterator var8 = var7.iterator();
-
-               label175:
-               while(true) {
-                  InventoryItem var5;
-                  do {
-                     if (!var8.hasNext()) {
-                        break label175;
-                     }
-
-                     var5 = (InventoryItem)var8.next();
-                  } while(var5 == null);
-
-                  if (var5.isBroken()) {
-                     var5.setBroken(false);
-                  }
-
-                  var5.setHaveBeenRepaired(1);
-                  if (var5.getVisual() != null) {
-                     for(int var6 = 0; var6 < BloodBodyPartType.MAX.index(); ++var6) {
-                        var5.getVisual().removeHole(var6);
-                        var5.getVisual().removeDirt();
-                        var5.getVisual().removeBlood();
-                     }
-                  }
-
-                  var5.setWet(false);
-                  var5.setInfected(false);
-                  var5.setCondition(var5.getConditionMax());
-               }
+               if (this.isUnlimitedAmmo)
+                var4.setCurrentAmmoCount(var2.getMaxAmmo());
             }
+
+            if (var4.getVisual() != null)
+            { 
+               if(this.isNoHoled)
+               for (int var7 = 0; var7 < BloodBodyPartType.MAX.index(); ++var7)
+               var4.getVisual().removeHole(var7);
+
+               if(this.isNoDirted)
+               var4.getVisual().removeDirt(); 
+               
+               if(this.isNoBlooded)
+               var4.getVisual().removeBlood();   
+            }
+ 
+            if(this.isUnlimitedCondition)
+            var4.setCondition(var2.getConditionMax());
+
+            if (this.isNoBroken) 
+            var4.setBroken(false);
+            
+            if(this.isAlwaysRepaired)
+            var4.setHaveBeenRepaired(1);
+
+            if(this.isNoWet)
+            var4.setWet(false);
+
+            if(this.isNoInfected)
+            var4.setInfected(false);
          }
    }
    
