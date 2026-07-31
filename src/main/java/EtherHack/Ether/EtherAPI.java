@@ -226,7 +226,7 @@ public class EtherAPI {
       this.zombiesUIColor = ConfigUtils.getColorFromConfig(var1, "zombiesUIColor", new Color(255, 150, 100));
       this.playersUIColor = ConfigUtils.getColorFromConfig(var1, "playersUIColor", new Color(255, 50, 100));
       this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
-      this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var1, (String)"isAlwaysRack", false);
+      this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRack", false);
       this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRoundChamber", false);
       this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRepaired", false);
       this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysKnockdown", false);
