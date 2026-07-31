@@ -216,88 +216,88 @@ public class EtherLuaMethods {
    }
 
    @LuaMethod(name = "isBypassDebugMode", global = true) public static boolean isBypassDebugMode() {return EtherMain.getInstance().etherAPI.isBypassDebugMode;}
-   @LuaMethod(name = "toggleBypassDebugMode", global = true) public static void toggleBypassDebugMode(boolean var0) {EtherMain.getInstance().etherAPI.isBypassDebugMode = var0;}
+   @LuaMethod(name = "toggleBypassDebugMode", global = true) public static void toggleBypassDebugMode(boolean isToggled) {EtherMain.getInstance().etherAPI.isBypassDebugMode = isToggled;}
 
    @LuaMethod(name="isAlwaysRack", global=true) public static boolean isAlwaysRack() {return EtherMain.getInstance().etherAPI.isAlwaysRack;}
-   @LuaMethod(name="toggleAlwaysRack", global=true) public static void toggleAlwaysRack(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRack = var0;}
+   @LuaMethod(name="toggleAlwaysRack", global=true) public static void toggleAlwaysRack(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;}
 
    @LuaMethod(name="isAlwaysRoundChamber", global=true) public static boolean isAlwaysRoundChamber() {return EtherMain.getInstance().etherAPI.isAlwaysRoundChamber;}
-   @LuaMethod(name="toggleAlwaysRoundChamber", global=true) public static void toggleAlwaysRoundChamber(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = var0;}
+   @LuaMethod(name="toggleAlwaysRoundChamber", global=true) public static void toggleAlwaysRoundChamber(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = isToggled;}
 
    @LuaMethod(name="isAlwaysRepaired", global=true) public static boolean isAlwaysRepaired() {return EtherMain.getInstance().etherAPI.isAlwaysRepaired;}
-   @LuaMethod(name="toggleAlwaysRepaired", global=true) public static void toggleAlwaysRepaired(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRepaired = var0;}
+   @LuaMethod(name="toggleAlwaysRepaired", global=true) public static void toggleAlwaysRepaired(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysRepaired = isToggled;}
 
    @LuaMethod(name="isAlwaysKnockdown", global=true) public static boolean isAlwaysKnockdown() {return EtherMain.getInstance().etherAPI.isAlwaysKnockdown;}
-   @LuaMethod(name="toggleAlwaysKnockdown", global=true) public static void toggleAlwaysKnockdown(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysKnockdown = var0;}
+   @LuaMethod(name="toggleAlwaysKnockdown", global=true) public static void toggleAlwaysKnockdown(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysKnockdown = isToggled;}
 
    @LuaMethod(name="isAlwaysAiming", global=true) public static boolean isAlwaysAiming() {return EtherMain.getInstance().etherAPI.isAlwaysAiming;}
-   @LuaMethod(name="toggleAlwaysAiming", global=true)public static void toggleAlwaysAiming(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysAiming = var0;}
+   @LuaMethod(name="toggleAlwaysAiming", global=true)public static void toggleAlwaysAiming(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysAiming = isToggled;}
 
    @LuaMethod(name="isAlwaysCritical", global=true) public static boolean isAlwaysCritical() {return EtherMain.getInstance().etherAPI.isAlwaysCritical;}
-   @LuaMethod(name="toggleAlwaysCritical", global=true) public static void toggleAlwaysCritical(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysCritical = var0;}
+   @LuaMethod(name="toggleAlwaysCritical", global=true) public static void toggleAlwaysCritical(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysCritical = isToggled;}
 
    @LuaMethod(name = "isZombieDontAttack", global = true) public static boolean isZombieDontAttack() {return EtherMain.getInstance().etherAPI.isZombieDontAttack;}
-   @LuaMethod(name = "toggleZombieDontAttack", global = true) public static void toggleZombieDontAttack(boolean var0) {EtherMain.getInstance().etherAPI.isZombieDontAttack = var0;}
+   @LuaMethod(name = "toggleZombieDontAttack", global = true) public static void toggleZombieDontAttack(boolean isToggled) {EtherMain.getInstance().etherAPI.isZombieDontAttack = isToggled;}
 
    @LuaMethod(name = "isEnableNightVision", global = true) public static boolean isEnableNightVision() {return EtherMain.getInstance().etherAPI.isEnableNightVision;}
-   @LuaMethod(name = "toggleNightVision", global = true) public static void toggleNightVision(boolean var0) {EtherMain.getInstance().etherAPI.isEnableNightVision = var0;}
+   @LuaMethod(name = "toggleNightVision", global = true) public static void toggleNightVision(boolean isToggled) {EtherMain.getInstance().etherAPI.isEnableNightVision = isToggled;}
 
    @LuaMethod(name = "isNoRecoil", global = true) public static boolean isNoRecoil() {return EtherMain.getInstance().etherAPI.isNoRecoil;}
-   @LuaMethod(name = "toggleNoRecoil", global = true) public static void toggleNoRecoil(boolean var0) {EtherMain.getInstance().etherAPI.isNoRecoil = var0;}
+   @LuaMethod(name = "toggleNoRecoil", global = true) public static void toggleNoRecoil(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoRecoil = isToggled;}
 
    @LuaMethod(name="isNoReload", global=true) public static boolean isNoReload() {return EtherMain.getInstance().etherAPI.isNoReload;}
-   @LuaMethod(name="toggleNoReload", global=true) public static void toggleNoReload(boolean var0) {EtherMain.getInstance().etherAPI.isNoReload = var0;}
+   @LuaMethod(name="toggleNoReload", global=true) public static void toggleNoReload(boolean var0) {EtherMain.getInstance().etherAPI.isNoReload = isToggled;}
 
    @LuaMethod(name="isNoJam", global=true) public static boolean isNoJam() {return EtherMain.getInstance().etherAPI.isNoJam;}
-   @LuaMethod(name="toggleNoJam", global=true) public static void toggleNoJam(boolean var0) {EtherMain.getInstance().etherAPI.isNoJam = var0;}
+   @LuaMethod(name="toggleNoJam", global=true) public static void toggleNoJam(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoJam = isToggled;}
 
    @LuaMethod(name="isNoSpentRoundChamber", global=true) public static boolean isNoSpentRoundChamber() {return EtherMain.getInstance().etherAPI.isNoSpentRoundChamber;}
-   @LuaMethod(name="toggleNoSpentRoundChamber", global=true) public static void toggleNoSpentRoundChamber(boolean var0) {EtherMain.getInstance().etherAPI.isNoSpentRoundChamber = var0;}
+   @LuaMethod(name="toggleNoSpentRoundChamber", global=true) public static void toggleNoSpentRoundChamber(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoSpentRoundChamber = isToggled;}
 
    @LuaMethod(name="isNoBroken", global=true) public static boolean isNoBroken() {return EtherMain.getInstance().etherAPI.isNoBroken;}
-   @LuaMethod(name="toggleNoBroken", global=true) public static void toggleNoBroken(boolean var0) {EtherMain.getInstance().etherAPI.isNoBroken = var0;}
+   @LuaMethod(name="toggleNoBroken", global=true) public static void toggleNoBroken(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoBroken = isToggled;}
 
    @LuaMethod(name="isNoInfected", global=true) public static boolean isNoInfected() {return EtherMain.getInstance().etherAPI.isNoInfected;}
-   @LuaMethod(name="toggleNoInfected", global=true) public static void toggleNoInfected(boolean var0) {EtherMain.getInstance().etherAPI.isNoInfected = var0;}
+   @LuaMethod(name="toggleNoInfected", global=true) public static void toggleNoInfected(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoInfected = isToggled;}
 
    @LuaMethod(name="isNoWet", global=true) public static boolean isNoWet() {return EtherMain.getInstance().etherAPI.isNoWet;}
-   @LuaMethod(name="toggleNoWet", global=true) public static void toggleNoWet(boolean var0) {EtherMain.getInstance().etherAPI.isNoWet = var0;}
+   @LuaMethod(name="toggleNoWet", global=true) public static void toggleNoWet(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoWet = isToggled;}
 
    @LuaMethod(name="isNoHoled", global=true) public static boolean isNoHoled() {return EtherMain.getInstance().etherAPI.isNoHoled;}
-   @LuaMethod(name="toggleNoHoled", global=true) public static void toggleNoHoled(boolean var0) {EtherMain.getInstance().etherAPI.isNoHoled = var0;}
+   @LuaMethod(name="toggleNoHoled", global=true) public static void toggleNoHoled(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoHoled = isToggled;}
 
    @LuaMethod(name="isNoDirted", global=true) public static boolean isNoDirted() {return EtherMain.getInstance().etherAPI.isNoDirted;}
-   @LuaMethod(name="toggleNoDirted", global=true) public static void toggleNoDirted(boolean var0) {EtherMain.getInstance().etherAPI.isNoDirted = var0;}
+   @LuaMethod(name="toggleNoDirted", global=true) public static void toggleNoDirted(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoDirted = isToggled;}
 
    @LuaMethod(name="isNoBlooded", global=true) public static boolean isNoBlooded() {return EtherMain.getInstance().etherAPI.isNoBlooded;}
-   @LuaMethod(name="toggleNo", global=true) public static void toggleNoBlooded(boolean var0) {EtherMain.getInstance().etherAPI.isNoBlooded = var0;}
+   @LuaMethod(name="toggleNoBlooded", global=true) public static void toggleNoBlooded(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoBlooded = isToggled;}
 
    @LuaMethod(name = "resetWeaponsStats", global = true) public static void resetWeaponsStats() {EtherMain.getInstance().etherAPI.resetWeaponsStats();}
    @LuaMethod(name = "isTimedActionCheat", global = true) public static boolean isTimedActionCheat() {return EtherMain.getInstance().etherAPI.isTimedActionCheat;}
-   @LuaMethod(name = "toggleTimedActionCheat", global = true) public static void toggleTimedActionCheat(boolean var0) {EtherMain.getInstance().etherAPI.isTimedActionCheat = var0;}
+   @LuaMethod(name = "toggleTimedActionCheat", global = true) public static void toggleTimedActionCheat(boolean isToggled) {EtherMain.getInstance().etherAPI.isTimedActionCheat = isToggled;}
    
    @LuaMethod(name = "isMultiHitZombies", global = true) public static boolean isMultiHitZombies() {return EtherMain.getInstance().etherAPI.isMultiHitZombies;}
-   @LuaMethod(name = "toggleMultiHitZombies", global = true) public static void toggleMultiHitZombies(boolean var0) {EtherMain.getInstance().etherAPI.isMultiHitZombies = var0;}
+   @LuaMethod(name = "toggleMultiHitZombies", global = true) public static void toggleMultiHitZombies(boolean isToggled) {EtherMain.getInstance().etherAPI.isMultiHitZombies = isToggled;}
 
    @LuaMethod(name = "isUnlimitedCondition", global = true) public static boolean isUnlimitedCondition() {return EtherMain.getInstance().etherAPI.isUnlimitedCondition;}
-   @LuaMethod(name = "toggleUnlimitedCondition", global = true) public static void toggleUnlimitedCondition(boolean var0) {EtherMain.getInstance().etherAPI.isUnlimitedCondition = var0;}
+   @LuaMethod(name = "toggleUnlimitedCondition", global = true) public static void toggleUnlimitedCondition(boolean isToggled) {EtherMain.getInstance().etherAPI.isUnlimitedCondition = isToggled;}
 
    @LuaMethod(name = "isMapDrawZombies", global = true) public static boolean isMapDrawZombies() {return EtherMain.getInstance().etherAPI.isMapDrawZombies;}
-   @LuaMethod(name = "toggleMapDrawZombies", global = true) public static void toggleMapDrawZombies(boolean var0) {EtherMain.getInstance().etherAPI.isMapDrawZombies = var0;}
+   @LuaMethod(name = "toggleMapDrawZombies", global = true) public static void toggleMapDrawZombies(boolean isToggled) {EtherMain.getInstance().etherAPI.isMapDrawZombies = isToggled;}
 
    @LuaMethod(name = "isMapDrawVehicles",global = true) public static boolean isMapDrawVehicles() {return EtherMain.getInstance().etherAPI.isMapDrawVehicles;}
-   @LuaMethod(name = "toggleMapDrawVehicles", global = true) public static void toggleMapDrawVehicles(boolean var0) {EtherMain.getInstance().etherAPI.isMapDrawVehicles = var0;}
+   @LuaMethod(name = "toggleMapDrawVehicles", global = true) public static void toggleMapDrawVehicles(boolean isToggled) {EtherMain.getInstance().etherAPI.isMapDrawVehicles = isToggled;}
 
    @LuaMethod(name = "isMapDrawAllPlayers", global = true) public static boolean isMapDrawAllPlayers() {return EtherMain.getInstance().etherAPI.isMapDrawAllPlayers;}
-   @LuaMethod(name = "toggleMapDrawAllPlayers", global = true) public static void toggleMapDrawAllPlayers(boolean var0) {EtherMain.getInstance().etherAPI.isMapDrawAllPlayers = var0;}
+   @LuaMethod(name = "toggleMapDrawAllPlayers", global = true) public static void toggleMapDrawAllPlayers(boolean isToggled) {EtherMain.getInstance().etherAPI.isMapDrawAllPlayers = isToggled;}
 
    @LuaMethod(name = "isMapDrawLocalPlayer", global = true) public static boolean isMapDrawLocalPlayer() {return EtherMain.getInstance().etherAPI.isMapDrawLocalPlayer;}
-   @LuaMethod(name = "toggleMapDrawLocalPlayer", global = true) public static void toggleMapDrawLocalPlayer(boolean var0) {EtherMain.getInstance().etherAPI.isMapDrawLocalPlayer = var0;}
+   @LuaMethod(name = "toggleMapDrawLocalPlayer", global = true) public static void toggleMapDrawLocalPlayer(boolean isToggled) {EtherMain.getInstance().etherAPI.isMapDrawLocalPlayer = isToggled;}
 
-   @LuaMethod(name = "toggleUnlimitedAmmo", global = true) public static void toggleUnlimitedAmmo(boolean var0) {EtherMain.getInstance().etherAPI.isUnlimitedAmmo = var0;}
+   @LuaMethod(name = "toggleUnlimitedAmmo", global = true) public static void toggleUnlimitedAmmo(boolean isToggled) {EtherMain.getInstance().etherAPI.isUnlimitedAmmo = isToggled;}
    @LuaMethod(name = "isUnlimitedAmmo", global = true) public static boolean isUnlimitedAmmo() {return EtherMain.getInstance().etherAPI.isUnlimitedAmmo;}
 
-   @LuaMethod(name = "toggleEnableUnlimitedCarry", global = true) public static void toggleEnableUnlimitedCarry(boolean var0) {EtherMain.getInstance().etherAPI.isUnlimitedCarry = var0;}
+   @LuaMethod(name = "toggleEnableUnlimitedCarry", global = true) public static void toggleEnableUnlimitedCarry(boolean isToggled) {EtherMain.getInstance().etherAPI.isUnlimitedCarry = isToggled;}
    @LuaMethod(name = "isEnableUnlimitedCarry", global = true) public static boolean isEnableUnlimitedCarry() {return EtherMain.getInstance().etherAPI.isUnlimitedCarry;}
 
    @LuaMethod(name = "requireExtra", global = true)
