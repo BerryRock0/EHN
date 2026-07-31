@@ -194,20 +194,6 @@ public class GamePatcher {
     * Внедрение в файл игрового окна
     */
    public void patchGameWindow() {
-      Patch.injectIntoClass("zombie/GameWindow", "InitDisplay", true, (method) -> {
-         String oldTitle = "Project Zomboid";
-         String newTitle = "Project Zomboid" + Info.CHEAT_WINDOW_TITLE_SUFFIX;
-         AbstractInsnNode[] nodes = method.instructions.toArray();
-
-         for (AbstractInsnNode insn : nodes) {
-            if (insn instanceof LdcInsnNode ldcInsnNode) {
-               if (ldcInsnNode.cst.equals(oldTitle)) {
-                  ldcInsnNode.cst = newTitle;
-               }
-            }
-         }
-
-      });
       Patch.injectIntoClass("zombie/GameWindow", "init", true, (method) -> {
          AbstractInsnNode insertionPoint = null;
 
