@@ -48,7 +48,7 @@ end
 --*********************************************************
 function EtherSettingsPanel:addButtonWithLabel(title, buttonTitle, func, isOnlyNotInGame)
     local rows = self.rows;
-    local buttonY = self.settingsStartY + rows * EtherMain.rowHeight;
+    local buttonY = rows * EtherMain.rowHeight;
 
     self:addLabel(EtherMain.panelPadding, buttonY + 2, title)
     self:addButton(self:getWidth() - 150 - EtherMain.panelPadding, buttonY, buttonTitle, func, isOnlyNotInGame)
@@ -62,7 +62,7 @@ end
 --*********************************************************
 function EtherSettingsPanel:addColorPickerWithLabel(title, func, startColor)
     local rows = self.rows;
-    local buttonY = self.settingsStartY + rows * EtherMain.rowHeight;
+    local buttonY = rows * EtherMain.rowHeight;
 
     self:addLabel(EtherMain.panelPadding, buttonY + 2, title)
 
@@ -208,22 +208,6 @@ function EtherSettingsPanel:createChildren()
     end, true);
 
     self:updatePanel();
-end
-
-
---*********************************************************
---* Инициализация списка конфигов
---*********************************************************
-function EtherSettingsPanel:updateConfigsList()
-    self.lastSelectedIndex = self.configs.selected or 0;
-    self.configs:clear();
-
-    local configList = getConfigList();
-    for i=0, configList:size() - 1 do
-        local config = configList:get(i)
-        self.configs:addItem("Config", config);
-    end
-    self.configs.selected = self.lastSelectedIndex;
 end
 
 --*********************************************************
