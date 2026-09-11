@@ -135,12 +135,8 @@ public class EtherLuaMethods {
             if (recipes != null)
             {
                for (Recipe recipe : recipes)
-               {
                   if (recipe.getOriginalname() != null)
-                  {
                      player.learnRecipe(recipe.getOriginalname());
-                  }
-               }
             }
          }
       }
@@ -151,28 +147,19 @@ public class EtherLuaMethods {
    }
 
    @LuaMethod(name = "giveItem",global = true)
-   public static void giveItem(InventoryItem item, int count) {
-      try {
+   public static void giveItem(InventoryItem item, int count)
+   {
+      try
+      {
          IsoPlayer player = IsoPlayer.getInstance();
-         if (player != null) {
-            for (int i = 0; i < count; i++) {
-               player.getInventory().AddItem(item);
-            }
-         }
-      } catch (Exception e) {
+         if (player != null)
+            for (int i = 0; i < count; i++)
+               player.getInventory().items.add(item);
+      }
+      catch (Exception e)
+      {
          Logger.printLog("Error in giveItem: " + e.getMessage());
       }
-   }
-
-   @LuaMethod(name = "giveItem",global = true)
-   public static void giveItem(String var0, int var1) {
-      IsoPlayer var2 = IsoPlayer.getInstance();
-      if (var2 != null) {
-         for(int var3 = 0; var3 < var1; ++var3) {
-            var2.getInventory().AddItem(var0);
-         }
-      }
-
    }
 
    @LuaMethod(name = "isBypassDebugMode", global = true) public static boolean isBypassDebugMode() {return EtherMain.getInstance().etherAPI.isBypassDebugMode;}
