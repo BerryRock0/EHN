@@ -147,20 +147,27 @@ public class EtherLuaMethods {
    }
 
    @LuaMethod(name = "giveItem",global = true)
-   public static void giveItem(InventoryItem item, int count)
+   public static void giveItem(InventoryItem item, int amount)
    {
-      try
-      {
-         IsoPlayer player = IsoPlayer.getInstance();
-         if (player != null)
-            for (int i = 0; i < count; i++)
-               player.getInventory().items.add(item);
-      }
-      catch (Exception e)
-      {
-         Logger.printLog("Error in giveItem: " + e.getMessage());
-      }
+         IsoPlayer localPlayer = IsoPlayer.getInstance();
+         if (localPlayer == null)
+            return;
+         
+         for (int i = 0; i < amount; ++i)
+            localPlayer.getInventory().items.add(item);
    }
+
+   @LuaMethod(name="giveItem", global=true)
+   public static void giveItem(String itemID, int amount)
+   {
+      IsoPlayer localPlayer = IsoPlayer.getInstance();
+      if (localPlayer == null)
+         return;
+            
+      for (int i = 0; i < amount; ++i)
+         localPlayer.getInventory().AddItem(itemID);
+   }
+   
 
    @LuaMethod(name = "isBypassDebugMode", global = true) public static boolean isBypassDebugMode() {return EtherMain.getInstance().etherAPI.isBypassDebugMode;}
    @LuaMethod(name = "toggleBypassDebugMode", global = true) public static void toggleBypassDebugMode(boolean isToggled) {EtherMain.getInstance().etherAPI.isBypassDebugMode = isToggled;}
