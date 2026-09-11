@@ -207,7 +207,6 @@ function EtherSettingsPanel:createChildren()
         getCore():ResetLua("default", "Force")
     end, true);
 
-    self:updateConfigsList();
     self:updatePanel();
 end
 
