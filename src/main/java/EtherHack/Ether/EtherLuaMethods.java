@@ -166,7 +166,7 @@ public class EtherLuaMethods {
    @LuaMethod(name = "toggleBypassDebugMode", global = true) public static void toggleBypassDebugMode(boolean isToggled) {EtherMain.getInstance().etherAPI.isBypassDebugMode = isToggled;}
 
    @LuaMethod(name="isAlwaysRack", global=true) public static boolean isAlwaysRack() {return EtherMain.getInstance().etherAPI.isAlwaysRack;}
-   @LuaMethod(name="toggleAlwaysRack", global=true) public static void toggleAlwaysRack(boolean var0) {EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;}
+   @LuaMethod(name="toggleAlwaysRack", global=true) public static void toggleAlwaysRack(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;}
 
    @LuaMethod(name="isAlwaysRoundChamber", global=true) public static boolean isAlwaysRoundChamber() {return EtherMain.getInstance().etherAPI.isAlwaysRoundChamber;}
    @LuaMethod(name="toggleAlwaysRoundChamber", global=true) public static void toggleAlwaysRoundChamber(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = isToggled;}
