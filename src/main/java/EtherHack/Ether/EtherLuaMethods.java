@@ -206,7 +206,7 @@ public class EtherLuaMethods {
    @LuaMethod(name = "toggleNoRecoil", global = true) public static void toggleNoRecoil(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoRecoil = isToggled;}
 
    @LuaMethod(name="isNoReload", global=true) public static boolean isNoReload() {return EtherMain.getInstance().etherAPI.isNoReload;}
-   @LuaMethod(name="toggleNoReload", global=true) public static void toggleNoReload(boolean var0) {EtherMain.getInstance().etherAPI.isNoReload = isToggled;}
+   @LuaMethod(name="toggleNoReload", global=true) public static void toggleNoReload(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoReload = isToggled;}
 
    @LuaMethod(name="isNoJam", global=true) public static boolean isNoJam() {return EtherMain.getInstance().etherAPI.isNoJam;}
    @LuaMethod(name="toggleNoJam", global=true) public static void toggleNoJam(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoJam = isToggled;}
