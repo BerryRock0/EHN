@@ -122,46 +122,6 @@ public class EtherLuaMethods {
 
    }
 
-   @LuaMethod(name = "getConfigList", global = true)
-   public static ArrayList<String> getConfigList() {
-      ArrayList<String> configFiles = new ArrayList<>();
-
-      try {
-         Path configFolderPath = EtherPaths.resolveWritablePath("EtherHack/config");
-
-         // Create directories if they don't exist
-         if (!Files.exists(configFolderPath)) {
-            Files.createDirectories(configFolderPath);
-            return configFiles; // Return empty list since directory was just created
-         }
-
-         List<Path> fileList = Files.list(configFolderPath)
-                 .filter(file -> file.toString().endsWith(".properties"))
-                 .toList();
-
-         for(Path filePath: fileList){
-            String fileName = filePath.getFileName().toString().replace(".properties","");
-            configFiles.add(fileName);
-         }
-
-         return configFiles;
-
-      } catch (IOException e) {
-         Logger.printLog("An error occurred while getting the list of config files: " + e);
-         return null;
-      }
-   }
-
-   @LuaMethod(name = "loadConfig", global = true)
-   public static void loadConfig(String var0) {
-      EtherMain.getInstance().etherAPI.loadConfig(var0);
-   }
-
-   @LuaMethod(name = "saveConfig", global = true)
-   public static void saveConfig(String var0) {
-      EtherMain.getInstance().etherAPI.saveConfig(var0);
-   }
-
    // Recipe and item manipulation
    @LuaMethod(name = "learnAllRecipes",global = true)
    public static void learnAllRecipes()
