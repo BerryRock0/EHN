@@ -199,7 +199,7 @@ public class EtherAPI {
    
    private void bypassDebugMode()
    {
-      Core.debug = this.isBypassDebugMode && GameClient.bIngame && (GameServer.bServer || GameServer.bCoop);
+      Core.debug = this.isBypassDebugMode && GameClient.bIngame;
    }
 
    @SubscribeLuaEvent(eventName = "OnRenderTick")
