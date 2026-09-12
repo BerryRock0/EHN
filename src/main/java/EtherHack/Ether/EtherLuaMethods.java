@@ -110,18 +110,6 @@ public class EtherLuaMethods {
       return ConfigUtils.getIntFromConfig(config, key, defaultValue);
    }
 
-   @LuaMethod(name = "deleteConfig", global = true)
-   public static void deleteConfig(String var0) {
-      Path var1 = EtherPaths.resolveWritablePath("EtherHack/config/" + var0 + ".properties");
-
-      try {
-         Files.deleteIfExists(var1);
-      } catch (IOException var3) {
-         Logger.printLog("The file '" + var0 + "' does not exist. Deletion canceled. Exception: " + var3.getMessage());
-      }
-
-   }
-
    // Recipe and item manipulation
    @LuaMethod(name = "learnAllRecipes",global = true)
    public static void learnAllRecipes()
@@ -278,7 +266,7 @@ public class EtherLuaMethods {
             return null;
          }
 
-         ConcurrentHashMap<String, Texture> textureCache = EtherMain.getInstance().etherAPI.textureCache;
+         HashMap<String, Texture> textureCache = EtherMain.getInstance().etherAPI.textureCache;
          String resolvedPath = EtherPaths.resolveResourcePathString(path);
 
          if (textureCache.containsKey(resolvedPath)) {
