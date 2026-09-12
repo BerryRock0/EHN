@@ -39,8 +39,8 @@ import static zombie.Lua.LuaManager.env;
 
 public class EtherAPI {
    private Exposer exposer;
-   final ConcurrentHashMap<String, Texture> textureCache = new ConcurrentHashMap<>();
-   private final ConcurrentHashMap<String, float[]> originalWeaponStats = new ConcurrentHashMap<>();
+   private final EtherLuaMethods etherLuaMethods = new EtherLuaMethods();
+   public HashMap<String, Texture> textureCache = new HashMap<>();
    public Color mainUIAccentColor;
    public Color vehiclesUIColor;
    public Color zombiesUIColor;
@@ -76,120 +76,62 @@ public class EtherAPI {
    public boolean isMapDrawVehicles;
    public boolean isMapDrawZombies;
 
-   private void initStartupConfig() {
-      Properties var1 = new Properties();
-
-      try {
-         FileInputStream var2 = new FileInputStream(EtherPaths.resolveResourcePathString("EtherHack/config/startup.properties"));
-
-         try {
-            var1.load(var2);
-         } catch (Throwable var6) {
-            try {
-               var2.close();
-            } catch (Throwable var5) {
-               var6.addSuppressed(var5);
-            }
-
-            throw var6;
-         }
-
-         var2.close();
-      } catch (IOException var7) {
-         Logger.printLog("Startup file not found. Loading default settings.");
-      }
+   private void initStartupConfig()
+   {
+      Properties cfg = new Properties();
       
       //this. = ConfigUtils.getBooleanFromConfig(var1, "", false);
-      this.mainUIAccentColor = ConfigUtils.getColorFromConfig(var1, "mainUIAccentColor", new Color(56, 239, 125));
-      this.vehiclesUIColor = ConfigUtils.getColorFromConfig(var1, "vehiclesUIColor", new Color(150, 150, 200));
-      this.zombiesUIColor = ConfigUtils.getColorFromConfig(var1, "zombiesUIColor", new Color(255, 150, 100));
-      this.playersUIColor = ConfigUtils.getColorFromConfig(var1, "playersUIColor", new Color(255, 50, 100));
-      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(var1, "isBypassDebugMode", false);
-      this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRack", false);
-      this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRoundChamber", false);
-      this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysRepaired", false);
-      this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysKnockdown", false);
-      this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysAiming", false);
-      this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(var1, "isAlwaysCritical", false);
-      this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(var1, "isPlayerInSafeTeleported", false);
-      this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(var1, "isMultiHitZombies", false);
-      this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(var1, "isEnableNightVision", false);
-      this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(var1, "isZombieDontAttack", false);
-      this.isNoRecoil = ConfigUtils.getBooleanFromConfig(var1, "isNoRecoil", false);
-      this.isNoReload = ConfigUtils.getBooleanFromConfig(var1, "isNoReload", false);
-      this.isNoJam = ConfigUtils.getBooleanFromConfig(var1, "isNoJam", false);
-      this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(var1, "isNoSpentRoundChamber", false);
-      this.isNoBroken = ConfigUtils.getBooleanFromConfig(var1, "isNoBroken", false);
-      this.isNoInfected = ConfigUtils.getBooleanFromConfig(var1, "isNoInfected", false);
-      this.isNoWet = ConfigUtils.getBooleanFromConfig(var1, "isNoWet", false);
-      this.isNoHoled = ConfigUtils.getBooleanFromConfig(var1, "isNoHoled", false);      
-      this.isNoDirted = ConfigUtils.getBooleanFromConfig(var1, "isNoDirted", false);
-      this.isNoBlooded = ConfigUtils.getBooleanFromConfig(var1, "isNoBlooded", false);
-      this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCarry", false);
-      this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedCondition", false);
-      this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(var1, "isUnlimitedAmmo", false);
-      this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawLocalPlayer", true);
-      this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawAllPlayers", false);
-      this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawVehicles", false);
-      this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(var1, "isMapDrawZombies", false);
+      this.mainUIAccentColor = ConfigUtils.getColorFromConfig(cfg, "mainUIAccentColor", new Color(56, 239, 125));
+      this.vehiclesUIColor = ConfigUtils.getColorFromConfig(cfg, "vehiclesUIColor", new Color(150, 150, 200));
+      this.zombiesUIColor = ConfigUtils.getColorFromConfig(cfg, "zombiesUIColor", new Color(255, 150, 100));
+      this.playersUIColor = ConfigUtils.getColorFromConfig(cfg, "playersUIColor", new Color(255, 50, 100));
+      this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(cfg, "isBypassDebugMode", false);
+      this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(cfg, "isAlwaysRack", false);
+      this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(cfg, "isAlwaysRoundChamber", false);
+      this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(cfg, "isAlwaysRepaired", false);
+      this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(cfg, "isAlwaysKnockdown", false);
+      this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(cfg, "isAlwaysAiming", false);
+      this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(cfg, "isAlwaysCritical", false);
+      this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(cfg, "isPlayerInSafeTeleported", false);
+      this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(cfg, "isMultiHitZombies", false);
+      this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(cfg, "isEnableNightVision", false);
+      this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(cfg, "isZombieDontAttack", false);
+      this.isNoRecoil = ConfigUtils.getBooleanFromConfig(cfg, "isNoRecoil", false);
+      this.isNoReload = ConfigUtils.getBooleanFromConfig(cfg, "isNoReload", false);
+      this.isNoJam = ConfigUtils.getBooleanFromConfig(cfg, "isNoJam", false);
+      this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(cfg, "isNoSpentRoundChamber", false);
+      this.isNoBroken = ConfigUtils.getBooleanFromConfig(cfg, "isNoBroken", false);
+      this.isNoInfected = ConfigUtils.getBooleanFromConfig(cfg, "isNoInfected", false);
+      this.isNoWet = ConfigUtils.getBooleanFromConfig(cfg, "isNoWet", false);
+      this.isNoHoled = ConfigUtils.getBooleanFromConfig(cfg, "isNoHoled", false);      
+      this.isNoDirted = ConfigUtils.getBooleanFromConfig(cfg, "isNoDirted", false);
+      this.isNoBlooded = ConfigUtils.getBooleanFromConfig(cfg, "isNoBlooded", false);
+      this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(cfg, "isUnlimitedCarry", false);
+      this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(cfg, "isUnlimitedCondition", false);
+      this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(cfg, "isUnlimitedAmmo", false);
+      this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(cfg, "isMapDrawLocalPlayer", true);
+      this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(cfg, "isMapDrawAllPlayers", false);
+      this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(cfg, "isMapDrawVehicles", false);
+      this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(cfg, "isMapDrawZombies", false);
    }
 
-   public EtherAPI() {
+   public EtherAPI()
+   {
       this.initStartupConfig();
       EventSubscriber.register(this);
    }
 
-   @LuaEvents({
-           @SubscribeLuaEvent(eventName = "OnResetLua"),
-           @SubscribeLuaEvent(eventName = "OnMainMenuEnter")
-   })
-   public void loadAPI() {
+   @LuaEvents({@SubscribeLuaEvent(eventName = "OnResetLua"), @SubscribeLuaEvent(eventName = "OnMainMenuEnter")})
+   public void loadAPI()
+   {
       Logger.printLog("Loading EtherAPI...");
 
-      if (this.exposer != null) {
+      if (this.exposer != null)
          this.exposer.destroy();
-      }
 
-      this.exposer = new SafeExposer(LuaManager.converterManager,
-              LuaManager.platform,
-              LuaManager.env);
-
-      this.exposer.exposeAPI(new EtherLuaMethods());
+      this.exposer = new Exposer(LuaManager.converterManager, LuaManager.platform, LuaManager.env);
+      this.exposer.exposeAPI(this.etherLuaMethods);
    }
-
-   // Inner class for safe method exposure
-   private class SafeExposer extends Exposer {
-      public SafeExposer(KahluaConverterManager m, Platform p, KahluaTable e) {
-         super(m, (J2SEPlatform) p, e);
-      }
-
-      public void exposeAPI(EtherLuaMethods methods) {
-         exposeGlobalFunctions(methods);
-      }
-   }
-
-    public void resetWeaponsStats() {
-        IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
-            return;
-        }
-        ArrayList<InventoryItem> inventoryItems = localPlayer.getInventory().getItems();
-        if (inventoryItems != null && !inventoryItems.isEmpty()) {
-            for (InventoryItem item : inventoryItems) {
-                String type;
-                if (!(item instanceof HandWeapon)) continue;
-                HandWeapon weapon = (HandWeapon)item;
-                if (!item.getStringItemType().equals("RangedWeapon") && !item.getStringItemType().equals("MeleeWeapon") || !this.originalWeaponStats.containsKey(type = weapon.getFullType())) continue;
-                float[] values = this.originalWeaponStats.get(type);
-                weapon.setExtraDamage(values[0]);
-                weapon.setMaxDamage(values[1]);
-                weapon.setMinDamage(values[2]);
-                weapon.setMaxRange(values[3]);
-                weapon.setMinRange(values[4]);
-                weapon.setHitChance((int)values[5]);
-            }
-        }
-    }
    
    private void updateLocalPlayerFeatures()
    {
@@ -214,42 +156,20 @@ public class EtherAPI {
          {
             if (playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
             {
-               if(this.isAlwaysKnockdown)
-                weapon.setAlwaysKnockdown(true);
-            
-               if(this.isAlwaysCritical)
-                weapon.setCriticalChance(100.0f);
-            
-               if(this.isAlwaysRack)
-                weapon.setRackAfterShoot(true);
-            
-               if(this.isNoJam)
-                weapon.setJammed(false);
-            
-               if(this.isAlwaysRoundChamber)
-                weapon.setRoundChambered(true);
-            
-               if(this.isNoSpentRoundChamber)
-                weapon.setSpentRoundChambered(false);
-            
-               if(this.isAlwaysAiming)
-                weapon.setAimingTime(0);
-            
-               if(this.isNoRecoil)
-                weapon.setRecoilDelay(0);
-            
-               if(this.isNoReload)
-                weapon.setReloadTime(0);
-
-               if (this.isUnlimitedAmmo)
-                playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
+               if(this.isAlwaysKnockdown) weapon.setAlwaysKnockdown(true);
+               if(this.isAlwaysCritical) weapon.setCriticalChance(100.0f);
+               if(this.isAlwaysRack) weapon.setRackAfterShoot(true);
+               if(this.isNoJam) weapon.setJammed(false);
+               if(this.isAlwaysRoundChamber) weapon.setRoundChambered(true);
+               if(this.isNoSpentRoundChamber) weapon.setSpentRoundChambered(false);
+               if(this.isAlwaysAiming) weapon.setAimingTime(0);
+               if(this.isNoRecoil) weapon.setRecoilDelay(0);
+               if(this.isNoReload) weapon.setReloadTime(0);
+               if (this.isUnlimitedAmmo) playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
             }
 
-            if(this.isAlwaysRepaired)
-            playerItem.setHaveBeenRepaired(1);
-            
-            if(this.isUnlimitedCondition)
-            playerItem.setCondition(playerItem.getConditionMax());
+            if(this.isAlwaysRepaired) playerItem.setHaveBeenRepaired(1);
+            if(this.isUnlimitedCondition) playerItem.setCondition(playerItem.getConditionMax());
          }
 
          if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
@@ -258,34 +178,22 @@ public class EtherAPI {
             {
                if (item == null)
                   continue;
-               
-               if (this.isNoBroken) 
-               item.setBroken(false);
 
                if (playerItem.getVisual() != null)
                { 
                   if(this.isNoHoled)
-                  for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
-                  item.getVisual().removeHole(i);
+                     for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
+                        item.getVisual().removeHole(i);
 
-                  if(this.isNoDirted)
-                  item.getVisual().removeDirt(); 
-               
-                  if(this.isNoBlooded)
-                  item.getVisual().removeBlood();
+                  if(this.isNoDirted) item.getVisual().removeDirt(); 
+                  if(this.isNoBlooded) item.getVisual().removeBlood();
                }
                
-               if(this.isAlwaysRepaired)
-               item.setHaveBeenRepaired(1);
-
-               if(this.isUnlimitedCondition)
-               item.setCondition(playerItem.getConditionMax());
-
-               if(this.isNoWet)
-               item.setWet(false);
-
-               if(this.isNoInfected)
-               item.setInfected(false); 
+               if(this.isAlwaysRepaired) item.setHaveBeenRepaired(1);
+               if (this.isNoBroken) item.setBroken(false);
+               if(this.isUnlimitedCondition) item.setCondition(playerItem.getConditionMax());
+               if(this.isNoWet) item.setWet(false);
+               if(this.isNoInfected) item.setInfected(false); 
             }
          }
    }
@@ -296,10 +204,14 @@ public class EtherAPI {
       }
 
    @SubscribeLuaEvent(eventName = "OnRenderTick")
-   public synchronized void updateAPI() {
-      try {
+   public synchronized void updateAPI()
+   {
+      try
+      {
+         bypassDebugMode();
          updateLocalPlayerFeatures();
-      } catch (Exception e) {
       }
+      catch (Exception e)
+      {}
    }
 }
