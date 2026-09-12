@@ -214,7 +214,6 @@ public class EtherLuaMethods {
    @LuaMethod(name="isNoBlooded", global=true) public static boolean isNoBlooded() {return EtherMain.getInstance().etherAPI.isNoBlooded;}
    @LuaMethod(name="toggleNoBlooded", global=true) public static void toggleNoBlooded(boolean isToggled) {EtherMain.getInstance().etherAPI.isNoBlooded = isToggled;}
 
-   @LuaMethod(name = "resetWeaponsStats", global = true) public static void resetWeaponsStats() {EtherMain.getInstance().etherAPI.resetWeaponsStats();}
    @LuaMethod(name = "isTimedActionCheat", global = true) public static boolean isTimedActionCheat() {return EtherMain.getInstance().etherAPI.isTimedActionCheat;}
    @LuaMethod(name = "toggleTimedActionCheat", global = true) public static void toggleTimedActionCheat(boolean isToggled) {EtherMain.getInstance().etherAPI.isTimedActionCheat = isToggled;}
    
