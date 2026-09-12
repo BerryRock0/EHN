@@ -144,64 +144,63 @@ public class EtherAPI {
       if (localPlayer == null)
          return;
 
-         if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
-            SandboxOptions.instance.set("MultiHitZombies", this.isMultiHitZombies);
+      if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
+         SandboxOptions.instance.set("MultiHitZombies", this.isMultiHitZombies);
 
 
-         if (this.isEnableNightVision)
-            localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
+      if (this.isEnableNightVision)
+         localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
 
-
-         if(playerItem != null)
+      if(playerItem != null)
+      {
+         if (playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
          {
-            if (playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
-            {
-               if(this.isAlwaysKnockdown) weapon.setAlwaysKnockdown(true);
-               if(this.isAlwaysCritical) weapon.setCriticalChance(100.0f);
-               if(this.isAlwaysRack) weapon.setRackAfterShoot(true);
-               if(this.isNoJam) weapon.setJammed(false);
-               if(this.isAlwaysRoundChamber) weapon.setRoundChambered(true);
-               if(this.isNoSpentRoundChamber) weapon.setSpentRoundChambered(false);
-               if(this.isAlwaysAiming) weapon.setAimingTime(0);
-               if(this.isNoRecoil) weapon.setRecoilDelay(0);
-               if(this.isNoReload) weapon.setReloadTime(0);
-               if (this.isUnlimitedAmmo) playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
-            }
-
-            if(this.isAlwaysRepaired) playerItem.setHaveBeenRepaired(1);
-            if(this.isUnlimitedCondition) playerItem.setCondition(playerItem.getConditionMax());
+            if(this.isAlwaysKnockdown) weapon.setAlwaysKnockdown(true);
+            if(this.isAlwaysCritical) weapon.setCriticalChance(100.0f);
+            if(this.isAlwaysRack) weapon.setRackAfterShoot(true);
+            if(this.isNoJam) weapon.setJammed(false);
+            if(this.isAlwaysRoundChamber) weapon.setRoundChambered(true);
+            if(this.isNoSpentRoundChamber) weapon.setSpentRoundChambered(false);
+            if(this.isAlwaysAiming) weapon.setAimingTime(0);
+            if(this.isNoRecoil) weapon.setRecoilDelay(0);
+            if(this.isNoReload) weapon.setReloadTime(0);
+            if (this.isUnlimitedAmmo) playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
          }
 
-         if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+         if(this.isAlwaysRepaired) playerItem.setHaveBeenRepaired(1);
+         if(this.isUnlimitedCondition) playerItem.setCondition(playerItem.getConditionMax());
+      }
+
+      if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+      {
+         for (InventoryItem item : inventoryItems)
          {
-            for (InventoryItem item : inventoryItems)
-            {
-               if (item == null)
-                  continue;
+            if (item == null)
+               continue;
 
-               if (playerItem.getVisual() != null)
-               { 
-                  if(this.isNoHoled)
-                     for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
-                        item.getVisual().removeHole(i);
+            if (playerItem.getVisual() != null)
+            { 
+               if(this.isNoHoled)
+                  for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
+                     item.getVisual().removeHole(i);
 
-                  if(this.isNoDirted) item.getVisual().removeDirt(); 
-                  if(this.isNoBlooded) item.getVisual().removeBlood();
-               }
+               if(this.isNoDirted) item.getVisual().removeDirt(); 
+               if(this.isNoBlooded) item.getVisual().removeBlood();
+            }
                
-               if(this.isAlwaysRepaired) item.setHaveBeenRepaired(1);
-               if (this.isNoBroken) item.setBroken(false);
-               if(this.isUnlimitedCondition) item.setCondition(playerItem.getConditionMax());
-               if(this.isNoWet) item.setWet(false);
-               if(this.isNoInfected) item.setInfected(false); 
-            }
+            if(this.isAlwaysRepaired) item.setHaveBeenRepaired(1);
+            if (this.isNoBroken) item.setBroken(false);
+            if(this.isUnlimitedCondition) item.setCondition(playerItem.getConditionMax());
+            if(this.isNoWet) item.setWet(false);
+            if(this.isNoInfected) item.setInfected(false); 
          }
+      }
    }
    
-      private void bypassDebugMode()
-      {
-         Core.debug = this.isBypassDebugMode;
-      }
+   private void bypassDebugMode()
+   {
+      Core.debug = this.isBypassDebugMode && GameClient.bIngame && (GameServer.bServer || GameServer.bCoop);
+   }
 
    @SubscribeLuaEvent(eventName = "OnRenderTick")
    public synchronized void updateAPI()
