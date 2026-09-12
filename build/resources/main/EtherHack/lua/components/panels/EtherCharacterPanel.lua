@@ -94,13 +94,6 @@ function EtherCharacterPanel:createChildren()
         toggleNightVision(isChecked);
     end, isEnableNightVision(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
-        toggleExtraDamage(isChecked);
-        if(not isChecked) then
-            resetWeaponsStats()
-        end
-    end, isExtraDamage(), false);
-
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
         EtherDebugClient.toggleSelf("unlimitedCarry", isChecked);
     end, isEnableUnlimitedCarry(), false);
