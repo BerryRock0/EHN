@@ -216,7 +216,7 @@
 	UI_VisualsPanel_DrawPlayerInfo = "Show detailed information about the player",
 	UI_VisualsPanel_DrawLineToVehicles = "Show lines to vehicle",
 	UI_VisualsPanel_DrawLineToPlayers = "Show lines to players",
-	UI_VisualsPanel_360Vision = "The viewing angle of objects is 360 degrees",
+	UI_VisualsPanel_360Vision = "360 degrees view",
 
 	UI_VisualsDraws_PrimaryHand = "Primary hand: ",
 	UI_VisualsDraws_SecondaryHand = "Secondary hand: ",
